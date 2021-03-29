@@ -1,3 +1,4 @@
+<style>
 *{
     margin: 0;padding: 0%;border: 0ch;opacity: 100; /*?*/
 }
@@ -19,10 +20,11 @@ input[type=button]{
     
 /* ------------- RefreshPage ------------- */
 #RefreshPage{
+    background: white;
     margin-top: 30;
     color: black;
     margin: 0 auto;
-    width: 150;
+    width: 150;height:26;
     border: 1px solid transparent;
     border-width: 10 1 10 1;
     text-align: center;
@@ -66,3 +68,4 @@ input[type=button]{
             }#menu #label .text{
                 background: blue;
             }
+</style>

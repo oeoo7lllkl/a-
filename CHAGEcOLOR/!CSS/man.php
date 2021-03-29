@@ -53,7 +53,7 @@
     /*width=2*height*/
     margin:0 auto;
     position: relative;
-    top: 10%;
+    top: 50;
 }
 #man{
     background-color: /*배경*/transparent;
@@ -87,27 +87,31 @@
             top: 20%;
             display: flex;
         }
-            .glasses>.line{
-                /*안경*/
-                border:1px solid rgb(192, 178, 98);
-                border:1px solid transparent;
+            .glasses .line{
+                border-top:1px solid 
+                rgb(211, 180, 8);
+                border-left:1px solid 
+                rgb(211, 180, 8);
+                border-right:1px solid 
+                rgb(211, 180, 8);
             }
-            .side{
-                width: 10%;height: 0%;
-                position: relative;
-                top: 50%;
-            }
-            .glass{
-                width: 35%;height: 100%;
-            }
-            .nose{
-                width: 10%;height: 0%;
-                position: relative;
-                top: 25%;
-            }
+                .side{
+                    width: 10%;height: 0%;
+                    position: relative;
+                    top: 50%;
+                }
+                .glass.line{
+                    width: 35%;height: 100%;
+                    border:1px solid black;
+                }
+                .nose{
+                    width: 10%;height: 0%;
+                    position: relative;
+                    top: 25%;
+                }
     .mask{
         height: 41%;
-        background-color: /*마스크*/transparent;
+        background-color: /*마스크*/white;
     }
 #neck-center{
     margin:0 auto;
@@ -136,7 +140,7 @@
                     height: 30%;
                 }
                 .neck.skin #box2{
-                    background-color: /*목자켓*/<?=$color_jacket?>;
+                    background-color: /*목자켓*/<?=$color_jacketCoveringFront?>;
                     height: 70%;
                 }
 #body{
@@ -216,10 +220,14 @@
                 margin:0 auto;
             }
                 #shirts{
-                    background-color: /*셔츠자켓*/<?=$color_jacket?>;
+                    background-color: /*셔츠자켓*/<?=$color_shirts?>;
                     width: 24%;height: 17%;
                     margin:0 auto;
                 }
+                    .jacketCoveringFront{
+                        height:100%;width:100%;
+                        background: <?=$color_jacketCoveringFront?>;
+                    }
                 .zipper{
                     background-color: /*지퍼*/#c3c3c0;
                     width: 2%;height: 82%;
@@ -231,7 +239,7 @@
                     }
 
         #pants-top{
-            background-color: black;
+            background-color: <?=$color_pants?>;
             width: 98%;height: 10.5%;
             margin:0 auto;
         }
@@ -246,7 +254,7 @@
             margin:0 auto;
         }
             .leg{
-                background-color: black;
+                background-color: <?=$color_pants?>;
                 width: 50%;height: 100%;
             }
                 .leg.right{
@@ -290,7 +298,7 @@
             .shoe{
                 width: 30%;height: 100%;
                 margin: 12%;
-                background-color: /*신발*/black;
+                background-color: /*신발*/<?=$color_shoes?>;
             }
                 .shoe.right{
                     margin-top: 0;

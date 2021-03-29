@@ -8,11 +8,11 @@
             </div>
             <div class="face">
                 <div class="glasses">    
-                    <div class="side line"></div>
-                    <div class="glass line"></div>
-                    <div class="nose line"></div>
-                    <div class="glass line"></div>
-                    <div class="side line"></div>
+                    <div class="line side"></div>
+                    <div class="line glass"></div>
+                    <div class="line nose"></div>
+                    <div class="line glass"></div>
+                    <div class="line side"></div>
                 </div>
             </div>
             <div class="mask"></div>
@@ -37,7 +37,9 @@
             <div id="middle">
                 <div id="top">
                     <div id="jacket">
-                        <div id="shirts"></div>
+                        <div id="shirts">
+                            <div class="jacketCoveringFront"></div>
+                        </div>
                         <div class="zipper width"></div>
                         <div class="zipper"></div>
                     </div>
