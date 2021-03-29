@@ -171,8 +171,8 @@
             70%;
             팔하*/
             height: 42%;
-            background-color: /*팔자켓*/<?=$color_jacket?>;
             background:white;
+            background-color: /*팔자켓*/<?=$color_jacket?>;
         }
             .right.arm{
                 margin-right: auto;
