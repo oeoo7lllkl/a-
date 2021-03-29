@@ -124,7 +124,7 @@
         }
             .neck.jacket{
                 width: 25%;height: 83%;
-                background-color: /*목깃자켓*/<?=$color?>;
+                background-color: /*목깃자켓*/<?=$color_jacket?>;
             }
             .neck.skin{
                 background-color: 
@@ -136,7 +136,7 @@
                     height: 30%;
                 }
                 .neck.skin #box2{
-                    background-color: /*목자켓*/<?=$color?>;
+                    background-color: /*목자켓*/<?=$color_jacket?>;
                     height: 70%;
                 }
 #body{
@@ -149,12 +149,12 @@
         height: 49.38%;
     }
         #shoulder{
-            background-color: /*자켓*/<?=$color?>;
+            background-color: /*자켓*/<?=$color_jacket?>;
             width: 100%;height:21.25%;
         }
         .arm.first{
             width: 99.5%;height: 21.25%;
-            background-color: /*자켓*/<?=$color?>;
+            background-color: /*자켓*/<?=$color_jacket?>;
         }
         .arm.second{
             width: 
@@ -164,7 +164,7 @@
             70%;
             팔하*/
             height: 38.75%;
-            background-color: /*팔자켓*/<?=$color?>;
+            background-color: /*팔자켓*/<?=$color_jacket?>;
         }
             .right.arm{
                 margin-right: auto;
@@ -211,12 +211,12 @@
             height: 40.7%;
         }
             #jacket{
-                background-color: /*자켓*/<?=$color?>;
+                background-color: /*자켓*/<?=$color_jacket?>;
                 height: 100%;width: 100%;
                 margin:0 auto;
             }
                 #shirts{
-                    background-color: /*셔츠자켓*/<?=$color?>;
+                    background-color: /*셔츠자켓*/<?=$color_jacket?>;
                     width: 24%;height: 17%;
                     margin:0 auto;
                 }

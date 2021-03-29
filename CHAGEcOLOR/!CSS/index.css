@@ -2,6 +2,7 @@
     margin: 0;padding: 0%;border: 0ch;opacity: 100; /*?*/
 }
 
+/* ------------- 삭제 ------------- */
 /* ------------- 색상 선택 버튼 ------------- */
 input[type=button]{
     width: 100;height: 50;
@@ -34,30 +35,34 @@ input[type=button]{
 /* ------------- 메뉴 사람 메뉴 ------------- */
 #columns{
     display: flex;
-    height: 80%;
+    height: 90%;width: 500;
+    margin: 0 auto;
 }
 
 /* ------------- 메뉴 ------------- */
 #menu{
     background: rgb(94, 94, 94);
     width: 100;
+    margin: auto 0;
 }
     #menu input[type=submit]{
         width: 100;height: 50;
         margin-top: 40;
         font-size: large;
-        visibility: hidden;
+        /* visibility: hidden; */
     }
     #menu #label{
         text-align: center;
         background: white;
-        margin-top: 20;
+        color: white;
+        margin: 20 0;
         height: 30;
         font-size: large;
+
     }
         #menu #label:hover{
             cursor:pointer;
             opacity: 50%;
-        }#menu #label{
-            
-        }
+            }#menu #label .text{
+                background: blue;
+            }
