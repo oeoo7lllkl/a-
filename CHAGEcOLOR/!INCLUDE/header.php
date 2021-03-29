@@ -6,7 +6,7 @@
         session_start();
         include "!include/_pageid.php";
 
-        // 세션에 모자색 적용
+        // 세션에 모자색 적용 
         if(isset($_SESSION[$_pageid.'color_hat'])){
             $color_hat=$_SESSION[$_pageid.'color_hat'];
         }
