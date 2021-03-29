@@ -49,11 +49,11 @@
     background-color: rgb(135, 141, 141);
 }
 #percent{
-    width: 183;height: 91.5;
+    width: 201;height: 100.5;
     /*width=2*height*/
     margin:0 auto;
     position: relative;
-    top: 65;
+    top: 63;
 }
 #man{
     background:red;
@@ -164,43 +164,42 @@
             background-color: /*자켓*/<?=$color_jacket?>;
         }
         .arm.second{
-            width: 
-            /*팔상*/
-            98%;
-            /*팔중
-            70%;
-            팔하*/
-            height: 42%;
-            background:white;
+            /*팔중*/
+            width:70%;
+            width: 98%;
+
+            height: 40%;
+            /*팔중*/
+            background:                #ebd6c0;
             background-color: /*팔자켓*/<?=$color_jacket?>;
         }
             .right.arm{
                 margin-right: auto;
-                    border-right:0.5px solid black;
+                border-right:0.5px solid black;
             }
                 .right.arm.second{
-                    margin-right: auto;
-                    /*팔상*/
-                    margin-left: 0%;
-                    /*팔중
+                    /*팔중*/
                     margin-left: 5%;
-                    팔하*/
+                    margin-left: 0%;
+                    /*팔중*/
+                    border-right:0px solid black;
+                    border-right:0.5px solid black;
                 }
             .left.arm{
                 margin-left: auto;
-                    border-left:0.5px solid black;
+                border-left:0.5px solid black;
             }
                 .left.arm.second{
-                    margin-left: auto;
-                    /*팔상*/
-                    margin-right: 0%;
-                    /*팔중
+                    /*팔중*/
                     margin-right: 5%;
-                    팔하*/
+                    margin-left: auto;
+                    /*팔중*/
+                    border-left:0px solid black;
+                    border-left:0.5px solid black;
                 }
         .hand{
             background-color: #ebd6c0;
-            width: 80%;height: 21%;
+            width: 80%;height: 16%;
         }
             .right.hand{
                 margin-right: auto;
@@ -302,8 +301,8 @@
             height: 9.26%;
         }
             .shoe{
-                width: 30%;height: 100%;
-                margin: 12%;
+                width: 33%;height: 100%;
+                margin: 10%;
                 background-color: /*신발*/<?=$color_shoes?>;
             }
                 .shoe.right{
