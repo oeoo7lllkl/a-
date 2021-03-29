@@ -1,5 +1,5 @@
 <?php include "!INCLUDE/!FUNCTION/menu.php";
-make_menuStart();
+make_menuStart();ㅜ
 ?><div id="label" onclick="submit_cover.click();"><div class="text">덮기/열기</div></div>
     <input type="hidden" id="jacketCover" name="jacketCover" value="-">
     <input type="submit" hidden id="submit_cover">
