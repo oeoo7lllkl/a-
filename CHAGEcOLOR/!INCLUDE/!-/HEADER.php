@@ -1,13 +1,3 @@
-<?php
-/*-------------삭제------------------
-if(isset($_POST['color']))
-{$color= $_POST['color'];}
-else{
-    $color="black";
-}
-//--------------------------------*/
-?>
-
 <header>
     
     <meta charset="utf-8">

@@ -92,16 +92,16 @@
         }
             .glasses .line{
                 border-top:1px solid 
-                rgb(211, 180, 8);
+                rgb(172, 146, 4);
                 border-left:1px solid 
-                rgb(211, 180, 8);
+                rgb(172, 146, 4);
                 border-right:1px solid 
-                rgb(211, 180, 8);
+                rgb(172, 146, 4);
             }
                 .side{
                     width: 5%;height: 0%;
                     position: relative;
-                    top: 50%;
+                    top: 33%;
                 }
                 .glass.line{
                     width: 40%;height: 100%;
@@ -136,6 +136,13 @@
             .neck.jacket{
                 width: 15%;height: 83%;
                 background-color: /*목깃자켓*/<?=$color_jacket?>;
+                <?php //열려있고 자켓색이 카키나 하양이면 목깃 투명색
+                if($_SESSION[$_pageid.'jacketCovered']!='yes'&($color_jacket=='#474844'|$color_jacket=='white')){
+                    ?>
+                    background:transparent;
+                    <?php
+                }
+                ?>
             }
             .neck.skin{
                 background-color: 
@@ -149,7 +156,21 @@
                 .neck.skin #box2{
                     background-color: /*목자켓*/<?=$color_jacketCoveringFront?>;
                     height: 70%;
-                }                
+                    display:flex;
+                }           
+                    #jacketSideNeckMore{
+                        background:<?=$color_jacket?>;
+                        /*``*/
+                        width:17%;
+                        height:100%;
+                        <?php //열려있고 자켓색이 카키나 하양이면 목깃 투명색
+                        if($_SESSION[$_pageid.'jacketCovered']!='yes'&($color_jacket=='#474844'|$color_jacket=='white')){
+                            ?>
+                            background:transparent;
+                            <?php
+                        }
+                        ?>
+                    }
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 팔 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 #body{
     display: flex;
@@ -167,14 +188,14 @@
             width: 100%;height:21.25%;
         }
         .arm.first{
-            width: 98.25%;height: 22%;
+            width: 97.5%;height: 22%;
             background: white;
             background-color: /*자켓*/<?=$color_jacket?>;
         }
         .arm.second{
             /*팔중*/
             width:70%;
-            width: 98.25%;
+            width: 97.5%;
 
             height: 40%;
             /*팔중*/
@@ -189,7 +210,6 @@
                 .right.arm.second{
                     /*팔중*/
                     /* margin-left: 5%; */
-                    margin-right: auto;
                     /*팔중*/
                     border-right:0px solid black;
                     border-right:0.5px solid black;
@@ -201,7 +221,6 @@
                 .left.arm.second{
                     /*팔중*/
                     /* margin-right: 5%; */
-                    margin-left: auto;
                     /*팔중*/
                     border-left:0px solid black;
                     border-left:0.5px solid black;
@@ -243,15 +262,48 @@
                         height:100%;width:100%;
                         background: <?=$color_jacketCoveringFront?>;
                     }
-                .zipper{
-                    background-color: /*지퍼*/#c3c3c0;
-                    width: 2%;height: 82%;
-                    margin:0 auto;
-                }
-                    .zipper.width{
+                    .zipper{
+                        background-color: /*지퍼*/<?=$color_zipper?>;
+                        width: 2%;height: 82%;
+                        margin:0 auto;
+                    }
+                    #verticalZipper{
+                        margin:0 auto;
+                        height:110%;
+                        width:5%;
+                    }
+                        #verticalZipper.inShirts{
+                            width:8%;
+                        }
+                    #horizonZipper{
                         width: 25%;height: 1%;
                         margin:0 auto;
                     }
+                    <?php 
+                    //자켓을 끝까지 잠궜을 때
+                    if($jacketCovered=="yes"){
+                        //지퍼 수직
+                        ?>
+                        #verticalZipper{
+                            background:black;
+                            background-color:<?=$color_zipper?>;
+                        }
+                        #horizonZipper{
+                            background-color: transparent;
+                        }
+                        <?php
+                    }else{
+                        //지퍼 수평
+                        ?>
+                        #verticalZipper{
+                            background-color:transparent;
+                        }
+                        #horizonZipper{
+                            background-color: <?=$color_zipper?>;
+                        }
+                        <?php
+                    }
+                    ?>
 
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 바지 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
         #pants-top{

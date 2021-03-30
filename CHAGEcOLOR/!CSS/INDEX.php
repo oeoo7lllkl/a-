@@ -3,21 +3,6 @@
     margin: 0;padding: 0%;border: 0ch;opacity: 100; /*?*/
 }
 
-/* ------------- 삭제 ------------- */
-/* ------------- 색상 선택 버튼 ------------- */
-input[type=button]{
-    width: 100;height: 50;
-}
-    input[type=button]#빨{
-        background-color: red;
-    }
-    input[type=button]#파{
-        background-color: blue;
-    }
-    input[type=button]#초{
-        background-color: green;
-    }
-    
 /* ------------- RefreshPage ------------- */
 #RefreshPage{
     background: white;
@@ -43,7 +28,7 @@ input[type=button]{
 
 /* ------------- 메뉴 ------------- */
 #menu{
-    background: rgb(94, 94, 94);
+    background: rgb(100, 100, 100);
     width: 100;
     margin: auto 0;
 }
@@ -55,7 +40,6 @@ input[type=button]{
     }
     #menu #label{
         text-align: center;
-        background: white;
         color: white;
         margin: 20 0;
         height: 30;
@@ -66,7 +50,6 @@ input[type=button]{
             cursor:pointer;
             opacity: 50%;
             }#menu #label .text{
-                background: blue;
             }
      
 /* ------------- 바닥 ------------- */  

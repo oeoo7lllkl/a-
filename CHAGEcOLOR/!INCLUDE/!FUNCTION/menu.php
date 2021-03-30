@@ -17,7 +17,7 @@ function make_menuEnd($id){
 //한줄("color_hat","c0b498","베이지")
 function make_row($id,$value,$text){
     ?>
-    <div id="label" onclick="<?=$id?>.value='<?=$value?>';submit_<?=$id?>.click();"><div class="text"><?=$text?></div></div>
+    <div id="label" style="color:<?=$value?>;" onclick="<?=$id?>.value='<?=$value?>';submit_<?=$id?>.click();"><div class="text"><?=$text?></div></div>
     <?php
 }
 /*
