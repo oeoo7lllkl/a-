@@ -53,16 +53,18 @@
     /*width=2*height*/
     margin:0 auto;
     position: relative;
-    top: 63;
+    top: 30;
 }
 #man{
-    background:red;
+    background:red;/*!!*/
     background-color: /*배경*/transparent;
     width: /*넓이*/83%;
     height: /*높이*/662%;
     /*초기비율: width:176,height:662*/
     margin:0 auto;
 }
+
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 머리 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 #head{
     background-color: #ebd6c0;
     width: 34%;height: 13.5%;
@@ -105,6 +107,8 @@
                     width: 40%;height: 100%;
                     border:1px solid 
                     rgb(211, 180, 8);
+                    border:1px solid 
+                    black;
                 }
                 .nose{
                     width: 10%;height: 0%;
@@ -115,6 +119,7 @@
         height: 36%;
         background-color: /*마스크*/white;
     }
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 목 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 #neck-center{
     margin:0 auto;
     width: 35%;
@@ -144,7 +149,8 @@
                 .neck.skin #box2{
                     background-color: /*목자켓*/<?=$color_jacketCoveringFront?>;
                     height: 70%;
-                }
+                }                
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 팔 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 #body{
     display: flex;
     height: 81%;
@@ -156,21 +162,24 @@
         height: 49.38%;
     }
         #shoulder{
+            background: white;
             background-color: /*자켓*/<?=$color_jacket?>;
             width: 100%;height:21.25%;
         }
         .arm.first{
-            width: 99.5%;height: 22%;
+            width: 98.25%;height: 22%;
+            background: white;
             background-color: /*자켓*/<?=$color_jacket?>;
         }
         .arm.second{
             /*팔중*/
             width:70%;
-            width: 98%;
+            width: 98.25%;
 
             height: 40%;
             /*팔중*/
             background:                #ebd6c0;
+            background: white;
             background-color: /*팔자켓*/<?=$color_jacket?>;
         }
             .right.arm{
@@ -179,8 +188,8 @@
             }
                 .right.arm.second{
                     /*팔중*/
-                    margin-left: 5%;
-                    margin-left: 0%;
+                    /* margin-left: 5%; */
+                    margin-right: auto;
                     /*팔중*/
                     border-right:0px solid black;
                     border-right:0.5px solid black;
@@ -191,7 +200,7 @@
             }
                 .left.arm.second{
                     /*팔중*/
-                    margin-right: 5%;
+                    /* margin-right: 5%; */
                     margin-left: auto;
                     /*팔중*/
                     border-left:0px solid black;
@@ -210,6 +219,7 @@
                 margin-right: 9%;
             }
 
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 몸통 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
     #middle{
         background-color: transparent;
         width: 68%;
@@ -243,6 +253,7 @@
                         margin:0 auto;
                     }
 
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 바지 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
         #pants-top{
             background-color: <?=$color_pants?>;
             width: 98%;height: 8.2%;
@@ -268,6 +279,7 @@
                 .leg.left{        
                     margin-left: 3%;margin-right: auto;
                 }
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 발 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
         #foots{
             display: flex;
             height: 

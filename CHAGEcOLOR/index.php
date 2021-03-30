@@ -10,3 +10,5 @@
     <?php include "!include/!-/man.php"?>
     <?php include "!include/!menu/!right/".$cloth.".php"?>
 </div>
+<div id="floor">
+</div>
