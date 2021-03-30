@@ -1,5 +1,6 @@
 <?php include "!INCLUDE/!FUNCTION/menu.php";
 make_menuStart();
+make_row("color_hat",'black',"모자없음");
 make_row("color_hat",'#c0b498',"베이지");
 make_row("color_hat",'gray',"그레이");
 make_row("color_hat",'rgb(24, 24, 24)',"검정");

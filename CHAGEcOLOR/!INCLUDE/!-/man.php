@@ -25,9 +25,9 @@
                 <div class="neck skin">
                     <div id="box1"></div>
                     <div id="box2" class="jacketCoveringNeck">
-                        <div id="jacketSideNeckMore"></div>
+                        <div id="jacketSideNeckMore"><div id="sideZipperRight"></div></div>
                         <div id="verticalZipper"></div>
-                        <div id="jacketSideNeckMore"></div>
+                        <div id="jacketSideNeckMore"><div id="sideZipperLeft"></div></div>
                     </div>
                 </div>
                 <div class="neck jacket"></div><!--!!neck jacket -> neckSideJacket-->
@@ -50,7 +50,6 @@
                                 <div id="verticalZipper" class="inShirts"></div>
                             </div>
                         </div>
-                        <div id="horizonZipper"></div>
                         <div class="zipper"></div>
                     </div>
                 </div>

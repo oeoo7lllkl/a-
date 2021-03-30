@@ -56,15 +56,15 @@
     top: 30;
 }
 #man{
-    background:red;/*!!*/
     background-color: /*배경*/transparent;
     width: /*넓이*/83%;
     height: /*높이*/662%;
     /*초기비율: width:176,height:662*/
     margin:0 auto;
 }
-
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 머리 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 #head{
     background-color: #ebd6c0;
     width: 34%;height: 13.5%;
@@ -119,7 +119,9 @@
         height: 36%;
         background-color: /*마스크*/white;
     }
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 목 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 #neck-center{
     margin:0 auto;
     width: 35%;
@@ -160,8 +162,7 @@
                 }           
                     #jacketSideNeckMore{
                         background:<?=$color_jacket?>;
-                        /*``*/
-                        width:17%;
+                        width:16%;
                         height:100%;
                         <?php //열려있고 자켓색이 카키나 하양이면 목깃 투명색
                         if($_SESSION[$_pageid.'jacketCovered']!='yes'&($color_jacket=='#474844'|$color_jacket=='white')){
@@ -171,7 +172,21 @@
                         }
                         ?>
                     }
+                        #sideZipperRight{
+                            margin-left:auto;
+                            height:100%;
+                            width:30%;
+                            background:<?=$color_zipper?>;//!
+                        }
+                        #sideZipperLeft{
+                            margin-right:auto;
+                            height:100%;
+                            width:30%;
+                            background:<?=$color_zipper?>;
+                        }
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 팔 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 #body{
     display: flex;
     height: 81%;
@@ -194,36 +209,89 @@
         }
         .arm.second{
             /*팔중*/
-            width:70%;
-            width: 97.5%;
-
+            <?php 
+            if($_SESSION[$_pageid.'armsUpOrDown']=='up'){
+                ?>
+                width:70%;
+                <?php
+            }else{
+                ?>
+                width: 97.5%;
+                <?php
+            }
+            ?>
             height: 40%;
             /*팔중*/
-            background:                #ebd6c0;
-            background: white;
-            background-color: /*팔자켓*/<?=$color_jacket?>;
+            <?php 
+            if($_SESSION[$_pageid.'armsUpOrDown']=='up'){
+                ?>
+                background: #ebd6c0;
+                <?php
+            }else{
+                ?>
+                background-color: /*팔자켓*/<?=$color_jacket?>;
+                <?php
+            }
+            ?>
         }
+        <?php $inputNumber="20"; $input="rgb(".$inputNumber.", ".$inputNumber.", ".$inputNumber.")"?>
             .right.arm{
                 margin-right: auto;
-                border-right:0.5px solid black;
+                border-right:0.5px solid <?=$input?>;
             }
                 .right.arm.second{
                     /*팔중*/
-                    /* margin-left: 5%; */
+                    <?php 
+                    if($_SESSION[$_pageid.'armsUpOrDown']=='up'){
+                        ?>
+                        margin-left: 5%;
+                        <?php
+                    }else{
+                        ?>
+                        <?php
+                    }
+                    ?>
                     /*팔중*/
-                    border-right:0px solid black;
-                    border-right:0.5px solid black;
+                    <?php 
+                    if($_SESSION[$_pageid.'armsUpOrDown']=='up'){
+                        ?>
+                        border-right:0px solid transparent ;
+                        <?php
+                    }else{
+                        ?>
+                        border-right:0.5px solid <?=$input?>;
+                        <?php
+                    }
+                    ?>
                 }
             .left.arm{
                 margin-left: auto;
-                border-left:0.5px solid black;
+                border-left:0.5px solid <?=$input?>;
             }
                 .left.arm.second{
                     /*팔중*/
-                    /* margin-right: 5%; */
+                    <?php 
+                    if($_SESSION[$_pageid.'armsUpOrDown']=='up'){
+                        ?>
+                        margin-right: 5%;
+                        <?php
+                    }else{
+                        ?>
+                        <?php
+                    }
+                    ?>
                     /*팔중*/
-                    border-left:0px solid black;
-                    border-left:0.5px solid black;
+                    <?php 
+                    if($_SESSION[$_pageid.'armsUpOrDown']=='up'){
+                        ?>
+                        border-left:0px solid transparent ;
+                        <?php
+                    }else{
+                        ?>
+                        border-left:0.5px solid <?=$input?>;
+                        <?php
+                    }
+                    ?>
                 }
         .hand{
             background-color: #ebd6c0;
@@ -238,7 +306,9 @@
                 margin-right: 9%;
             }
 
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 몸통 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
     #middle{
         background-color: transparent;
         width: 68%;
@@ -255,7 +325,34 @@
             }
                 #shirts{
                     background-color: /*셔츠자켓*/<?=$color_shirts?>;
-                    width: 24%;height: 17%;
+                    <?php 
+                    //자켓을 끝까지 잠궜을 때
+                    if($jacketCovered=="yes"){
+                        //지퍼 수직
+                        ?>
+                        
+                        <?php
+                    }else{
+                        //지퍼 수평
+                        ?>
+                        border-left:2px solid <?=$color_zipper?>;
+                        border-right:2px solid <?=$color_zipper?>;
+                        border-bottom:2px solid <?=$color_zipper?>;
+                        <?php
+                    }
+                    ?>
+                    <?php 
+                    if($color_jacket=='#474844'|$color_jacket=='white'){
+                        ?>
+                        width: 37%;
+                        <?php
+                    }else{
+                        ?>
+                        width: 24%;
+                        <?php
+                    }
+                    ?>
+                    height: 17%;
                     margin:0 auto;
                 }
                     .jacketCoveringFront{
@@ -273,12 +370,18 @@
                         width:5%;
                     }
                         #verticalZipper.inShirts{
-                            width:8%;
+                            <?php 
+                            if($color_jacket=='#474844'|$color_jacket=='white'){
+                                ?>
+                                width:5%;
+                                <?php
+                            }else{
+                                ?>
+                                width:8%;
+                                <?php
+                            }
+                            ?>
                         }
-                    #horizonZipper{
-                        width: 25%;height: 1%;
-                        margin:0 auto;
-                    }
                     <?php 
                     //자켓을 끝까지 잠궜을 때
                     if($jacketCovered=="yes"){
@@ -305,7 +408,9 @@
                     }
                     ?>
 
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 바지 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
         #pants-top{
             background-color: <?=$color_pants?>;
             width: 98%;height: 8.2%;
@@ -313,12 +418,18 @@
         }
         #pants-bottom{
             display: flex;
-            width: 98%;height: 
-            /*발상*/
-            40.5%;
-            /*발중
-            38.6%;
-            발하*/
+            width: 98%; 
+            <?php 
+            if($_SESSION[$_pageid.'pantsShortOrLong']=='long'){
+                ?>
+                height:40.5%;
+                <?php
+            }else{
+                ?>
+                height:38.6%;
+                <?php
+            }
+            ?>
             margin:0 auto;
         }
             .leg{
@@ -331,15 +442,22 @@
                 .leg.left{        
                     margin-left: 3%;margin-right: auto;
                 }
-/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 발 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 발목 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
         #foots{
             display: flex;
-            height: 
-            /*발상*/
-            0%;
-            /*발중
-            1.9%;
-            발하*/
+            <?php 
+            if($_SESSION[$_pageid.'pantsShortOrLong']=='long'){
+                ?>
+                height: 0%;
+                <?php
+            }else{
+                ?>
+                height: 1.9%;
+                <?php
+            }
+            ?>
         }
             .foot{
                 width: 17%;height: 100%;
@@ -360,6 +478,9 @@
                     margin-bottom: 0;
                     margin-left: auto;
                 }
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 신발 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+/*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
         #shoes{
             display: flex;
             height: 9.26%;

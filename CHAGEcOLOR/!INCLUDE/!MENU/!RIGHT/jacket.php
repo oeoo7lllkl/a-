@@ -1,8 +1,10 @@
 <?php include "!INCLUDE/!FUNCTION/menu.php";
 make_menuStart();
-?><div id="label" onclick="submit_cover.click();"><div class="text">덮기/열기</div></div>
-    <input type="hidden" id="jacketCover" name="jacketCover" value="-">
-    <input type="submit" hidden id="submit_cover">
+?>
+    <div id="label" onclick="option.value='jacketCover';submit_option.click();"><div class="text">덮기/열기</div></div>
+    <div id="label" onclick="option.value='armsUpper';submit_option.click();"><div class="text">팔걷기/펴기</div></div>
+    <input type="hidden" id="option" name="option">
+    <input type="submit" hidden id="submit_option">
 </form>
 <form action="." method="post">
 <?php

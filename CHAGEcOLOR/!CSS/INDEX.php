@@ -6,12 +6,12 @@
 /* ------------- RefreshPage ------------- */
 #RefreshPage{
     background: white;
-    margin-top: 30;
+    margin-top: 10;
     color: black;
     margin: 0 auto;
-    width: 100;height:26;
+    width: 100;height:15;
     border: 1px solid transparent;
-    border-width: 10 1 10 1;
+    border-width: 0 1 10 1;
     text-align: center;
 }   
     #RefreshPage:hover{
