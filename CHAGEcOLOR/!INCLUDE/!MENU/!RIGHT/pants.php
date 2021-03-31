@@ -7,8 +7,8 @@ make_menuStart();
 <form action="." method="post">
 <?php
 make_row("color_pants",'#c0b498',"베이지");
-make_row("color_pants",'#d7d8dd',"그레이");
+make_row("color_pants",'#7b7b7b',"그레이");
 make_row("color_pants",'black',"검정");
-make_row("color_pants",'rgb(1, 1, 95)',"네이비");
+make_row("color_pants",$navy,"네이비");
 make_menuEnd("color_pants");
 ?>

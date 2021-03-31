@@ -1,6 +1,10 @@
 <style>
 *{
-    margin: 0;padding: 0%;border: 0ch;opacity: 100; /*?*/
+    margin: 0;padding: 0%;border: 0ch;
+}
+
+body{
+    background-color: black;
 }
 
 /* ------------- RefreshPage ------------- */
@@ -22,8 +26,10 @@
 /* ------------- 메뉴 사람 메뉴 ------------- */
 #columns{
     display: flex;
-    height: 700;width: 500;
+    height: 765;width: 500;
     margin: 0 auto;
+    <?php $numberColumns=50?>
+    background: rgb(<?=$numberColumns?>, <?=$numberColumns?>, <?=$numberColumns?>);
 }
 
 /* ------------- 메뉴 ------------- */
@@ -49,11 +55,19 @@
         #menu #label:hover{
             cursor:pointer;
             opacity: 50%;
-            }#menu #label .text{
+                color:pink;
+                font-size:25;
+        }
+            #menu #label .text{
             }
-     
-/* ------------- 바닥 ------------- */  
-#floor{
-    height:10;width:100%;
-}
+/* ------------- 입력색 ------------- */  
+#colorMenu{
+    width:100;
+    height:100%;
+    background:red;
+}   
+    #colorMenu>form>input{
+        width:100;height:40;
+        font-size:25;
+    }
 </style>

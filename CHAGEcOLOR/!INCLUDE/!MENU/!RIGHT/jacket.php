@@ -9,11 +9,11 @@ make_menuStart();
 <form action="." method="post">
 <?php
 //은색 지퍼
-make_row("color_jacket",'#474844',"카키");
-make_row("color_jacket",'white',"하양");
+make_row("color_jacket",'#3c3f3a',"카키");
+make_row("color_jacket",$cream,"크림");
 //검정 지퍼
 make_row("color_jacket",'#a8524f',"초코");
 make_row("color_jacket",'black',"검정");
-make_row("color_jacket",'rgb(1, 1, 95)',"네이비");
+make_row("color_jacket",$navy,"네이비");
 make_menuEnd("color_jacket");
 ?>
