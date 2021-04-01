@@ -1,57 +1,57 @@
 -------------mysql DB-----------------
 옵션        value
-    모자    1 or 0
-    안경    1 or 0
-    마스크  1 or 0
-    지퍼    1 or 0
-    소매    1 or 0
-    바지    1 or 0
+    hat    1 or 0
+    glasses   1 or 0
+    mask  1 or 0
+    zipper    1 or 0
+    arms    1 or 0
+    pants    1 or 0
 
 색깔        value        
- 베이지모자 #c0b498 
-   검정모자 rgb(38,38,38)
-    비건디  rgb(207, 42, 42)
-    카키    #3c3f3a
-    크림    #d9d4ce
-    초코    #a8524f
-    네이비  rgb(0, 0, 40)
-    베이지  #dbcbba    
-    옥색    rgb(0, 44, 38)    
-  무신회색  #4c4d53        
-베이지바지  #c0b498  
-그레이바지  #7b7b7b 
+#beigeHat  #c0b498 
+#blackHat  rgb(38,38,38)
+#redHat     rgb(207, 42, 42)
+#khaki        #3c3f3a
+#cream        #d9d4ce
+#choco        #a8524f
+#navy           rgb(0, 0, 40)
+#beige          #dbcbba    
+#greenShirts    rgb(0, 44, 38)    
+#grayMusinsa  #4c4d53        
+#beigePants  #c0b498  
+#grayPants  #7b7b7b 
 
-옷 종류     옷색    value
-    모자
-            베이지  #c0b498
-            그레이  gray
-            검정    rgb(38,38,38)
-            하양    white
-            비건디  rgb(207, 42, 42)
-    마스크
-            검정    black
-            하양    white
-    자켓    
-            카키    #3c3f3a
-            크림    #d9d4ce
-            초코    #a8524f
-            검정    black
-            네이비  rgb(0, 0, 40)
-    셔츠    
-            검정    black    
-            하양    white    
-            베이지  #dbcbba    
-            갈색    brown        
-            옥색    rgb(0, 44, 38)    
-            네이비  rgb(0, 0, 40)  
-            회색    gray          
-           무신회색 #4c4d53        
-    바지        
-            베이지  #c0b498  
-            그레이  #7b7b7b 
-            검정    black
-            네이비  rgb(0, 0, 40)
-    신발    
-            하양    white
-            검정    black
-            회색    gray
+옷 종류                 color
+    hat
+                        #beigeHat 
+                        gray
+                        #blackHat   
+                        white   
+                        #redHat 
+    mask
+                        black   
+                        white   
+jacket
+                        #khaki    
+                        #cream    
+                        #choco    
+                        black   
+                        #navy 
+    shirts
+                        black   
+                        white   
+                        #beige  
+                        brown   
+                        #greenShirts   
+                        #navy 
+                        gray   
+                        #grayMusinsa 
+    pants
+                        #beigePants  
+                        #grayPants  
+                        black   
+                        #navy 
+    shoes
+                        white   
+                        black   
+                        gray   
