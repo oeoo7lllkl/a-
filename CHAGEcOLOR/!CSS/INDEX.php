@@ -1,74 +1,133 @@
 <style>
-*{
-    margin: 0;padding: 0%;border: 0ch;
-}
-
 body{
     background-color: black;
     color:white;
 }
+</style>
+<?php
+session_start();
 
+if(!isset($_SESSION['start'])){
+    $_SESSION['start']=1;
+    ?>
+    <form method="post" action="." onsubmit="H.value=screen.height;">
+        <input type="hidden" name="H">
+        <input type="submit" id="HS" hidden>
+    </form>
+    <script>
+    HS.click();
+    </script><?php 
+}else if($_SESSION['start']==1){
+    $screenH=$_POST['H'];
+    if($screenH>900){
+        $myBodyH=intval($screenH)*1.1;
+        $topB=$myBodyH/1.1*0.04/2;
+    }else{
+        $myBodyH=intval($screenH)*0.85;
+        $topB=$myBodyH/0.85*0.04/2;
+    }
+    $_SESSION['myBodyH']=$myBodyH;
+    $_SESSION['topB']=$topB;
+    $_SESSION['start']=2;
+    ?><script>alert("WELCOME");
+    location.href=".";
+    </script><?php
+}
+$myBodyH=$_SESSION['myBodyH'];
+$topB=$_SESSION['topB'];
+
+$columnsH=$myBodyH*0.98;
+$columnsW=$columnsH/765*500;
+$menuW=$columnsW/5;
+$inputColorinputH=30;
+$inputColorinputCount=3;
+?>
+<style>
+*{
+    margin: 0;padding: 0%;border: 0ch;
+}
+
+    .myBody{
+        height:<?=$myBodyH?>;
+        width:<?=$myBodyH*0.64102?>;
+        margin:auto;
+        margin-top:<?=$topB?>;
+
+    }
 /* ------------- RefreshPage ------------- */
-#RefreshPage{
+.RefreshPage{
     background: white;
-    margin-top: 10;
     color: black;
     margin: 0 auto;
     width: 100;height:15;
-    border: 1px solid transparent;
+    height:2%;width:13.333%;
     border-width: 0 1 10 1;
     text-align: center;
 }   
-    #RefreshPage:hover{
+    .RefreshPage:hover{
         cursor: pointer;
         opacity: 50%;
     }
 
 /* ------------- 메뉴 사람 메뉴 ------------- */
-#columns{
+.columns{
     display: flex;
-    height: 765;width: 500;
+    height:<?=$columnsH?>;width:<?=$columnsW?>;
     margin: 0 auto;
     <?php $numberColumns=50?>
     background: rgb(<?=$numberColumns?>, <?=$numberColumns?>, <?=$numberColumns?>);
 }
 
 /* ------------- 메뉴 ------------- */
-#menu{
-    background: rgb(100, 100, 100);
-    width: 100;
-    margin: auto 0;
+.menu{
+    width: <?=$menuW?>;
+    margin-top:<?=$menuW*0.3?>%;
 }
-    #menu input[type=submit]{
-        width: 100;height: 50;
-        margin-top: 40;
-        font-size: large;
-        /* visibility: hidden; */
-    }
-    #menu #label{
+    .menu .label{
         text-align: center;
         color: white;
-        margin: 20 0;
-        height: 30;
-        font-size: large;
-
+        margin: <?=$menuW*0.01?> 0;
+        height: <?=$menuW*0.3?>;
+        font-size: <?=$menuW*0.21?>;
+        background: rgb(100, 100, 100);
+        border-top:<?=$menuW*0.1?>px solid rgb(100, 100, 100);
+        border-bottom:<?=$menuW*0.05?>px solid rgb(100, 100, 100);
     }
-        #menu #label:hover{
+    .menu .colorCloth .label{
+        margin-top:<?=$menuW*0?>%;
+    }
+        .menu .label:hover{
             cursor:pointer;
             opacity: 50%;
-                color:pink;
-                font-size:25;
         }
-            #menu #label .text{
+            .menu .label .text{
             }
 /* ------------- 입력색 ------------- */  
-#colorMenu{
-    width:100;
-    height:100%;
-    background:red;
-}   
-    #colorMenu>form>input{
-        width:100;height:40;
-        font-size:25;
+.colorMenu{
+    width:<?=$menuW?>;height:100%;
+}
+    .inputColor{
+        width:<?=$menuW?>;
+        margin: auto 0;
+    }   
+        .inputColor input{
+            width:<?=$menuW?>;height:<?=$inputColorinputH?>;
+            font-size:<?=$menuW*0.2?>;
+        }
+    .colorCloth{
+        height:<?=$columnsH-$inputColorinputH*$inputColorinputCount*2?>;
+        display:flex;
+        align-items:center;
+        background:red;
     }
+
+.box{
+    /* width:300;height:300; */
+    background:pink;
+    
+    ._1{
+        background:green;
+        width:50%;height:50%;
+    }
+}
 </style>

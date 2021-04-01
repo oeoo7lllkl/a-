@@ -5,7 +5,10 @@
     include "!CSS/INDEX.php";
         include "_COLOR.php";
         include "colorChoice.php";
-    include "!CSS/man.php"?>
+    include "!CSS/man.php";
+    
+    include "!INCLUDE/!FUNCTION/menu.php";
+    ?>
     
     <title>-</title>
 

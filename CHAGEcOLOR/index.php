@@ -1,13 +1,21 @@
-<?php include "!include/!-/header.php";
-?>
 <body>
-    <div id="RefreshPage" onclick="location.href='!INCLUDE/!FUNCTION/_sessionD.php'">
-        !Reset
-    </div>
-    <div id="columns">
-        <?php include "!include/!menu/!LEFT/cloth.php"?>
-        <?php include "!include/!-/man.php"?>
-        <?php include "!include/!-/colorMenu.php"?>
+    <?php include "!include/!-/header.php";
+    ?>
+    <div class="myBody">
+        <div class="RefreshPage" onclick="location.href='!INCLUDE/!FUNCTION/_sessionD.php'">
+            Reset
+        </div>
+        
+        <div class="columns">
+            <?php 
+            include "!include/!menu/!LEFT/cloth.php";
+            include "!include/!-/man.php";
+            include "!include/!-/colorMenu.php";
+            ?>
+        </div>
+
+        <div class="box">
+            <div class="_1"></div>    
+        </div>
     </div>
 </body>
-#slsl

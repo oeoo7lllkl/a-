@@ -61,12 +61,17 @@
                 슬리퍼
     */
     
-#percent{<?php $PH=110;$PW=$PH*2;?>/* PH=110 */
+#percent{<?php 
+$PH=110;$PW=$PH*2;
+$PH=14.092;$PW=44;
+?>/* PH=110 */
     width: <?=$PW?>;height: <?=$PH?>;
+    width: <?=$PW?>%;height: <?=$PH?>%;
     /*width=2*height*/
     margin:0 auto;
     position: relative;
     top: 20;
+    top: 35;
 }
 #man{
     background-color: /*배경*/transparent;
@@ -86,6 +91,7 @@
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
     .hat{
         height: 44%;
+        <?php if($hat==0){$color_hat=$color_hair;}?>
         background-color: /*모자*/<?=$color_hat?>;
         display: flex;
         align-items:flex-end;
@@ -606,6 +612,7 @@
                 ?>
                 #percent{
                     top:22.5;
+                    top:37.5;
                 }
                 <?php
             }?>
@@ -613,6 +620,7 @@
             ?>
             #percent{
                 top:13;
+                top:28;
             }
             <?php
         }

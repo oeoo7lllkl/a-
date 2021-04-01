@@ -1,7 +1,10 @@
-<?php include "!INCLUDE/!FUNCTION/menu.php";
-make_menuStart();
-make_row("color_shoes",'black',"검정");
-make_row("color_shoes",'white',"하양");
-make_row("color_shoes",'gray',"회색");
-make_menuEnd("color_shoes");
-?>
+<div class="menu">
+    <?php
+    formStart();
+    $formName="color_shoes";
+    color($formName,'white',"하양");
+    color($formName,'black',"검정");
+    color($formName,'gray',"회색");
+    formEnd($formName);
+    ?>
+</div>

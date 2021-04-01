@@ -1,7 +1,4 @@
 <?php
-session_start();
-if(!isset($_SESSION['start'])){?><script>alert("WELCOME!");</script><?php }
-$_SESSION['start']=1;
 /*
 세션 목록
 cloth
@@ -13,6 +10,7 @@ color_shirts
 color_pants
 color_shoes
 
+hat
 glasses 
 mask
 jacketCovered
@@ -89,55 +87,104 @@ else{//세션도 포스트도 없으면 자켓색 카키
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 옵션 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-if(!isset($_SESSION['jacketCovered'])){$_SESSION['jacketCovered']="no";}
-if(!isset($_SESSION['armsUpOrDown']))$_SESSION['armsUpOrDown']="down";
+//세션에 모자
+if(!isset($_SESSION['hat']))$_SESSION['hat']=0;
+$hat=$_SESSION['hat'];
+//세션에 안경
+if(!isset($_SESSION['glasses']))$_SESSION['glasses']=0;
+$glasses=$_SESSION['glasses'];
+//세션에 마스크
+if(!isset($_SESSION['mask']))$_SESSION['mask']=1;
+$mask=$_SESSION['mask'];
+//세션에 자켓덮기
+if(!isset($_SESSION['jacketCovered'])){
+    $_SESSION['jacketCovered']="no";
+    $_SESSION['color_jacketCoveringFront']="transparent";
+}
+$jacketCovered=$_SESSION['jacketCovered'];
+//세션에 팔걷기
+if(!isset($_SESSION['armsUpOrDown'])){
+    $_SESSION['armsUpOrDown']="down";
+}
+$armsUpOrDown=$_SESSION['armsUpOrDown'];
+
 //옵션이 제출되면
 if(isset($_POST['option'])){
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 자켓덮기/열기면 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    //옵션이 자켓덮기/열기면
-    if($_POST['option']=='jacketCover'){
-        if($_SESSION["jacketCovered"]=="yes"){$_SESSION["jacketCovered"]="no";}
-        else{$_SESSION["jacketCovered"]="yes";}
-    }    //옵션이 팔걷기/펴기면
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 팔걷기/펴기면 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    if($_POST['option']=='armsUpper'){
-        if($_SESSION["armsUpOrDown"]=="up"){$_SESSION["armsUpOrDown"]="down";}
-        else{$_SESSION["armsUpOrDown"]="up";}
-    }       
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 안경 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 모자 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    if($_POST['option']=='hat'){
+        if($_SESSION["hat"]==1){
+            $_SESSION["hat"]=0;
+            $hat=0;
+        }
+        else{
+            $_SESSION["hat"]=1;
+            $hat=1;
+        }
+    }   
+    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 안경 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     if($_POST['option']=='glasses'){
-        if($_SESSION["glasses"]==1){$_SESSION["glasses"]=0;}
-        else{$_SESSION["glasses"]=1;}
+        if($_SESSION["glasses"]==1){
+            $_SESSION["glasses"]=0;
+            $glasses=0;
+        }
+        else{
+            $_SESSION["glasses"]=1;
+            $glasses=1;
+        }
     }   
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 마스크 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     if($_POST['option']=='mask'){
-        if($_SESSION["mask"]==1){$_SESSION["mask"]=0;}
-        else{$_SESSION["mask"]=1;}
+        if($_SESSION["mask"]==1){
+            $_SESSION["mask"]=0;
+            $mask=0;
+        }
+        else{
+            $_SESSION["mask"]=1;
+            $mask=1;
+        }
+    }   
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 자켓덮기/열기면 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    if($_POST['option']=='jacketCover'){
+        if($_SESSION["jacketCovered"]=="yes"){
+            $_SESSION["jacketCovered"]="no";
+            $jacketCovered="no";
+            $_SESSION['color_jacketCoveringFront']="transparent";
+        }
+        else{
+            $_SESSION["jacketCovered"]="yes";
+            $jacketCovered="yes";
+        }
+    }
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 팔걷기/펴기면 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    if($_POST['option']=='armsUpper'){
+        if($_SESSION["armsUpOrDown"]=="up"){
+            $_SESSION["armsUpOrDown"]="down";
+            $armsUpOrDown="down";
+        }
+        else{
+            $_SESSION["armsUpOrDown"]="up";
+            $armsUpOrDown="up";
+        }
+    }       
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 바지길이 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    //짧은/긴 클릭되면
+    if($_POST['option']=='pantsShortOrLong'){
+        if($_SESSION["pantsShortOrLong"]=="long"){
+            $_SESSION["pantsShortOrLong"]="short";
+            $pantsShortOrLong="short";
+        }
+        else{
+            $_SESSION["pantsShortOrLong"]="long";
+            $pantsShortOrLong="long";
+        }
     }   
 }
 
-//세션에 자켓덮힘이 있으면
-if(isset($_SESSION["jacketCovered"])){
-    $jacketCovered=$_SESSION["jacketCovered"];
-    if($jacketCovered=="no"){
-        $color_jacketCoveringFront="transparent";
-    }
-}else{//자켓덮힘이 없으면 셔츠덮는자켓색 투명
+if($_SESSION['jacketCovered']=="yes"){
+    $color_jacketCoveringFront=$color_jacket;
+}else{
     $color_jacketCoveringFront="transparent";
 }
-
-//세션에 팔걷기 있으면 세션의 값을 받음
-if(isset($_SESSION["armsUpOrDown"])){
-    $armsUpOrDown=$_SESSION["armsUpOrDown"];
-}else{//세션에 없으면 다운으로
-    $armsUpOrDown="down";
-}
-
-if(!isset($_SESSION['glasses']))$_SESSION['glasses']=0;
-$glasses=$_SESSION['glasses'];
-
-if(!isset($_SESSION['mask']))$_SESSION['mask']=1;
-$mask=$_SESSION['mask'];
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 셔츠 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -161,18 +208,7 @@ if(!isset($_SESSION['pantsShortOrLong'])){
     $pantsShortOrLong="long";
 }else{
     $pantsShortOrLong=$_SESSION['pantsShortOrLong'];
-}
-//짧은/긴 클릭되면
-if(isset($_POST['pantsShortOrLong'])){
-    if($pantsShortOrLong=="long"){
-        $_SESSION["pantsShortOrLong"]="short";
-        $pantsShortOrLong="short";
-    }
-    else{
-        $_SESSION["pantsShortOrLong"]="long";
-        $pantsShortOrLong="long";
-    }
-}   
+} 
 
 // 포스트 바지색을 받으면 적용
 if(isset($_POST['color_pants']))
