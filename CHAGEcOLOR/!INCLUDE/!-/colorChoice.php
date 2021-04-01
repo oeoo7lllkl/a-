@@ -4,13 +4,31 @@ if(!isset($_SESSION['start'])){?><script>alert("WELCOME!");</script><?php }
 $_SESSION['start']=1;
 /*
 세션 목록
+cloth
+
 color_hat
+color_mask
 color_jacket
 color_shirts
 color_pants
 color_shoes
+
+glasses 
+mask
 jacketCovered
+armsUpOrDown 
+pantsShortOrLong
 */
+//왼쪽 메뉴가 클릭되면
+$cloth="index";
+if(isset($_POST["cloth"])){$cloth=$_POST["cloth"];
+    $_SESSION['cloth']=$cloth;}else if(isset($_SESSION['cloth'])){
+    $cloth=$_SESSION['cloth'];
+}
+//색상 입력되면
+if(isset($_POST['inputedColor'])){
+    $_SESSION['color_'.$cloth]=$_POST['inputedColor'];
+}
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 모자 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -25,6 +43,22 @@ else if(isset($_SESSION['color_hat'])){
 }
 else{//세션도 포스트도 없으면 
     $color_hat="black";
+}
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 마스크 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// 포스트 색을 받으면 적용
+if(isset($_POST['color_mask']))
+{$color_mask= $_POST['color_mask'];
+    //세션색도 변경
+    $_SESSION['color_mask']=$color_mask;
+}
+//포스트없고 세션있으면 세션색을 적용 
+else if(isset($_SESSION['color_mask'])){
+    $color_mask=$_SESSION['color_mask'];
+}
+else{//포스트도 세션도 없으면 
+    $color_mask="black";
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 자켓 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -59,28 +93,28 @@ if(!isset($_SESSION['jacketCovered'])){$_SESSION['jacketCovered']="no";}
 if(!isset($_SESSION['armsUpOrDown']))$_SESSION['armsUpOrDown']="down";
 //옵션이 제출되면
 if(isset($_POST['option'])){
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 자켓덮기/열기면 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     //옵션이 자켓덮기/열기면
     if($_POST['option']=='jacketCover'){
         if($_SESSION["jacketCovered"]=="yes"){$_SESSION["jacketCovered"]="no";}
         else{$_SESSION["jacketCovered"]="yes";}
     }    //옵션이 팔걷기/펴기면
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 팔걷기/펴기면 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     if($_POST['option']=='armsUpper'){
         if($_SESSION["armsUpOrDown"]=="up"){$_SESSION["armsUpOrDown"]="down";}
         else{$_SESSION["armsUpOrDown"]="up";}
     }       
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 안경 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     if($_POST['option']=='glasses'){
         if($_SESSION["glasses"]==1){$_SESSION["glasses"]=0;}
         else{$_SESSION["glasses"]=1;}
     }   
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 마스크 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     if($_POST['option']=='mask'){
         if($_SESSION["mask"]==1){$_SESSION["mask"]=0;}
         else{$_SESSION["mask"]=1;}
     }   
 }
-if(!isset($_SESSION['glasses']))$_SESSION['glasses']=0;
-$glasses=$_SESSION['glasses'];
-if(!isset($_SESSION['mask']))$_SESSION['mask']=0;
-$mask=$_SESSION['mask'];
 
 //세션에 자켓덮힘이 있으면
 if(isset($_SESSION["jacketCovered"])){
@@ -98,6 +132,12 @@ if(isset($_SESSION["armsUpOrDown"])){
 }else{//세션에 없으면 다운으로
     $armsUpOrDown="down";
 }
+
+if(!isset($_SESSION['glasses']))$_SESSION['glasses']=0;
+$glasses=$_SESSION['glasses'];
+
+if(!isset($_SESSION['mask']))$_SESSION['mask']=1;
+$mask=$_SESSION['mask'];
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 셔츠 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

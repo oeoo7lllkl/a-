@@ -7,12 +7,7 @@
     <div id="columns">
         <?php include "!include/!menu/!LEFT/cloth.php"?>
         <?php include "!include/!-/man.php"?>
-        <div id="colorMenu">
-            <form action=".">
-                <input type="text" name="inputedColor">
-                <input type="submit">
-            </form>
-            <?php include "!include/!menu/!right/".$cloth.".php"?>
-        </div>
+        <?php include "!include/!-/colorMenu.php"?>
     </div>
 </body>
+#slsl
