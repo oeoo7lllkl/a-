@@ -1,52 +1,14 @@
 <style>
-body{
-    background-color: black;
-    color:white;
-}
-</style>
-<?php
-session_start();
-
-if(!isset($_SESSION['start'])){
-    $_SESSION['start']=1;
-    ?>
-    <form method="post" action="." onsubmit="H.value=screen.height;">
-        <input type="hidden" name="H">
-        <input type="submit" id="HS" hidden>
-    </form>
-    <script>
-    HS.click();
-    </script><?php 
-}else if($_SESSION['start']==1){
-    $screenH=$_POST['H'];
-    if($screenH>900){
-        $myBodyH=intval($screenH)*1.1;
-        $topB=$myBodyH/1.1*0.04/2;
-    }else{
-        $myBodyH=intval($screenH)*0.85;
-        $topB=$myBodyH/0.85*0.04/2;
-    }
-    $_SESSION['myBodyH']=$myBodyH;
-    $_SESSION['topB']=$topB;
-    $_SESSION['start']=2;
-    ?><script>alert("WELCOME");
-    location.href=".";
-    </script><?php
-}
-$myBodyH=$_SESSION['myBodyH'];
-$topB=$_SESSION['topB'];
-
-$columnsH=$myBodyH*0.98;
-$columnsW=$columnsH/765*500;
-$menuW=$columnsW/5;
-$inputColorinputH=30;
-$inputColorinputCount=3;
-?>
-<style>
 *{
     margin: 0;padding: 0%;border: 0ch;
 }
-
+<?php 
+$columnsH=$myBodyH*0.98;
+$columnsW=$columnsH/765*500;
+$menuW=$columnsW/5;
+$inputColorinputH=0.3*$menuW;
+$inputColorinputCount=3;
+?>
     .myBody{
         height:<?=$myBodyH?>;
         width:<?=$myBodyH*0.64102?>;
@@ -59,9 +21,7 @@ $inputColorinputCount=3;
     background: white;
     color: black;
     margin: 0 auto;
-    width: 100;height:15;
-    height:2%;width:13.333%;
-    border-width: 0 1 10 1;
+    width:20%;     height:<?=$menuW*0.025?>%;
     text-align: center;
 }   
     .RefreshPage:hover{
@@ -88,7 +48,7 @@ $inputColorinputCount=3;
         color: white;
         margin: <?=$menuW*0.01?> 0;
         height: <?=$menuW*0.3?>;
-        font-size: <?=$menuW*0.21?>;
+        font-size: <?=$menuW*0.18?>;
         background: rgb(100, 100, 100);
         border-top:<?=$menuW*0.1?>px solid rgb(100, 100, 100);
         border-bottom:<?=$menuW*0.05?>px solid rgb(100, 100, 100);
@@ -112,22 +72,17 @@ $inputColorinputCount=3;
     }   
         .inputColor input{
             width:<?=$menuW?>;height:<?=$inputColorinputH?>;
-            font-size:<?=$menuW*0.2?>;
+            font-size:<?=$menuW*0.17?>;
         }
     .colorCloth{
         height:<?=$columnsH-$inputColorinputH*$inputColorinputCount*2?>;
-        display:flex;
-        align-items:center;
+        height:0%;
         background:red;
+        margin-top:<?=$menuW*0.78?>%;
+        <?php 
+        if($_SESSION['cloth']=="option"){?>
+            margin-top:<?=$menuW*1.51?>%;
+            <?php
+        }?>
     }
-
-.box{
-    /* width:300;height:300; */
-    background:pink;
-    
-    ._1{
-        background:green;
-        width:50%;height:50%;
-    }
-}
 </style>

@@ -1,19 +1,21 @@
 <style>
     <?php 
-    $ZNC=2;//:지퍼.목.중앙;
-    $ZSN=6;//:지퍼.목.옆;
-    $ZOSS=1;//:지퍼.셔츠위.사이드;
-    $ZOS1=3;//:지퍼.셔츠위.중앙;
-    $ZOS2=7;
-    $ZSO=1;//:지퍼.셔츠.가장자리;
-    $ZS1=3;//:지퍼.셔츠.중앙;
-    $ZS2=7;
-    $ZJ=3;//:지퍼.자켓;
-        
-    $LH=39.6;//:다리.높이;
+    $one=$menuW*0.01;
 
-    $SH=11;//:신발.높이;
-        $FH=0.9+3.5-$SH+9.26;//:발목.높이;
+    $ZNC=$one*1.2;//:지퍼.목.중앙;
+    $ZSN=$one*6;//:지퍼.목.옆;
+    $ZOSS=$one*1;//:지퍼.셔츠위.사이드;
+    $ZOS1=$one*2;//:지퍼.셔츠위.중앙;
+    $ZOS2=$one*4;
+    $ZSO=$one*1;//:지퍼.셔츠.가장자리;
+    $ZS1=$one*2;//:지퍼.셔츠.중앙;
+    $ZS2=$one*4.5;
+    $ZJ=$one*3;//:지퍼.자켓;
+        
+    $LH=$one*39.6;//:다리.높이;
+
+    $SH=$one*11;//:신발.높이;
+        $FH=$one*0.9+$one*3.5-$SH+$one*9.26;//:발목.높이;
     ?>
     /*
             -위치-
@@ -61,7 +63,7 @@
                 슬리퍼
     */
     
-#percent{<?php 
+.percent{<?php 
 $PH=110;$PW=$PH*2;
 $PH=14.092;$PW=44;
 ?>/* PH=110 */
@@ -70,17 +72,15 @@ $PH=14.092;$PW=44;
     /*width=2*height*/
     margin:0 auto;
     position: relative;
-    top: 20;
-    top: 35;
 }
-#man{
+.man{
     background-color: /*배경*/transparent;
     width: /*넓이*/83%;
     height: /*높이*/662%;
     /*초기비율: width:176,height:662*/
     margin:0 auto;
 }
-#head{
+.head{
     background-color: <?=$skin?>;
     width: 34%;height: 13.5%;
     margin:0 auto;
@@ -126,9 +126,9 @@ $PH=14.092;$PW=44;
                 }
                 .glass.line{
                     width: 40%;height: 100%;
-                    border:1px solid 
+                    border:<?=$menuW*0.01?>px solid 
                     rgb(211, 180, 8);
-                    border:1px solid 
+                    border:<?=$menuW*0.01?>px solid 
                     black;
                     <?php if($glasses==0){?>border-color:transparent;<?php }?>
                 }
@@ -141,19 +141,19 @@ $PH=14.092;$PW=44;
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 마스크 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
     .mask{
-        height: 36%;
+        height: <?=$menuW*0.3251?>%;
         background-color: /*마스크*/<?=$color_mask?>;
         <?php if($mask==0){?>background-color:transparent;<?php }?>
     }
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 목 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
-#neck-center{
+.neck-center{
     margin:0 auto;
     width: 35%;
     height: 5.2%;
 }
-    #neck{
+    .neckColumns{
         display: flex;
         height: 100%;
     }
@@ -180,16 +180,16 @@ $PH=14.092;$PW=44;
                 <?=$skin?>;
                 width: 70%;
             }
-                .neck.skin #box1{
+                .neck.skin .box1{
                     background-color: transparent;
                     height: 30%;
                 }
-                .neck.skin #box2{
+                .neck.skin .box2{
                     background-color: /*목자켓*/<?=$color_jacketCoveringFront?>;
                     height: 70%;
                     display:flex;
                 }           
-                    #jacketSideNeckMore{
+                    .jacketSideNeckMore{
                         background:<?=$color_jacket?>;
                         width:30%;
                         height:100%;
@@ -201,7 +201,7 @@ $PH=14.092;$PW=44;
                         }
                         ?>
                     }
-                        #sideZipperRight{/*:지퍼.목.옆;*/
+                        .sideZipperRight{/*:지퍼.목.옆;*/
                             margin-left:auto;
                             height:100%;
                             width:<?=$ZSN?>%;
@@ -225,7 +225,7 @@ $PH=14.092;$PW=44;
                             }
                             ?>
                         }
-                        #sideZipperLeft{
+                        .sideZipperLeft{
                             margin-right:auto;
                             height:100%;
                             width:<?=$ZSN?>%;
@@ -250,7 +250,7 @@ $PH=14.092;$PW=44;
                             ?>
                         }
                     /*:지퍼.목.중앙;*/
-                    #verticalZipper{
+                    .verticalZipper{
                         margin:0 auto;
                         height:110%;
                         width:<?=$ZNC?>%;
@@ -258,16 +258,16 @@ $PH=14.092;$PW=44;
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 팔 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
-#body{
+.body{
     display: flex;
     height: 81%;
 }
-    #side{
+    .columnArm{
         margin: 0ch;
         width: 16%;
         height: 49.38%;
     }
-        #shoulder{
+        .shoulder{
             background-color: /*자켓*/<?=$color_jacket?>;
             width: 100%;height:21.25%;
         }
@@ -355,21 +355,21 @@ $PH=14.092;$PW=44;
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 몸통 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
-    #middle{
+    .middle{
         background-color: transparent;
         width: 68%;
         height: 100%;
     }
-        #top{
+        .top{
             display: flex;
             height: 42%;
         }
-            #jacket{
+            .jacket{
                 background-color: /*자켓*/<?=$color_jacket?>;
                 height: 100%;width: 100%;
                 margin:0 auto;
             }   
-                #skinOverShirts{
+                .skinOverShirts{
                     margin:0 auto;
                     height:1%;
                     <?php //카키나 크림일때 폭 넓게
@@ -404,7 +404,7 @@ $PH=14.092;$PW=44;
                     }
                     ?>
                 }
-                    #zipperOverShirts{
+                    .zipperOverShirts{
                         height:100%;
                         margin:0 auto;
                         <?php 
@@ -431,7 +431,7 @@ $PH=14.092;$PW=44;
                             <?php
                         }?>
                     }
-                #shirts{/*:셔츠;*/
+                .shirts{/*:셔츠;*/
                     height: 24%;
                     margin:0 auto;
                     background-color: /*셔츠자켓*/<?=$color_shirts?>;
@@ -475,7 +475,7 @@ $PH=14.092;$PW=44;
                         height:100%;width:100%;
                         background: <?=$color_jacketCoveringFront?>;
                     }
-                        #verticalZipper.inShirts{
+                        .verticalZipper.inShirts{
                             <?php //:지퍼.셔츠.중앙;
                             if($color_jacket==$khaki|$color_jacket==$cream){
                                 ?>
@@ -493,21 +493,21 @@ $PH=14.092;$PW=44;
                     if($jacketCovered=="yes"){
                         //지퍼 수직
                         ?>
-                        #verticalZipper{
+                        .verticalZipper{
                             background:black;
                             background-color:<?=$color_zipper?>;
                         }
-                        #horizonZipper{
+                        .horizonZipper{
                             background-color: transparent;
                         }
                         <?php
                     }else{
                         //지퍼 수평
                         ?>
-                        #verticalZipper{
+                        .verticalZipper{
                             background-color:transparent;
                         }
-                        #horizonZipper{
+                        .horizonZipper{
                             background-color: <?=$color_zipper?>;
                         }
                         <?php
@@ -522,12 +522,12 @@ $PH=14.092;$PW=44;
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 바지 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
-        #pants-top{
+        .pants-top{
             background-color: <?=$color_pants?>;
             width: 98%;height: 8.2%;
             margin:0 auto;
         }
-        #pants-bottom{
+        .pants-bottom{
             display: flex;
             width: 98%; 
             <?php 
@@ -556,7 +556,7 @@ $PH=14.092;$PW=44;
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 발목 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
-        #foots{
+        .foots{
             display: flex;
             <?php 
             if($pantsShortOrLong=='long'){
@@ -592,7 +592,7 @@ $PH=14.092;$PW=44;
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 신발 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
-        #shoes{
+        .shoes{
             display: flex;
             <?php if($color_shoes=='black'){
                 $SH+=1.2; ?>
@@ -608,21 +608,25 @@ $PH=14.092;$PW=44;
                 <?php
             }?>
         }
-        <?php if($color_shoes=='gray'){
-                ?>
-                #percent{
-                    top:22.5;
-                    top:37.5;
-                }
-                <?php
-            }?>
-        <?php if($color_shoes=='black'){
+        <?php 
+        if($color_shoes=='gray'){
             ?>
-            #percent{
-                top:13;
-                top:28;
+            .percent{
+                top:<?=$menuW*0.17?>;
             }
             <?php
+        }if($color_shoes=='black'){
+            ?>
+            .percent{
+                top:<?=$menuW*0.1?>;
+            }
+            <?php
+        }if($color_shoes=='white'){
+            ?>
+            .percent{
+                top: <?=$menuW*0.15?>;
+            }
+        <?php
         }
         ?>
             .shoe{

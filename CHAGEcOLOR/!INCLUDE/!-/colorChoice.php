@@ -1,4 +1,59 @@
+<style>
+body{
+    background-color: black;
+    color:white;
+}
+</style>
 <?php
+session_start();
+
+if(!isset($_SESSION['start'])){
+    //-------------------------초기 설정
+    $_SESSION['hat']=0;
+    $_SESSION['pantsShortOrLong']="long";
+
+    $_SESSION['color_hat']=$blackHat;
+    $_SESSION['color_mask']="black";
+    $_SESSION['color_jacket']=$khaki;
+    $_SESSION['color_shirts']="black";
+    $_SESSION['color_pants']="black";
+    $_SESSION['color_shoes']="black";
+    //-----------------------------------
+
+    $_SESSION['start']=1;
+    ?>
+    <form method="post" action="." onsubmit="H.value=screen.height;">
+        <input type="hidden" name="H">
+        <input type="submit" id="HS" hidden>
+    </form>
+    <script>
+    HS.click();
+    </script><?php 
+}else if($_SESSION['start']==1){
+    $screenH=$_POST['H'];
+    //화면 높이가 변경되면 ?>
+    <!-- <script>alert(screen.height)</script> -->
+    <?php
+    if($screenH==1024){//맥북에어: 900, 아이패드미니5: 1024, 윈도우: 1080
+        $myBodyH=intval($screenH)*1.1;
+        $topB=$myBodyH/1.1*0.04/2;
+    }else if($screenH==1024){
+        $myBodyH=intval($screenH)*0.85;
+        $topB=$myBodyH/0.85*0.04/2;
+    }else if($screenH==1080){
+        $myBodyH=intval($screenH)*0.8;
+        $topB=$myBodyH/0.85*0.04/2;
+    }
+
+    $_SESSION['myBodyH']=$myBodyH;
+    $_SESSION['topB']=$topB;
+    $_SESSION['start']=2;
+    ?><script>alert("WELCOME");
+    location.href=".";
+    </script><?php
+}
+$myBodyH=$_SESSION['myBodyH'];
+$topB=$_SESSION['topB'];
 /*
 세션 목록
 cloth

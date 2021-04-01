@@ -7,14 +7,15 @@ function formStart(){
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 좌측 옵션, 옷종류 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     function option($cloth){
         ?>
-        <div style="<?php if($cloth=="option"){?>border:2px solid white;<?php }?>" class="label" onclick="value.value='option';submitCloth.click();">
+        <div style="<?php if($cloth=="option"){?>background:rgb(120,120,120);border-color:rgb(120,120,120);<?php }?>" class="label" onclick="value.value='option';submitCloth.click();">
             <div class="text">옵션</div>
         </div>
         <?php
     }
     function cloth($cloth,$clothName,$color_cloth,$clothText){
+        
         ?>
-        <div style="<?php if($cloth==$clothName){?>background:rgb(120,120,120);border-color:rgb(120,120,120);<?php }?>color:<?=$color_cloth?>;" class="label" onclick="value.value='<?=$clothName?>';submitCloth.click();">
+        <div <?php if(($clothName=="hat"|$clothName=="mask")& $_SESSION["$clothName"]==0){?>hidden<?php }?> style="<?php if($cloth==$clothName){?>background:rgb(120,120,120);border-color:rgb(120,120,120);<?php }?>color:<?=$color_cloth?>;" class="label" onclick="value.value='<?=$clothName?>';submitCloth.click();">
             <div class="text"><?=$clothText?></div>
         </div>
         <?php

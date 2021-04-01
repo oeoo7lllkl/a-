@@ -13,9 +13,5 @@
             include "!include/!-/colorMenu.php";
             ?>
         </div>
-
-        <div class="box">
-            <div class="_1"></div>    
-        </div>
     </div>
 </body>
