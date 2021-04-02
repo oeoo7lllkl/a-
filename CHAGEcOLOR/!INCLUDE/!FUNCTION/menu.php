@@ -7,22 +7,38 @@ function formStart(){
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 좌측 옵션, 옷종류 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     function option($cloth){
         ?>
-        <div style="<?php if($cloth=="option"){?>background:rgb(120,120,120);border-color:rgb(120,120,120);<?php }?>" class="label" onclick="value.value='option';submitCloth.click();">
+        <div style="<?php if($cloth=="option"){?>background:rgb(120,120,120);border-color:rgb(120,120,120);<?php }?>" class="label" onclick="nameValue.value='option';submitCloth.click();">
             <div class="text">옵션</div>
         </div>
         <?php
     }
     function cloth($cloth,$clothName,$color_cloth,$clothText){
-        
+        if(isset($_SESSION[$clothName])){
+            if(($clothName=="hat"|$clothName=="mask")& $_SESSION[$clothName]==0){
+                $hidden="hidden";
+            }else{
+                $hidden="";
+            }
+        }else{
+            $hidden="";
+        }
+        //~~~~~~~~~~~~~~~~~ 클릭되면
+        if($cloth==$clothName){
+            $clicked="background:rgb(120,120,120);border-color:rgb(120,120,120);";
+        }else{
+            $clicked="";
+        }
         ?>
-        <div <?php if(($clothName=="hat"|$clothName=="mask")& $_SESSION["$clothName"]==0){?>hidden<?php }?> style="<?php if($cloth==$clothName){?>background:rgb(120,120,120);border-color:rgb(120,120,120);<?php }?>color:<?=$color_cloth?>;" class="label" onclick="value.value='<?=$clothName?>';submitCloth.click();">
+        <div class="label" <?=$hidden?> 
+        style="color:<?=$color_cloth?>;<?=$clicked?>" 
+        onclick='nameValue.value="<?=$clothName?>";submitCloth.click();'>
             <div class="text"><?=$clothText?></div>
         </div>
-        <?php
+        <?php 
     }
     function formClothEnd($name){
         ?>
-        <input type="hidden" id="value" name="<?=$name?>">
+        <input type="hidden" id="nameValue" name="<?=$name?>">
             <input id="submitCloth" type="submit" hidden>
         </form>
         <?php

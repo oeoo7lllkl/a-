@@ -2,20 +2,74 @@
     <?php 
     $one=$menuW*0.01;
 
-    $ZNC=$one*1.2;//:지퍼.목.중앙;
+    //:지퍼.목.중앙;~~~~~~~~
+    if($_SESSION['screenH']==900){//맥북에어
+        $ZNC=$one*2;
+    }else if($_SESSION['screenH']==1024){//아이패드미니5
+        $ZNC=$one*1.2;
+    }else if($_SESSION['screenH']==1080){//윈도우
+        $ZNC=$one*1.2;
+    }else if($_SESSION['screenH']==823){//내폰
+        $ZNC=$one*0.4;
+    }
     $ZSN=$one*6;//:지퍼.목.옆;
     $ZOSS=$one*1;//:지퍼.셔츠위.사이드;
-    $ZOS1=$one*2;//:지퍼.셔츠위.중앙;
-    $ZOS2=$one*4;
+    //:지퍼.셔츠위.중앙;
+    if($_SESSION['screenH']==900){//맥북에어
+        $ZOS1=$one*4;
+    }else if($_SESSION['screenH']==1024){//아이패드미니5
+        $ZOS1=$one*2;
+    }else if($_SESSION['screenH']==1080){//윈도우
+        $ZOS1=$one*2;
+    }else if($_SESSION['screenH']==823){//내폰
+        $ZOS1=$one*0.5;
+    }
+    $ZOS2=$ZOS1*2;
     $ZSO=$one*1;//:지퍼.셔츠.가장자리;
-    $ZS1=$one*2;//:지퍼.셔츠.중앙;
-    $ZS2=$one*4.5;
+    //:지퍼.셔츠.중앙;~~~~~~~
+    if($_SESSION['screenH']==900){//맥북에어
+        $ZS1=$one*4;
+    }else if($_SESSION['screenH']==1024){//아이패드미니5
+        $ZS1=$one*2;
+    }else if($_SESSION['screenH']==1080){//윈도우
+        $ZS1=$one*2;
+    }else if($_SESSION['screenH']==823){//내폰
+        $ZS1=$one*0.59;
+    }
+            $ZS2=$ZS1/2*4.5;
     $ZJ=$one*3;//:지퍼.자켓;
         
-    $LH=$one*39.6;//:다리.높이;
+//:다리.길이;
+    if($_SESSION['screenH']==900){//맥북에어
+        $LH=$one*39.6;
+    }else if($_SESSION['screenH']==1024){//아이패드미니5
+        $LH=$one*30;
+    }else if($_SESSION['screenH']==1080){//윈도우
+        $LH=$one*39.6;
+    }else if($_SESSION['screenH']==823){//내폰
+        $LH=$one*13.2;
+    }
+        //:발목.높이;
+        if($_SESSION['screenH']==900){//맥북에어
+            $FH=$one*0.9+$one*3.5-$SH+$one*9.26;
+        }else if($_SESSION['screenH']==1024){//아이패드미니5
+            $FH=2.6;
+        }else if($_SESSION['screenH']==1080){//윈도우
+            $FH=$one*0.9+$one*3.5-$SH+$one*9.26;
+        }else if($_SESSION['screenH']==823){//내폰
+            $FH=2.7;
+        }
 
-    $SH=$one*11;//:신발.높이;
-        $FH=$one*0.9+$one*3.5-$SH+$one*9.26;//:발목.높이;
+    //:신발.높이;
+    if($_SESSION['screenH']==900){//맥북에어
+        $SH=$one*11;
+    }else if($_SESSION['screenH']==1024){//아이패드미니5
+        $SH=$one*6.5;
+    }else if($_SESSION['screenH']==1080){//윈도우
+        $SH=$one*11;
+    }else if($_SESSION['screenH']==823){//내폰
+        $SH=$one*3;
+    }
     ?>
     /*
             -위치-
@@ -63,11 +117,12 @@
                 슬리퍼
     */
     
-.percent{<?php 
-$PH=110;$PW=$PH*2;
-$PH=14.092;$PW=44;
-?>/* PH=110 */
-    width: <?=$PW?>;height: <?=$PH?>;
+.percent{
+    <?php 
+    $PH=110;$PW=$PH*2;
+    $PH=14.092;$PW=44;
+    $PH=14.092;$PW=44;
+    ?>/* PH=110 */
     width: <?=$PW?>%;height: <?=$PH?>%;
     /*width=2*height*/
     margin:0 auto;
@@ -79,12 +134,13 @@ $PH=14.092;$PW=44;
     height: /*높이*/662%;
     /*초기비율: width:176,height:662*/
     margin:0 auto;
+    background:red;
 }
 .head{
     background-color: <?=$skin?>;
     width: 34%;height: 13.5%;
     margin:0 auto;
-    border-bottom:1px solid black;
+    border-bottom:<?=$menuW*0.01?>px solid black;
 }
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 모자 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
@@ -140,8 +196,17 @@ $PH=14.092;$PW=44;
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@[ 마스크 ]@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
-    .mask{
-        height: <?=$menuW*0.3251?>%;
+    .mask{<?php
+        if($_SESSION['screenH']==900){//맥북에어
+            $maskHeight=0.366652;
+        }else if($_SESSION['screenH']==1024){//아이패드미니5
+            $maskHeight=0.259;
+        }else if($_SESSION['screenH']==1080){//윈도우
+            $maskHeight=0.366652;
+        }else if($_SESSION['screenH']==823){//내폰
+            $maskHeight=0.114477;
+        }?>
+        height: <?=$menuW*$maskHeight//맥북에어?>%;
         background-color: /*마스크*/<?=$color_mask?>;
         <?php if($mask==0){?>background-color:transparent;<?php }?>
     }
@@ -272,7 +337,18 @@ $PH=14.092;$PW=44;
             width: 100%;height:21.25%;
         }
         .arm.first{
-            width: 99%;height: 22%;
+            <?php
+            //:팔.넓이;
+            if($_SESSION['screenH']==900){//맥북에어
+                $armWidth=98.5;
+            }else if($_SESSION['screenH']==1024){//아이패드미니5
+                $armWidth=99;
+            }else if($_SESSION['screenH']==1080){//윈도우
+                $armWidth=99;
+            }else if($_SESSION['screenH']==823){//내폰
+                $armWidth=99;
+            }?>
+            width: <?=$armWidth?>%;height: 22%;
             background-color: /*자켓*/<?=$color_jacket?>;
         }
         .arm.second{
@@ -283,7 +359,7 @@ $PH=14.092;$PW=44;
                 <?php
             }else{
                 ?>
-                width: 99%;
+                width: <?=$armWidth?>%;
                 <?php
             }
             ?>
@@ -594,12 +670,27 @@ $PH=14.092;$PW=44;
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
         .shoes{
             display: flex;
-            <?php if($color_shoes=='black'){
-                $SH+=1.2; ?>
+            <?php 
+            //기기에 맞게
+            if($_SESSION['screenH']==900){//맥북에어
+                $SHB=0;
+                $SHG=0;
+            }else if($_SESSION['screenH']==1024){//아이패드미니5
+                $SHB=0;
+                $SHG=0;
+            }else if($_SESSION['screenH']==1080){//윈도우
+                $SHB=0;
+                $SHG=0;
+            }else if($_SESSION['screenH']==823){//내폰
+                $SHB=0;
+                $SHG=0;
+            }
+            if($color_shoes=='black'){
+                $SH+=1.2+$SHB; ?>
                 height:<?=$SH?>%;/*:신발.높이;*/
                 <?php
             }else if($color_shoes=='gray'){
-                $SH-=0.4; ?>
+                $SH-=0.4+$SHG; ?>
                 height:<?=$SH?>%;/*:신발.높이;*/
                 <?php
             }else{
@@ -609,22 +700,40 @@ $PH=14.092;$PW=44;
             }?>
         }
         <?php 
+        //기기에 맞게
+        if($_SESSION['screenH']==900){//맥북에어
+            $topPercentGray=2.28;
+            $topPercentBlack=3;
+            $topPercentWhite=2.4;
+        }else if($_SESSION['screenH']==1024){//아이패드미니5
+            $topPercentGray=2.28;
+            $topPercentBlack=3;
+            $topPercentWhite=2.4;
+        }else if($_SESSION['screenH']==1080){//윈도우
+            $topPercentGray=1;
+            $topPercentBlack=1;
+            $topPercentWhite=1;
+        }else if($_SESSION['screenH']==823){//내폰
+            $topPercentGray=2.28;
+            $topPercentBlack=3;
+            $topPercentWhite=2.4;
+        }
         if($color_shoes=='gray'){
             ?>
             .percent{
-                top:<?=$menuW*0.17?>;
+                top:<?=$topPercentGray*$menuW*0.17?>;
             }
             <?php
         }if($color_shoes=='black'){
             ?>
             .percent{
-                top:<?=$menuW*0.1?>;
+                top:<?=$topPercentBlack*$menuW*0.1?>;
             }
             <?php
         }if($color_shoes=='white'){
             ?>
             .percent{
-                top: <?=$menuW*0.15?>;
+                top: <?=$topPercentWhite*$menuW*0.15?>;
             }
         <?php
         }

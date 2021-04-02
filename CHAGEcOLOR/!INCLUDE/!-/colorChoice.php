@@ -28,32 +28,47 @@ if(!isset($_SESSION['start'])){
     </form>
     <script>
     HS.click();
-    </script><?php 
+    </script><?php die();
 }else if($_SESSION['start']==1){
     $screenH=$_POST['H'];
+    $_SESSION['screenH']=$screenH;
     //화면 높이가 변경되면 ?>
     <!-- <script>alert(screen.height)</script> -->
     <?php
-    if($screenH==1024){//맥북에어: 900, 아이패드미니5: 1024, 윈도우: 1080
-        $myBodyH=intval($screenH)*1.1;
-        $topB=$myBodyH/1.1*0.04/2;
+    $myBodyH=intval($screenH)*0.85;
+    if($screenH==900){//아이패드미니5: 1024, 맥북에어: 900, 윈도우: 1080
+        $myBodyH*=1;//맥북에어
     }else if($screenH==1024){
-        $myBodyH=intval($screenH)*0.85;
-        $topB=$myBodyH/0.85*0.04/2;
+        $myBodyH*=1.25;//아이패드미니
     }else if($screenH==1080){
-        $myBodyH=intval($screenH)*0.8;
-        $topB=$myBodyH/0.85*0.04/2;
+        $myBodyH*=1.1;//윈도우
+    }else if($screenH==823){
+        $myBodyH*=3.5;//내폰
+    }else{
+        die("화면 높이에 맞게 설정해주세요.".$screenH);
     }
+    $topB=$myBodyH/0.85*0.04/2;
 
     $_SESSION['myBodyH']=$myBodyH;
     $_SESSION['topB']=$topB;
     $_SESSION['start']=2;
     ?><script>alert("WELCOME");
-    location.href=".";
     </script><?php
+
 }
 $myBodyH=$_SESSION['myBodyH'];
+// die($myBodyH);
+//기기에 맞게
 $topB=$_SESSION['topB'];
+if($_SESSION['screenH']==900){//맥북에어
+    $topB*=1;
+}else if($_SESSION['screenH']==1024){//아이패드미니5
+    $topB*=1;
+}else if($_SESSION['screenH']==1080){//윈도우
+    $topB*=1;
+}else if($_SESSION['screenH']==823){//내폰
+    $topB*=1;
+}
 /*
 세션 목록
 cloth
