@@ -59,7 +59,7 @@ body{
     <?php
     //:마진 탑;
     if($_SESSION['screenH']==900){//맥북에어
-        ?>margin-top:<?=$menuW*0.3?>%;<?php
+        ?>margin-top:<?=$menuW*0.45?>%;<?php
     }else if($_SESSION['screenH']==1024){//아이패드미니5
         ?>margin-top:<?=$menuW*0.3?>%;<?php
     }else if($_SESSION['screenH']==1080){//윈도우
@@ -78,7 +78,7 @@ body{
         border-top:<?=$menuW*0.1?>px solid rgb(100, 100, 100);
         border-bottom:<?=$menuW*0.05?>px solid rgb(100, 100, 100);
     }
-    .menu .colorCloth .label{
+    .menu .colorCloth{
         margin-top:<?=$menuW*0?>%;
     }
         .menu .label:hover{
@@ -92,11 +92,10 @@ body{
     width:<?=$menuW?>;height:100%;
 }
     .inputColor{
-        width:<?=$menuW?>;
-        margin: auto 0;
+        width:100%;
     }   
         .inputColor input{
-            width:<?=$menuW?>;height:<?=$inputColorinputH?>;
+            width:100%;height:<?=$inputColorinputH?>;
             font-size:<?=$menuW*0.17?>;
         }
     .colorCloth{
@@ -106,7 +105,7 @@ body{
         <?php
         //:마진 탑;
         if($_SESSION['screenH']==900){//맥북에어
-            ?>margin-top:<?=$menuW*0.78?>%;<?php
+            ?>margin-top:<?=$menuW*1.37?>%;<?php
         }else if($_SESSION['screenH']==1024){//아이패드미니5
             ?>margin-top:<?=$menuW*0.78?>%;<?php
         }else if($_SESSION['screenH']==1080){//윈도우
@@ -118,7 +117,7 @@ body{
         if($_SESSION['cloth']=="option"){
             //:마진 탑.옵션메뉴일 때;
             if($_SESSION['screenH']==900){//맥북에어
-                ?>margin-top:<?=$menuW*1.51?>%;<?php
+                ?>margin-top:<?=$menuW*2.3?>%;<?php
             }else if($_SESSION['screenH']==1024){//아이패드미니5
                 ?>margin-top:<?=$menuW*1.51?>%;<?php
             }else if($_SESSION['screenH']==1080){//윈도우

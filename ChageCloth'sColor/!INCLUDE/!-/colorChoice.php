@@ -6,7 +6,6 @@ body{
 </style>
 <?php
 session_start();
-
 if(!isset($_SESSION['start'])){
     //-------------------------초기 설정
     $_SESSION['hat']=0;

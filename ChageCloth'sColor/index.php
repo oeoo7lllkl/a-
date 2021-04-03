@@ -1,4 +1,4 @@
-<body>
+<body style="background:black;">
     <?php include "!include/!-/header.php";
     ?>
     <div class="myBody">

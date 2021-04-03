@@ -12,7 +12,16 @@
     }else if($_SESSION['screenH']==823){//내폰
         $ZNC=$one*0.4;
     }
-    $ZSN=$one*6;//:지퍼.목.옆;
+    //:지퍼.목.옆;
+    if($_SESSION['screenH']==900){//맥북에어
+        $ZSN=$one*6;
+    }else if($_SESSION['screenH']==1024){//아이패드미니5
+        $ZSN=$one*4;
+    }else if($_SESSION['screenH']==1080){//윈도우
+        $ZSN=$one*6;
+    }else if($_SESSION['screenH']==823){//내폰
+        $ZSN=$one*1.7;
+    }
     $ZOSS=$one*1;//:지퍼.셔츠위.사이드;
     //:지퍼.셔츠위.중앙;
     if($_SESSION['screenH']==900){//맥북에어
@@ -22,7 +31,7 @@
     }else if($_SESSION['screenH']==1080){//윈도우
         $ZOS1=$one*2;
     }else if($_SESSION['screenH']==823){//내폰
-        $ZOS1=$one*0.5;
+        $ZOS1=$one*0.6;
     }
     $ZOS2=$ZOS1*2;
     $ZSO=$one*1;//:지퍼.셔츠.가장자리;
@@ -52,6 +61,7 @@
         //:발목.높이;
         if($_SESSION['screenH']==900){//맥북에어
             $FH=$one*0.9+$one*3.5-$SH+$one*9.26;
+            $FH=2.6;
         }else if($_SESSION['screenH']==1024){//아이패드미니5
             $FH=2.6;
         }else if($_SESSION['screenH']==1080){//윈도우
@@ -116,25 +126,14 @@
             383b46
                 슬리퍼
     */
-    
-.percent{
-    <?php 
-    $PH=110;$PW=$PH*2;
-    $PH=14.092;$PW=44;
-    $PH=14.092;$PW=44;
-    ?>/* PH=110 */
-    width: <?=$PW?>%;height: <?=$PH?>%;
-    /*width=2*height*/
-    margin:0 auto;
-    position: relative;
-}
+/* .percent 제일 밑으로 옮겼습니다. */
 .man{
-    background-color: /*배경*/transparent;
     width: /*넓이*/83%;
     height: /*높이*/662%;
     /*초기비율: width:176,height:662*/
     margin:0 auto;
-    background:red;
+    background:blue;
+    background-color: /*배경*/transparent;
 }
 .head{
     background-color: <?=$skin?>;
@@ -198,7 +197,7 @@
 /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
     .mask{<?php
         if($_SESSION['screenH']==900){//맥북에어
-            $maskHeight=0.366652;
+            $maskHeight=0.3676;
         }else if($_SESSION['screenH']==1024){//아이패드미니5
             $maskHeight=0.259;
         }else if($_SESSION['screenH']==1080){//윈도우
@@ -753,4 +752,24 @@
                     margin-bottom: 0;
                     margin-left: auto;
                 }
+                
+.percent{
+    <?php 
+    //기기에 맞게
+    if($_SESSION['screenH']==900){//맥북에어
+        $PH=94;$PW=37;
+    }else if($_SESSION['screenH']==1024){//아이패드미니5
+        $PH=14.092;$PW=44;
+    }else if($_SESSION['screenH']==1080){//윈도우
+        $PH=14.092;$PW=44;
+    }else if($_SESSION['screenH']==823){//내폰
+        $PH=14.092;$PW=44;
+    }
+    ?>
+    width: <?=$PW?>%;height: <?=$PH?>%;
+    /*width=2*height*/
+    margin:0 auto;
+    position: relative;
+    /* background:red; */
+}
 </style>
