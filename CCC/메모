@@ -1,0 +1,60 @@
+-------------mysql DB-----------------
+options
+id	name        value
+1    hat    1 or 0
+2    glasses   1 or 0
+3    mask  1 or 0
+4    zipper    1 or 0
+5    arms    1 or 0
+6    pants    1 or 0
+
+_colors
+name        value        
+#beigeHat  #c0b498 
+#blackHat  rgb(38,38,38)
+#redHat     rgb(207, 42, 42)
+#khaki        #3c3f3a
+#cream        #d9d4ce
+#choco        #a8524f
+#navy           rgb(0, 0, 40)
+#beigeShirts          #dbcbba    
+#greenShirts    rgb(0, 44, 38)    
+#grayMusinsa  #4c4d53        
+#beigePants  #c0b498  
+#grayPants  #7b7b7b 
+
+clothes
+id	name                 color
+    	hat
+1                        #beigeHat 
+2                        gray
+3                        #blackHat   
+4                        white   
+5                        #redHat 
+   	mask
+6                        black   
+7                        white   
+        jacket
+8                        #khaki    
+9                        #cream    
+10                        #choco    
+1                        black   
+2                        #navy 
+    shirts
+3                        black   
+4                        white   
+5                        #beige  
+6                        brown   
+7                        #greenShirts   
+8                        #navy 
+9                        gray   
+20                        #grayMusinsa 
+    pants
+1                        #beigePants  
+2                        #grayPants  
+3                        black   
+4                        #navy 
+    shoes
+5                        white   
+6                        black   
+7                        gray   
