@@ -65,7 +65,7 @@
         }else if($_SESSION['screenH']==1024){//아이패드미니5
             $FH=2.6;
         }else if($_SESSION['screenH']==1080){//윈도우
-            $FH=$one*0.9+$one*3.5-$SH+$one*9.26;
+            $FH=2.6;
         }else if($_SESSION['screenH']==823){//내폰
             $FH=2.7;
         }
@@ -201,7 +201,7 @@
         }else if($_SESSION['screenH']==1024){//아이패드미니5
             $maskHeight=0.259;
         }else if($_SESSION['screenH']==1080){//윈도우
-            $maskHeight=0.366652;
+            $maskHeight=0.3417;
         }else if($_SESSION['screenH']==823){//내폰
             $maskHeight=0.114477;
         }?>
@@ -761,7 +761,8 @@
     }else if($_SESSION['screenH']==1024){//아이패드미니5
         $PH=14.092;$PW=44;
     }else if($_SESSION['screenH']==1080){//윈도우
-        $PH=14.092;$PW=44;
+        $slice=1;//!!
+        $PH=14.092/$slice;$PW=44/$slice;
     }else if($_SESSION['screenH']==823){//내폰
         $PH=14.092;$PW=44;
     }

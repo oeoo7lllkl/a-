@@ -40,7 +40,7 @@ if(!isset($_SESSION['start'])){
     }else if($screenH==1024){
         $myBodyH*=1.25;//아이패드미니
     }else if($screenH==1080){
-        $myBodyH*=1.1;//윈도우
+        $myBodyH*=0.9;//윈도우
     }else if($screenH==823){
         $myBodyH*=3.5;//내폰
     }else{

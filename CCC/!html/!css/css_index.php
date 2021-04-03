@@ -1,8 +1,3 @@
-<?php 
-include "!php/!include/incl_screenHeight.php";
-include "!php/!include/incl_firstSetting.php";
-// $_*=;//화면 높이 맞추기
-?>
 <style>
 body{
     font-size:<?=$_*15?>;
