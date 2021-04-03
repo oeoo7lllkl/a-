@@ -1,9 +1,10 @@
 <?php
+include "!php/!process/prcc_session.php";
 function mysqlC(){
     //$host,$userName,$password,$databaseName
     // $A=mysqli_connect("localhost","root","11513122","o");
     $A=mysqli_connect("localhost","root","root","o");
-    if($A==true){
+    if($A){
         return $A;
     }else{
         echo(mysqli_connect_error());
