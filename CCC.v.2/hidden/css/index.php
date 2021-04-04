@@ -11,7 +11,7 @@ body{
     background:rgb(200,0,0);
 
     background:rgb(255,85,170);/**/
-    background:rgb(255,170,85);/*!!*/
+    background:rgb(255,170,85);/**/
     background:rgb(85,170,255);/*파랑*/
     background:rgb(85,255,170);/*청록*/
     background:rgb(170,85,255);/*보라 */

@@ -1,0 +1,123 @@
+<?php
+$conn=msC();
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@ 맥북 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//================================ colors ====================================
+#############################
+ $count_column=2; 
+#############################
+$sql="select * FROM _colors";
+$result=msQ($conn,$sql);
+$N=$_*$count_column*120;
+$table_colors="<table style='width:$N;'>";
+$table_colors.="
+<tr>
+    <th>
+        name
+    <th>
+    <th>
+        value
+    <th>
+</tr>
+";
+while($row=msFA($result)){
+    $table_colors.="
+    <tr>
+        <td>
+            {$row['name']}
+        <td>
+        <td>
+            {$row['value']}
+        <td>
+    </tr>
+    ";
+}
+$table_colors.="</table>";
+//================================ clothes ====================================
+#############################
+ $count_column=5; 
+#############################
+$sql="select * FROM clothes";
+$result=msQ($conn,$sql);
+$N=$_*$count_column*60;
+$table_clothes="<table style='width:$N;'>";
+$table_clothes.="
+<tr>
+    <th>
+        id
+    <th>
+    <th>
+        cloth
+    <th>
+    <th>
+        name
+    <th>
+    <th>
+        value
+    <th>
+</tr>
+";
+while($row=msFA($result)){
+    $table_clothes.="
+    <tr>
+        <td>
+            {$row['id']}
+        <td>
+        <td>
+            {$row['cloth']}
+        <td>
+        <td>
+            {$row['name']}
+        <td>
+        <td>
+            {$row['value']}
+        <td>
+    </tr>
+    ";
+}
+$table_clothes.="</table>";
+//================================ options ====================================
+#############################
+ $count_column=4; 
+#############################
+$sql="select * FROM options";
+$result=msQ($conn,$sql);
+$N=$_*240;
+$table_options="<table style='width:$N;'>";
+$table_options.="
+<tr>
+    <th>
+        id
+    <th>
+    <th>
+        text
+    <th>
+    <th>
+        name
+    <th>
+    <th>
+        value
+    <th>
+</tr>
+";
+while($row=msFA($result)){
+    $table_options.="
+    <tr>
+        <td>
+            {$row['id']}
+        <td>
+        <td>
+            {$row['text']}
+        <td>
+        <td>
+            {$row['name']}
+        <td>
+        <td>
+            {$row['value']}
+        <td>
+    </tr>
+    ";
+}
+$table_options.="</table>";
+?>

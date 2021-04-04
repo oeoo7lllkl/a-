@@ -57,4 +57,13 @@ id	name    colorName   value
     shoes
 5           하양        white   
 6           검정        black   
-7           회색        gray   
+7           회색        gray  
+
+ dress
+name    color
+hat
+mask
+jacket
+shirts
+pants
+shoes

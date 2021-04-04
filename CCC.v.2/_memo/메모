@@ -1,10 +1,3 @@
----session---
-DataBase
-    macbookair
-    companywindow
---------------------------
-`
-세션 초기화가 안되 왜
 
 wamp db clothes text 집어넣기
     _colors id 추가하고 오토인크리먼트 키설정

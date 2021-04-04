@@ -1,4 +1,4 @@
-<title>-</title>
+<title>pages</title>
 <?php
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@ php @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -17,6 +17,41 @@ if(!isset($_POST['h'])){
     </script>
     <?php
 }else{
+    $settingheight=array(
+        900,
+        1024,
+        823
+    );
+    $settingwidth=array(
+        1440,
+        768,
+        412
+    );
+    /*id
+    0   맥북
+    1   패드
+    2   폰
+    */
+    //제일 안쪽의 (1)(2)만 하시오.
+    $index=0;//←여기서(1)
+    if($_POST['h']==$settingheight[$index] & $_POST['w']==$settingwidth[$index]){
+        $id=$index;
+    }else{
+        $index++;//←여기서(1)
+        if($_POST['h']==$settingheight[$index] & $_POST['w']==$settingwidth[$index]){
+            $id=$index;
+        }else{
+            $index++;//←여기서(1)
+            if($_POST['h']==$settingheight[$index] & $_POST['w']==$settingwidth[$index]){
+                $id=$index;
+            }else{
+                $index++;//←여기서(2)
+                die("
+                <h1>h={$_POST['h']} & w={$_POST['w']} & id=$index</h1>
+                ");//이까지 붙여넣기(2)➔
+            }//이까지 복사(1)➔
+        }//이까지 복사(1)➔
+    }//이까지 복사(1)➔
     if($_POST['h']<=$_POST['w']){
         $R=$_POST['h']*0.5;
     }else{
@@ -28,23 +63,25 @@ if(!isset($_POST['h'])){
 <?php
 function makebox($str,$foldername){
     if($str!=""){
-        $id="click";
-        if($foldername==""){
-            $onclick="alert('곧 출시됩니다.');";
+        if($foldername!=""){
+            $onclick="onclick=\"location.href='$foldername'\"";
+            $opacity="opa0";
         }else{
-            $onclick="location.href='$foldername'";
+            $onclick="onclick=\"alert('곧 출시됩니다.');\"";
+            $opacity="opa1";
         }
     }else{
-        $id="";
+        $onclick="";
+        $opacity="opa2";
     }
     ?>
     <div class="box">
-            <div class="center" id="<?=$id?>" onclick="<?=$onclick?>">
-                <div class="text">
-                    <?=$str?>
-                </div>
+        <div class="center click <?=$opacity?>" <?=$onclick?>>
+            <div class="text">
+                <?=$str?>
             </div>
         </div>
+    </div>
     <?php
 }
 if(isset($_POST['destroy'])){
@@ -102,9 +139,8 @@ body{
     display:flex;
     align-items:center;
     cursor:pointer;
-    opacity:50%;
 }
-#click:hover{
+.click:hover{
     opacity:100%;
 }
 .center .text{
@@ -115,6 +151,15 @@ body{
     width:100%;
     font-size:<?=$r*0.15?>;
 }
+.opa0{
+    opacity:70%;
+}
+.opa1{
+    opacity:50%;
+}
+.opa2{
+    opacity:30%;
+}
 
 .destroy{
     margin:0 auto;
@@ -124,10 +169,14 @@ body{
     border-top:<?=$r*$B?>px solid rgb(100,0,0);
     border-bottom :<?=$r*$B?>px solid rgb(100,0,0);
     text-align:center;
-    font-size:<?=$r*0.05?>;
+    <?php $F=1.1;if($id==1)$F=1.3;if($id==2)$F=1.3;?>
+    font-size:<?=$r*0.05*$F?>;
     background:rgb(100,0,0);
     cursor:pointer;
     margin-bottom:<?=$r*0.1?>;
+    <?php if($id==1){?>
+        margin-left:<?=$r*0.753?>;
+    <?php }?>
 }
 .destroy:hover{
     background:rgb(200,0,0);

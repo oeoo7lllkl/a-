@@ -1,3 +1,46 @@
+4/4 3 ============================================
+
+
+    hidden/function/basic
+    hidden/firstSetting/body
+    hidden/firstSetting/screenHeight
+    hidden/firstSetting/mysqlC
+    hidden/function/mysql
+    -------------------------
+    hidden/css/index
+    -------------------------
+        hidden/topnavi
+        ---------------------
+        hidden/css/topNavi
+        ---------------------
+    show/part/topNavi
+            hidden/tables
+            -----------------
+            hidden/css/DB
+            -----------------
+        DB
+    show/body/
+CCC/index
+
+
+-----------------------------------------
+
+
+    function/basic.
+    firstSetting/screenHeight.        
+    function/mysqlC.
+    function/mysql.
+    firstSetting/startPage.
+        css/index.
+    page/index.
+index
+
+        incl_tables
+        css_DB
+    html_DB
+
+-----------------------------------------
+
  ============================================
 
 
@@ -47,7 +90,7 @@ index
     html_DB ++++++++++++
 
 
-                        commits: 4/4 2
+commits: 4/4 2
 ============================================
 
 
