@@ -1,3 +1,4 @@
+<title>CCC</title>
 <?php
 session_start();
 //-----------------------헤더-------------------------
@@ -9,7 +10,7 @@ include "!firstSetting/startPage.php";
 
 include "!function/mysql.php";
 //-----------------------본문-------------------------
-include "!include/index.php";
+include "!page/index.php";
 //------------------------------------------------
 // include "!page/html_box.php";
 ?>
