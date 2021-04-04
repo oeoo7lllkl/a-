@@ -1,10 +1,10 @@
 <?php
-function mysqlC(){
+function msC(){
     if($_SESSION['DataBase']=="macbookair"){    //맥북DB
         $A=mysqli_connect("localhost","root","root","o");
     }
     else if($_SESSION['DataBase']=="companywindow"){    //회사DB
-        $A=mysqli_connect("localhost","root","root","o");
+        $A=mysqli_connect("localhost","root","11513122","o");
     }                   //$host,$userName,$password,$databaseName
               
     if($A){

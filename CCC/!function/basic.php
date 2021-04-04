@@ -12,4 +12,7 @@ function d($string){
 function v($string){
     var_dump($string);
 }
+function e($string){
+    echo($string);
+}
 ?>

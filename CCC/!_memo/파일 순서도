@@ -1,4 +1,55 @@
-            
+ ============================================
+
+
+    function/basic.
+    firstSetting/screenHeight.        
+    function/mysqlC.
+    function/mysql.
+    firstSetting/startPage.
+        css/index.
+    page/index.
+CCC/index.
+
+        incl_tables
+        css_DB
+    html_DB
+
+-----------------------------------------
+
+
+    function/basic.
+    firstSetting/screenHeight.        
+    function/mysqlC.
+    function/mysql.
+    firstSetting/startPage.
+        css/index.
+    page/index.
+CCC/index.
+
+        incl_tables
+        css_DB
+    html_DB
+
+-----------------------------------------
+
+        func_basic ++++++++++++
+        fsts_screenHeight          
+        fsts_mysqlC
+    func_mysql
+    fsts_startPage ++++++++++++
+        css_index
+        hdnf_sessionReset -----------
+    html_index
+index
+
+        incl_tables ++++++++++++
+        css_DB ++++++++++++
+    html_DB ++++++++++++
+
+
+                        commits: 4/4 2
+============================================
+
 
             prcc_session
             fsts_screenHeight
@@ -6,7 +57,12 @@
         func_mysql 
     incl_index  
         css_index
+        hdnf_sessionReset
     html_index
 index
 
-commits: 4/4 1
+
+                        commits: 4/4 1 
+
+
+

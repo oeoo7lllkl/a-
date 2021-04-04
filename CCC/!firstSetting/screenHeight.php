@@ -29,7 +29,7 @@ if(!isset($_SESSION['_'])){
                 $_*=1.2;
             }else if($_==1080){//회사윈도우
                 $_SESSION['DataBase']="companywindow";
-                $_*=0;
+                $_*=0.8;
             }
         }else{
             //확인: 화면 높이 -> 1.배열에 포함 2.비율맞추고 else if에 추가
