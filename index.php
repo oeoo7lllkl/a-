@@ -20,17 +20,20 @@ if(!isset($_POST['h'])){
     $settingheight=array(
         900,
         1024,
-        823
+        823,
+        1080
     );
     $settingwidth=array(
         1440,
         768,
-        412
+        412,
+        1920
     );
     /*id
     0   맥북
     1   패드
     2   폰
+    3   회사윈도우
     */
     //제일 안쪽의 (1)(2)만 하시오.
     $index=0;//←여기서(1)
@@ -45,10 +48,15 @@ if(!isset($_POST['h'])){
             if($_POST['h']==$settingheight[$index] & $_POST['w']==$settingwidth[$index]){
                 $id=$index;
             }else{
-                $index++;//←여기서(2)
-                die("
-                <h1>h={$_POST['h']} & w={$_POST['w']} & id=$index</h1>
-                ");//이까지 붙여넣기(2)➔
+                $index++;//←여기서(1)
+                if($_POST['h']==$settingheight[$index] & $_POST['w']==$settingwidth[$index]){
+                    $id=$index;
+                }else{
+                    $index++;//←여기서(2)
+                    die("
+                    <h1>h={$_POST['h']} & w={$_POST['w']} & id=$index</h1>
+                    ");//이까지 붙여넣기(2)➔
+                }//이까지 복사(1)➔
             }//이까지 복사(1)➔
         }//이까지 복사(1)➔
     }//이까지 복사(1)➔

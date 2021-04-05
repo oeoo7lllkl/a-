@@ -1,9 +1,47 @@
 <?php
 function i($string){
     if(isset($string)){
-        die("<h1><p>존재</p></h1>");
+        ?>
+        <script>
+            alert("존재: <?=$string?>");
+        </script>
+        <?php
     }else{
-        die("<h1><p>없음</p></h1>");
+        ?>
+        <script>
+            alert("없음");
+        </script>
+        <?php
+    }
+}
+function iic($string){
+    if(isset($string)){
+        ?>}</style>
+        <script>
+            alert("존재: <?=$string?>");
+        </script>
+        <?php
+    }else{
+        ?>}</style>
+        <script>
+            alert("없음");
+        </script>
+        <?php
+    }
+}
+function iis($string){
+    if(isset($string)){
+        ?></style>
+        <script>
+            alert("존재: <?=$string?>");
+        </script>
+        <?php
+    }else{
+        ?></style>
+        <script>
+            alert("없음");
+        </script>
+        <?php
     }
 }
 function d($string){
@@ -26,5 +64,19 @@ function e($string){
     <p>$string</p>
     </h1>
     ");
+}
+function a($str){
+    ?>
+    <script>
+        alert("<?=$str?>");
+    </script>
+    <?php
+}
+function aic($str){
+    ?>}</style>
+    <script>
+        alert("<?=$str?>");
+    </script>
+    <?php
 }
 ?>

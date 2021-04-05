@@ -1,15 +1,5 @@
 <?php
-if(!isset($_SESSION['topnavi-where'])){
-    $_SESSION['topnavi-where']="top";
-}else if(isset($_POST['topnavi'])){
-    if($_POST['topnavi']=="where"){
-        if($_SESSION['topnavi-where']=="top"){
-            $_SESSION['topnavi-where']="bottom";
-        }else{
-            $_SESSION['topnavi-where']="top";
-        }
-    }
-}
+include "hidden/topNavi.php";
 if($_SESSION['topnavi-where']=="top"){
     include "show/part/topNavi.php";
 }
