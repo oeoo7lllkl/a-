@@ -1,10 +1,10 @@
 <?php
 function msC(){
     if(isset($_SESSION['settingid'])){
-        if($_SESSION['settingid']==3){
+        if($_SESSION['settingid']==3){//회사윈도우
             $A=mysqli_connect("localhost","root","11513122","o");
         }
-        else{
+        else{//맥북
             $A=mysqli_connect("localhost","root","root","o");
         }
     }                 

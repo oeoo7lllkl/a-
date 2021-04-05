@@ -8,7 +8,16 @@ if(isset($_POST['topnavi'])){
         session_destroy();
         session_start();
         $_SESSION['body']=$settingbody;
+    }else if($_POST['topnavi']=="memo"){
+        if($_SESSION['hide-memo']==""){
+            $_SESSION['hide-memo']=" hidden";
+        }else{
+            $_SESSION['hide-memo']="";
+        }
     }
+}
+if(!isset($_SESSION['hide-memo'])){
+    $_SESSION['hide-memo']="";
 }
 ?>
 <form hidden action="." method="post">

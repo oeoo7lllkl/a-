@@ -32,7 +32,6 @@
 
 .side{
     /* background:red; */
-    width:<?=$_*200?>;
     display:flex;
 }
     .side.left{

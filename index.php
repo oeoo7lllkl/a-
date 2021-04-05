@@ -205,5 +205,5 @@ body{
     <input type="hidden" name="destroy" value="1">
     <input id="destroy" type="submit"></form>
 <p class="air">    
-<div class="destroy" onclick="if(confirm('세션을 종료?')){alert('세션이 종료됩니다.');destroy.click();}">세션 종료</div>
+<div class="destroy" onclick="destroy.click();">세션 종료</div>
 </p>
