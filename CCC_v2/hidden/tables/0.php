@@ -10,7 +10,7 @@ $conn=msC();
 $sql="select * FROM _colors";
 $result=msQ($conn,$sql);
 $N=$_*$count_column*120;
-$table_colors="<table style='width:$N;'>";
+$table_colors="<table>";
 $table_colors.="
 <tr>
     <th>
@@ -41,7 +41,7 @@ $table_colors.="</table>";
 $sql="select * FROM clothes";
 $result=msQ($conn,$sql);
 $N=$_*$count_column*60;
-$table_clothes="<table style='width:$N;'>";
+$table_clothes="<table>";
 $table_clothes.="
 <tr>
     <th>
@@ -84,7 +84,7 @@ $table_clothes.="</table>";
 $sql="select * FROM options";
 $result=msQ($conn,$sql);
 $N=$_*240;
-$table_options="<table style='width:$N;'>";
+$table_options="<table>";
 $table_options.="
 <tr>
     <th>

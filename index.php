@@ -189,11 +189,11 @@ body{
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <p class="air"></p>
 <div class="row">
-    <?=makebox("CCC.v.2","CCC.v.2")?>
-    <?=makebox("CCC.v.1","CCC.v.1")?>
+    <?=makebox("CCC_v2","CCC_v2")?>
+    <?=makebox("CCC_v1","CCC_v1")?>
 </div>
 <div class="row">
-    <?=makebox("CCC.v.3","")?>
+    <?=makebox("CCC_v3","")?>
     <?=makebox("GUCCI","")?>
 </div>
 <div class="row">
@@ -205,5 +205,5 @@ body{
     <input type="hidden" name="destroy" value="1">
     <input id="destroy" type="submit"></form>
 <p class="air">    
-<div class="destroy" onclick="alert('세션이 종료됩니다.');destroy.click();">세션 종료</div>
+<div class="destroy" onclick="if(confirm('세션을 종료?')){alert('세션이 종료됩니다.');destroy.click();}">세션 종료</div>
 </p>

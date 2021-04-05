@@ -4,16 +4,27 @@ if(!isset($_SESSION['_'])){
         ?>
         <form action="." method="post">
             <input id="screenHeight" type="hidden" name="screenHeight">
-            <input type="submit" id="screenHeightSubmit" hidden>
+            <input id="screenW" type="hidden" name="screenW">
+            <input type="submit" id="screenSubmit" hidden>
         </form>
         <script>
             screenHeight.value=screen.height;
-            screenHeightSubmit.click();
+            screenW.value=screen.width;
+            screenSubmit.click();
         </script>
         <?php
     }else{
         $screenHeight=$_POST['screenHeight'];
+        $screenWidth=$_POST['screenW'];
         $_=$screenHeight;
+        $W=$screenWidth;
+        $_SESSION['screen-height']=$_;
+        $_SESSION['screen-width']=$W;
+        if($_<=$W){
+            $_SESSION['screen-shorter']="h";
+        }else{
+            $_SESSION['screen-shorter']="w";
+        }
         //내가 설정해 놓은 화면높이의 목록을 배열로 만들어서 그 배열 안에 없으면 오류페이지를 뜨게 하도록
         $settingList=array("900",823,1024,1080);
         if(in_array($_,$settingList)){

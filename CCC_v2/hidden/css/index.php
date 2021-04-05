@@ -1,3 +1,8 @@
+<?php
+$W=$_SESSION['screen-width'];
+$H=$_SESSION['screen-height'];
+$R=$_;
+?>
 <style>
 *{
     margin:0;
