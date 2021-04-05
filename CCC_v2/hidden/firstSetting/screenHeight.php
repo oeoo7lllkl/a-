@@ -57,5 +57,6 @@ if(!isset($_SESSION['_'])){
     // $_=10;//!!
 }else{
     $_=$_SESSION['_'];
+    $S=$_SESSION['settingid'];
 }
 ?>

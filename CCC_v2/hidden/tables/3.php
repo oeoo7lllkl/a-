@@ -3,57 +3,29 @@ include "hidden/function/$S.php";
 include "hidden/css/$S.php";
 $conn=msC();
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//@@@@@@@@@@@@@@ 내폰 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@ 회사컴 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-//================================ colors ====================================
-#############################
- $count_column=2; 
-#############################
-$sql="select * FROM _colors";
-$result=msQ($conn,$sql);
-$N=$_*$count_column*120;
-$table_colors="<table>";
-$table_colors.="
-<tr>
-    <th>
-        name
-    <th>
-    <th>
-        value
-    <th>
-</tr>
-";
-while($row=msFA($result)){
-    $table_colors.="
-    <tr>
-        <td>
-            {$row['name']}
-        <td>
-        <td>
-            {$row['value']}
-        <td>
-    </tr>
-    ";
-}
-$table_colors.="</table>";
+##############################
+ $I=8; 
+##############################
 //================================ clothes ====================================
 #############################
- $count_column=5; 
+ $count_column=4; 
 #############################
 $sql="select * FROM clothes";
 $result=msQ($conn,$sql);
-$N=$_*$count_column*60;
-$table_clothes="<table>";
+$N=$_*$count_column*$I;
+$table_clothes="<table style='width:$N%;'>";
 $table_clothes.="
 <tr>
     <th>
         id
-    <th>
-    <th>
-        cloth
-    <th>
+    </th>
     <th>
         name
+    <th>
+    <th>
+        colorName
     <th>
     <th>
         value
@@ -65,12 +37,12 @@ while($row=msFA($result)){
     <tr>
         <td>
             {$row['id']}
-        <td>
-        <td>
-            {$row['cloth']}
-        <td>
+        </td>
         <td>
             {$row['name']}
+        <td>
+        <td>
+            {$row['colorName']}
         <td>
         <td>
             {$row['value']}
@@ -81,20 +53,17 @@ while($row=msFA($result)){
 $table_clothes.="</table>";
 //================================ options ====================================
 #############################
- $count_column=4; 
+ $count_column=3; 
 #############################
 $sql="select * FROM options";
 $result=msQ($conn,$sql);
-$N=$_*240;
-$table_options="<table>";
+$N=$_*$count_column*$I;
+$table_options="<table style='width:$N%;'>";
 $table_options.="
 <tr>
     <th>
-        id
-    <th>
-    <th>
         text
-    <th>
+    </th>
     <th>
         name
     <th>
@@ -107,11 +76,8 @@ while($row=msFA($result)){
     $table_options.="
     <tr>
         <td>
-            {$row['id']}
-        <td>
-        <td>
             {$row['text']}
-        <td>
+        </td>
         <td>
             {$row['name']}
         <td>
@@ -122,4 +88,41 @@ while($row=msFA($result)){
     ";
 }
 $table_options.="</table>";
+//================================ colors ====================================
+#############################
+ $count_column=3; 
+#############################
+$sql="select * FROM _colors";
+$result=msQ($conn,$sql);
+$N=$_*$count_column*$I;
+$table_colors="<table style='width:$N%;'>";
+$table_colors.="
+<tr>
+    <th>
+        id
+    </th>
+    <th>
+        name
+    <th>
+    <th>
+        value
+    <th>
+</tr>
+";
+while($row=msFA($result)){
+    $table_colors.="
+    <tr>
+        <td>
+            {$row['id']}
+        </td>
+        <td>
+            {$row['name']}
+        <td>
+        <td>
+            {$row['value']}
+        <td>
+    </tr>
+    ";
+}
+$table_colors.="</table>";
 ?>

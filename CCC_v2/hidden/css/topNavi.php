@@ -46,7 +46,17 @@
     font-weight:bold;
     font-size:<?=$_*30?>px;
     background:rgb(100,0,0);
-    width:<?=$_*230?>;
+    <?php
+    if($S==0){
+        ?>
+        width:<?=$_*50?>%;
+        <?php 
+    }else{
+        ?>
+        width:<?=$_*50?>%;
+        <?php 
+    }
+    ?>
     margin:<?=$_*4?>;
 }
 </style>
