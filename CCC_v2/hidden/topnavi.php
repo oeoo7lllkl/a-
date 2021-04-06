@@ -1,11 +1,11 @@
 <?php
 if(isset($_POST['topnavi'])){
-    if($_POST['topnavi']=="body"){
-        $_SESSION['body']=$_POST['body'];
+    if($_POST['topnavi']=="main"){
+        $_SESSION['main']=$_POST['main'];
     }else if($_POST['topnavi']=="reset"){
         session_destroy();
         session_start();
-        $_SESSION['body']=$settingbody;
+        $_SESSION['main']=$settingbody;
     }else if($_POST['topnavi']=="memo"){
         if($_SESSION['hide-memo']==""){
             $_SESSION['hide-memo']=" hidden";
@@ -29,6 +29,6 @@ if(!isset($_SESSION['topnavi-where'])){
 ?>
 <form hidden action="." method="post">
 <input type="hidden" name="topnavi" id="topnavi">
-<input type="hidden" name="body" id="topnavi_body" value="0">
+<input type="hidden" name="main" id="topnavi_main" value="0">
 <input type="submit" id="topnavisubmit">
 </form>

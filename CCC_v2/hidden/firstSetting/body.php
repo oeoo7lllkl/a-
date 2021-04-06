@@ -2,10 +2,10 @@
 session_start();
 $HP=array("index","DB","CCC");
 ############[ 시작페이지 ]########################
-/*##########*/$index=2; /*###############*/
+/*##########*/$index=0; /*###############*/
 ###############################################
-if(!isset($_SESSION['body'])){
-    $_SESSION['body']=$HP[$index];
+if(!isset($_SESSION['main'])){
+    $_SESSION['main']=$HP[$index];
 }
 $settingbody=$HP[$index];
 ?>

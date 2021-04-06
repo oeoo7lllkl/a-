@@ -1,0 +1,17 @@
+<style>
+.clothes{
+}
+.button_cloth{
+    background:white;
+    color:black;
+    margin:10;
+    text-align:center;
+    cursor:pointer;
+}
+.button_cloth:hover{
+    background:gray;
+}
+.clicked{
+    background:gray;
+}
+</style>

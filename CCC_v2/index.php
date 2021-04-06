@@ -1,6 +1,6 @@
 <?php 
-include "index/header.php";
-include "index/body.php";
-//include "index/footer.php";
+include "hidden/header.php";
+include "show/body.php";
+//include "show/footer.php";
 ?>
 
