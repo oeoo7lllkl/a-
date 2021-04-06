@@ -12,20 +12,21 @@ if(isset($_POST['topnavi'])){
         }else{
             $_SESSION['hide-memo']="";
         }
-    }else if($_POST['topnavi']=="where"){
-        if($_SESSION['topnavi-where']=="top"){
-            $_SESSION['topnavi-where']="bottom";
-        }else{
-            $_SESSION['topnavi-where']="top";
-        }
     }
+    // else if($_POST['topnavi']=="where"){
+    //     if($_SESSION['topnavi-where']=="top"){
+    //         $_SESSION['topnavi-where']="bottom";
+    //     }else{
+    //         $_SESSION['topnavi-where']="top";
+    //     }
+    // }
 }
 if(!isset($_SESSION['hide-memo'])){
     $_SESSION['hide-memo']="";
 }
-if(!isset($_SESSION['topnavi-where'])){
-    $_SESSION['topnavi-where']="top";
-}
+// if(!isset($_SESSION['topnavi-where'])){
+//     $_SESSION['topnavi-where']="top";
+// }
 ?>
 <form hidden action="." method="post">
 <input type="hidden" name="topnavi" id="topnavi">

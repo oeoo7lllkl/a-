@@ -1,12 +1,12 @@
-<form action="." method="post" id="form_cloth">
-    <input type="hidden" id="cloth" name="cloth">
+<form action="." method="post" id="form_color">
+    <input type="hidden" id="color" name="color">
 </form>
 <?php
-if(isset($_POST['cloth'])){
-    // i($_POST['cloth']);
-    // i($_SESSION['cloth']);
-    $_SESSION['cloth']=$_POST['cloth'];
+if(isset($_POST['color'])){
+    // i($_POST['color']);
+    // i($_SESSION['color']);
+    $_SESSION['color']=$_POST['color'];
 }
 
-include "hidden/function/clothes.php";
+include "hidden/function/colors.php";
 ?>

@@ -1,5 +1,5 @@
 <?php
-function i($string){
+function ia($string){
     if(isset($string)){
         ?>
         <script>
@@ -14,7 +14,7 @@ function i($string){
         <?php
     }
 }
-function iic($string){
+function iaic($string){
     if(isset($string)){
         ?>}</style>
         <script>
@@ -29,7 +29,7 @@ function iic($string){
         <?php
     }
 }
-function iis($string){
+function iais($string){
     if(isset($string)){
         ?></style>
         <script>
@@ -51,12 +51,17 @@ function d($string){
     </p></h1>
     ");
 }
-function v($string){
-    var_dump("
+function dic($string){
+    die("}</style>
     <h1><p>
     $string
     </p></h1>
     ");
+}
+function vd($string){
+    var_dump(
+    $string
+    );
 }
 function e($string){
     echo("

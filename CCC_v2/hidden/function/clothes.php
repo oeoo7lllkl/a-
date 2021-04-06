@@ -1,7 +1,11 @@
 <?php
 function makeButton_cloth($text,$name){
-    if($name==$_SESSION['cloth']){
-        $clicked=" clicked";
+    if(isset($_SESSION['cloth'])){
+        if($name==$_SESSION['cloth']){
+            $clicked=" clicked";
+        }else{
+            $clicked="";
+        }
     }else{
         $clicked="";
     }

@@ -1,3 +1,81 @@
+4/6 19:18 ============================================
+
+
+    
+        hidden/function/basic
+        hidden/firstSetting/main
+        hidden/firstSetting/screenHeight
+        hidden/firstSetting/mysqlC
+        hidden/function/mysql
+        hidden/css/index
+    hidden/header
+        hidden/topnavi
+            hidden/css/topNavi
+        show/part/topNavi 
+                hidden/css/DB
+                hidden/function/$S
+                hidden/css/$S
+                hidden/tables/$S
+                ------------------
+                show/part/rows
+            DB  
+                hidden/css/CCC
+                hidden/css/clothes
+                hidden/css/man
+                hidden/clothes
+                    hidden/function/clothes
+                -------------------
+                show/part/clothes
+                show/part/man
+                show/part/colors
+            CCC             
+        show/main/
+            hidden/css/topNavi
+        show/part/topNavi
+    show/body
+CCC/index
+
+
+-----------------------------------------
+
+
+    
+        hidden/function/basic
+        hidden/firstSetting/body
+        hidden/firstSetting/screenHeight
+        hidden/firstSetting/mysqlC
+        hidden/function/mysql
+        hidden/css/index
+    hidden/header
+        hidden/topnavi
+            hidden/css/topNavi
+        show/part/topNavi 
+                hidden/css/DB
+                hidden/function/$S
+                hidden/css/$S
+                hidden/tables/$S
+                ------------------
+                show/part/rows
+            DB  
+                hidden/css/CCC
+                hidden/css/clothes
+                hidden/css/man
+                hidden/clothes
+                    hidden/function/clothes
+                -------------------
+                show/part/clothes
+                show/part/man
+                show/part/colors
+            CCC             
+        show/main/
+            hidden/css/topNavi
+        show/part/topNavi
+    show/body
+CCC/index
+
+
+-----------------------------------------
+
 4/6 4:07 ============================================
 
 
@@ -73,7 +151,7 @@ CCC/index
 
 -----------------------------------------
 
- 4/6 4:07 ============================================
+4/6 4:07 ============================================
 
 
     

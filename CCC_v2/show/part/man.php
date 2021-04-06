@@ -1,4 +1,5 @@
 <div class="space">
+    <div class="sky"></div>
     <div class="space-man">
         <div class="head"> 
             <div class="hair">헤어</div>
@@ -34,4 +35,5 @@
             </div>
         </div>
     </div>
+    <div class="ground"></div>
 </div>

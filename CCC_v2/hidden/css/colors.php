@@ -1,0 +1,17 @@
+<style>
+.colors{
+}
+.button_color{
+    background:white;
+    color:black;
+    margin:10;
+    text-align:center;
+    cursor:pointer;
+}
+.button_color:hover{
+    background:gray;
+}
+.clicked{
+    background:gray;
+}
+</style>

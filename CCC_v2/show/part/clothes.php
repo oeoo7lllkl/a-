@@ -1,5 +1,5 @@
 <div class="display-flex-center buttons-upper">
-    <div class="clothes buttons">
+    <div class="buttons">
         <?php
         makeButton_cloth("모자","hat");
         makeButton_cloth("마스크","mask");

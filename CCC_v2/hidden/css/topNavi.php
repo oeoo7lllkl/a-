@@ -1,5 +1,6 @@
 <style>
 .topNavi{
+    color:white;
     width:100%;
     height:<?=$_*40?>;
     display:flex;

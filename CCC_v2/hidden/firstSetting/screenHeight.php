@@ -20,13 +20,14 @@ if(!isset($_SESSION['_'])){
         $W=$screenWidth;
         $_SESSION['screen-height']=$_;
         $_SESSION['screen-width']=$W;
-        if($_<=$W){
-            $_SESSION['screen-shorter']="h";
-        }else{
+        if($_SESSION['screen-width']/$_SESSION['screen-height']<700/937){
             $_SESSION['screen-shorter']="w";
+        }else{
+            $_SESSION['screen-shorter']="h";
         }
         //내가 설정해 놓은 화면높이의 목록을 배열로 만들어서 그 배열 안에 없으면 오류페이지를 뜨게 하도록
         $settingList=array("900",823,1024,1080);
+        // 맥, 폰, 미니, 윈도우
         if(in_array($_,$settingList)){
             // $_=intval($_);//문자열이라 적용이 안되면
             if($_==$settingList[0]){
