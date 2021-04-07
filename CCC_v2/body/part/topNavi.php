@@ -1,6 +1,3 @@
-<?php 
-include "hidden/css/topNavi.php";?>  
-
 <div class="topNavi">
     <div class="left side">
     <?php

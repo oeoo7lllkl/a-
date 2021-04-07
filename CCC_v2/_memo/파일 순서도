@@ -1,3 +1,112 @@
+4/7 10:30 ============================================
+
+
+    
+                basic
+            function
+        mine
+            main
+            screenHeight
+            mysqlC
+        firstSetting
+                basic
+            mysql
+                    clothes
+                    colors
+                CCC/index
+            .
+        function/index
+        topnavi
+        +++++++++++++++++++++++++++++++++++
+        header/css/index
+        header/css/topNavi
+                    0
+                    1
+                    2
+                    3
+                header/DB/function/
+                    0
+                    1
+                    2
+                    3
+                header/DB/tables/
+                ++++++++++++++++++++++++++++++++++++++
+                header/DB/css/index
+                    0
+                    1
+                    2
+                    3
+                header/DB/css/
+            DB/index
+
+            function/index??
+                CCC/index.php
+            .
+        header/index
+    header/index
+    -----------------------------------
+        body/part/topNavi 
+            index
+                header/function/$S
+                header/tables/$S
+                +++++++++++++++++++
+                header/css/DB
+                header/css/$S
+                ------------------
+                body/part/rows
+            DB  
+                body/part/clothes
+                body/part/man
+                body/part/colors
+                
+                body/part/options
+            CCC             
+        body/main/
+        body/part/topNavi
+    body/index
+CCC/index
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+    
+        hidden/function/basic
+        hidden/firstSetting/main
+        hidden/firstSetting/screenHeight
+        hidden/firstSetting/mysqlC
+        hidden/function/mysql
+        hidden/css/index
+    hidden/header
+        hidden/topnavi
+            hidden/css/topNavi
+        show/part/topNavi 
+                hidden/css/DB
+                hidden/function/$S
+                hidden/css/$S
+                hidden/tables/$S
+                ------------------
+                show/part/rows
+            DB  
+                hidden/css/CCC
+                hidden/css/clothes
+                hidden/css/man
+                hidden/clothes
+                    hidden/function/clothes
+                -------------------
+                show/part/clothes
+                show/part/man
+                show/part/colors
+            CCC             
+        show/main/
+            hidden/css/topNavi
+        show/part/topNavi
+    show/body
+CCC/index
+
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 4/6 19:18 ============================================
 
 

@@ -7,6 +7,4 @@ if(isset($_POST['cloth'])){
     // i($_SESSION['cloth']);
     $_SESSION['cloth']=$_POST['cloth'];
 }
-
-include "hidden/function/clothes.php";
 ?>

@@ -7,6 +7,4 @@ if(isset($_POST['color'])){
     // i($_SESSION['color']);
     $_SESSION['color']=$_POST['color'];
 }
-
-include "hidden/function/colors.php";
 ?>

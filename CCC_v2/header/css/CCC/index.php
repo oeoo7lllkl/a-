@@ -12,6 +12,7 @@
 }
 
 body{
+    background:red;
     background:black;
     color:white;/* 전체 글자색 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 }
@@ -19,15 +20,15 @@ body{
 .box{
     background:white;/** 넓이:높이=700:937 */
     <?php
+    // aic($_SESSION['screen-height']);
     /** 박스넓이 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
-    if($_SESSION['screen-shorter']=="w"){
-        $box_width=$_SESSION['screen-width'];
-        $box_width=900;//폰
+    if($_SESSION['screen-height']==823){//폰
+        $box_width=979.5;
     }else if($_SESSION['screen-height']==900){//맥북
-        $box_width=612.5;
-    }else if ($_SESSION['screen-height']==1024){
+        $box_width=593.8;
+    }else if ($_SESSION['screen-height']==1024){//미니
         $box_width=$_SESSION['screen-width'];
-        $box_width=878;//미니
+        $box_width=878;
     }else{
         // dic($_SESSION['screen-height']);
         dic("hidden/css/ccc로 가서 박스넓이를 설정해주세요~");
@@ -71,8 +72,8 @@ body{
     $m=20;
     $sky_height=3;$ground_height=3;// 하늘, 땅 높이 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     $middle_height=100-$ground_height-$sky_height;
-    $sky_height+=($middle_height-$m/100*$middle_height)*3/4;
-    $ground_height+=($middle_height-$m/100*$middle_height)/4;
+    $sky_height+=($middle_height-$m/100*$middle_height)*4/5;
+    $ground_height+=($middle_height-$m/100*$middle_height)/5;
     ?>
     background:blue;
     height:<?=$sky_height?>%;
@@ -116,5 +117,6 @@ body{
     text-align:center;
     padding-top:50;
     background:rgb(100,100,100);
+    /* background:red; */
 }
 </style>
