@@ -66,6 +66,8 @@ if(!isset($_POST['h'])){
         $R=$_POST['w'];
     }
     $r=$R;
+    if($_POST['h']==823& $_POST['w']==412)
+    $r=$R*1.188;
 }
 ?>
 <?php
@@ -106,43 +108,49 @@ if(isset($_POST['destroy'])){
 }
 body{
     background:black;
+    /* background:blue; */
+    width:<?=$r*2?>;
 }
 .air{
     /*###########################*/
     /* background:blue; */
     /*###########################*/
-    height:<?=$r*0.05?>;
+    height:<?=$r*0.073?>;
     width:<?=$r*2?>;
     margin:0 auto;
 }
 <?php $r/=0.95;?>
 .row{
     /*###########################*/
-    /* background:green; */
+    /* background:gray; */
     /*###########################*/
-    height:<?=$r*0.8?>;
-    width:<?=$r*1.8?>;
-    padding:<?=$r*0.05?>;
+    height:<?=$r?>;
+    width:<?=$r*1.9?>;
+    padding:0;
+    padding:0 0 <?=$r*0.04?> 0;
     display:flex;
+    align-items:space-between;
     margin:0 auto;
 }
 .box{
     /*###########################*/
     /* background:blue; */
     /*###########################*/
-    height:<?=$r*0.9?>;
-    width:<?=$r*0.9?>;
-    height:100%;
-    width:50%;
+    <?php $box_width=48;?>
+    width:<?=$box_width?>%;
+    height:<?=$box_width*2?>%;
     display:flex;
     align-items:center;
+}
+.between{
+    width:<?=100-2*$box_width?>%;
 }
 .box .center{
     /*###########################*/
     background:white;
     /*###########################*/
-    height:<?=$r*0.8?>;
-    width:<?=$r*0.8?>;
+    height:100%;
+    width:100%;
     margin:0 auto;
     display:flex;
     align-items:center;
@@ -195,17 +203,20 @@ body{
 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@ 본문 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-<p class="air"></p>
+<p class="air">    </p>
 <div class="row">
-    <?=makebox("CCC_v2","CCC_v2")?>
     <?=makebox("CCC_v1","CCC_v1")?>
+    <div class="between"></div>
+    <?=makebox("CCC_v2","CCC_v2")?>
 </div>
 <div class="row">
-    <?=makebox("CCC_v3","")?>
+    <?=makebox("ankerwave","temp-at-ankerwave")?>
+    <div class="between"></div>
     <?=makebox("GUCCI","")?>
 </div>
 <div class="row">
     <?=makebox("","")?>
+    <div class="between"></div>
     <?=makebox("","")?>
 </div>
 

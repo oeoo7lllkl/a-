@@ -11,11 +11,11 @@
 }
 
 .button{
-    width:<?=$_*90?>;
     height:<?=$_*20?>;
     border-top:<?=$_*5?>px solid rgb(255,170,85);/*주*/
     border-bottom:<?=$_*5?>px solid rgb(255,170,85);/*주*/
     background:rgb(255,170,85);/*주*/
+    padding:0 <?=$_*8?>;
     cursor:pointer;
     text-align:center;
 

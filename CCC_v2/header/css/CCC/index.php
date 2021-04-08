@@ -14,11 +14,6 @@
 body{
     background:red;
     background:black;
-    color:white;/* 전체 글자색 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
-}
-
-.box{
-    background:white;/** 넓이:높이=700:937 */
     <?php
     // aic($_SESSION['screen-height']);
     /** 박스넓이 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
@@ -28,12 +23,21 @@ body{
         $box_width=593.8;
     }else if ($_SESSION['screen-height']==1024){//미니
         $box_width=$_SESSION['screen-width'];
-        $box_width=878;
+        $box_width=955;
     }else{
         // dic($_SESSION['screen-height']);
         dic("hidden/css/ccc로 가서 박스넓이를 설정해주세요~");
     }
-    $box_height=$box_width/700*937;?>/** 박스높이 */
+    /** 박스높이 */
+    $box_height=$box_width/700*937;
+    ?>
+    width:<?=$box_width?>;
+    margin:0 auto;
+    color:white;/* 전체 글자색 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+}
+
+.box{
+    background:white;/** 넓이:높이=700:937 */
     width:<?=$box_width?>;
     height:<?=$box_height?>;
     margin:0 auto;
