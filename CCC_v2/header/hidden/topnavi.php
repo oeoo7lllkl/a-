@@ -5,7 +5,6 @@ if(isset($_POST['topnavi'])){
     }else if($_POST['topnavi']=="reset"){
         session_destroy();
         session_start();
-        $_SESSION['main']=$settingbody;
     }else if($_POST['topnavi']=="memo"){
         if($_SESSION['hide-memo']==""){
             $_SESSION['hide-memo']=" hidden";

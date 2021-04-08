@@ -2,18 +2,19 @@
 <?php
 include "mine/index.php";
 
+include "header/hidden/topnavi.php";
 include "header/firstSetting/index.php";
 
 include "header/function/index.php";
 
 
-include "header/topnavi.php";
-
-include "header/{$_SESSION['main']}.php";
-
 include "header/css/index.php";
 include "header/css/topNavi.php";    
-   
+
+
+if(in_array($_SESSION['main'],array("index","DB","CCC"))){
+    include "header/main/{$_SESSION['main']}.php";
+}
 
 
 

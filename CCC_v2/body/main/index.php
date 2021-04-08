@@ -1,3 +1,2 @@
-<?php
-e("this is index main");
-?>
+
+<h1>this is main index</h1>

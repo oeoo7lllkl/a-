@@ -6,6 +6,7 @@
     <p class="button" onclick="topnavi.value='main';topnavi_main.value='DB';topnavisubmit.click();">DB</p>
     <p class="button" onclick="topnavi.value='main';topnavi_main.value='index';topnavisubmit.click();">홈</p>
     <p class="button" onclick="topnavi.value='main';topnavi_main.value='CCC';topnavisubmit.click();">CCC</p>
+    <p class="button" onclick="topnavi.value='main';topnavi_main.value='keypress';topnavisubmit.click();">keypress</p>
     </div>
     
     <div class="memo"<?=$_SESSION['hide-memo']?>><marquee>메모를 꼭 참고하세요!</marquee></div>

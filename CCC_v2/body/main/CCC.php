@@ -1,12 +1,12 @@
 <div class="box">
     <div class="display-flex outside-buttons">
         <?php 
-        include "body/part/clothes.php";
-        include "body/part/man.php";
-        include "body/part/colors.php";
+        include "body/part/CCC/clothes.php";
+        include "body/part/CCC/man.php";
+        include "body/part/CCC/colors.php";
         ?>
     </div>
-    <?php include "body/part/options.php";?>
+    <?php include "body/part/CCC/options.php";?>
 </div>
 <div class="note">
     화면 

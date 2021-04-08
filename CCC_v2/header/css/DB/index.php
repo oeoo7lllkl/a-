@@ -1,6 +1,7 @@
 <style>
 body{
-    background:blue;
+    /* background:blue; */
+    background:beige;
 }
 <?php 
 //@@회사컴아닐떄@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -12,10 +13,12 @@ if($_SESSION['settingid']!=3){?>
     padding:<?=$_*5?> auto;
     width:100%;
     background:rgb(40,63,21);/*녹*/
+    background:red;
 }
 .middle{
     display:flex;
     background:rgb(85,127,42);/*녹*/
+    background:rgb(150,50,50);
     <?php if($W==412){?>
         width:<?=$_*450?>;
         padding:<?=$_*2?>;
@@ -30,6 +33,7 @@ if($_SESSION['settingid']!=3){?>
 }
 .table{
     background:rgb(85,187,85);/*녹*/
+    background:white;
     margin: 5 auto;
     width:<?=$_*350?>;
     <?php
@@ -43,7 +47,7 @@ if($_SESSION['settingid']!=3){?>
     ?>
 }
 table{<?php $wth=$R*10;?>
-    background:rgb(85,255,170);/*녹*/
+    /* background:rgb(85,255,170);녹 */
     opacity:80%;
     margin:0 auto; 
     text-align:center;

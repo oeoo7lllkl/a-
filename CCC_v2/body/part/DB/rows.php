@@ -1,5 +1,5 @@
 <?php
-if($S==1){
+if($_SESSION['id']==1){//폰
     makeRow("options",$table_options);
     makeRow("colors",$table_colors);
     makeRow("clothes",$table_clothes);

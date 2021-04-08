@@ -55,10 +55,22 @@ body{
     padding-bottom:300;
     /* margin-bottom:300; */
 }
+.div-for-man-size-button{
+    height:50%;
+    margin-top:30%;
+}
+.man-size-button{
+    background:white;
+    height:10%;
+    margin:0 5%;
+    color:black;
+    text-align:center;
+    font-size:200%;
+}
 
 .space{<?php //iic($rgb);
-    $rgb=255;/* 사람 배경색 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
-    $space_color="rgb($rgb,$rgb,$rgb)";
+    $t=255;/* 사람 배경색 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+    $space_color="rgb($t,$t,$t)";
     ?>
     background:<?=$space_color?>;
     /* background:blue; */
@@ -67,15 +79,19 @@ body{
     <?php $box_space_width=$box_space_outside_width/700*540;?>/** 가운데넓이 */
     width:<?=$box_space_width?>;
 }
+<?php
+// iis($rgb);
+$rgb=80;//사람 밝기@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+?>
 .sky{<?php 
-    //사람크기설정@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    $m=20;
+        //사람크기
+        $m=$_SESSION['man-size'];
     $sky_height=3;$ground_height=3;// 하늘, 땅 높이 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     $middle_height=100-$ground_height-$sky_height;
     $sky_height+=($middle_height-$m/100*$middle_height)*4/5;
     $ground_height+=($middle_height-$m/100*$middle_height)/5;
     ?>
-    background:blue;
+    /* background:blue; */
     height:<?=$sky_height?>%;
 }
 .space-man{/**몸에 글자색@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
@@ -96,7 +112,8 @@ body{
     height:<?=$space_man_width/2*7?>;
 }
 .ground{
-    background:brown;
+    <?php $t=-$rgb+50;?>
+background:rgb(<?=$t+$rgb?>,<?=$t+$rgb?>,<?=$t+$rgb?>);
     height:<?=$ground_height?>%;
 }
 

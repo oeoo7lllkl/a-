@@ -1,58 +1,41 @@
-4/7 10:30 ============================================
-
+4/7 17:00 ============================================
 
     
-                basic
-            function
-        mine
-            main
-            screenHeight
-            mysqlC
-        firstSetting
-                basic
-            mysql
-                    clothes
-                    colors
+         
+            mine/function/basic
+        mine/index
+        header/hidden/topnavi
+            header/firstSetting/main
+            header/firstSetting/screenHeight
+            header/firstSetting/mysqlC
+        header/firstSetting/index
+            header/function/mysql
+                index/index
+
+                DB/index
+                    header/function/CCC/clothes
+                    header/function/CCC/colors
                 CCC/index
-            .
-        function/index
-        topnavi
-        +++++++++++++++++++++++++++++++++++
+            header/function/
+        header/function/index
+            index
+            DB
+                header/hidden/CCC/index
+                header/hidden/CCC/clothes
+                header/hidden/CCC/colors
+                header/css/CCC/index
+                header/css/CCC/clothes
+                header/css/CCC/man
+                header/css/CCC/colors
+                header/css/CCC/options
+            CCC
+        header/main/
         header/css/index
         header/css/topNavi
-                    0
-                    1
-                    2
-                    3
-                header/DB/function/
-                    0
-                    1
-                    2
-                    3
-                header/DB/tables/
-                ++++++++++++++++++++++++++++++++++++++
-                header/DB/css/index
-                    0
-                    1
-                    2
-                    3
-                header/DB/css/
-            DB/index
-
-            function/index??
-                CCC/index.php
-            .
-        header/index
     header/index
     -----------------------------------
         body/part/topNavi 
             index
-                header/function/$S
-                header/tables/$S
-                +++++++++++++++++++
-                header/css/DB
-                header/css/$S
-                ------------------
                 body/part/rows
             DB  
                 body/part/clothes
