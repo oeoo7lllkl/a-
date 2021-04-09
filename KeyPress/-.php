@@ -7,7 +7,7 @@
 if(!isset($_SESSION['screen-width'])){
     if(!isset($_POST['screen-width'])){ 
         ?>
-        <script>
+        <script>   
             screen_width.value=screen.width;
             screen_height.value=screen.height;
             form_screen.submit();
