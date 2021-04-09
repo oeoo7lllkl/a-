@@ -20,7 +20,7 @@ body{
     if($_SESSION['screen-height']==823){//폰
         $box_width=979.5;
     }else if($_SESSION['screen-height']==900){//맥북
-        $box_width=593.8;
+        $box_width=669;
     }else if ($_SESSION['screen-height']==1024){//미니
         $box_width=$_SESSION['screen-width'];
         $box_width=955;
@@ -129,15 +129,5 @@ background:rgb(<?=$t+$rgb?>,<?=$t+$rgb?>,<?=$t+$rgb?>);
     /** 밑에높이 */
     height:<?=$box_height/937*80?>;
     background:rgb(200,200,200);
-}
-
-.note{
-    background:white;
-    color:red;
-    font-size:30;
-    text-align:center;
-    padding-top:50;
-    background:rgb(100,100,100);
-    /* background:red; */
-}
+}/
 </style>

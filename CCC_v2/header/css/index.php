@@ -8,6 +8,8 @@ $R=$_;
     margin:0;
 }
 body{
+    margin:0 auto;
+    
     font-size:<?=$_*16?>;
     color:white;
     color:rgb(45,45,45);

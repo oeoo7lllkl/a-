@@ -107,6 +107,7 @@ if(isset($_POST['destroy'])){
     margin:0;
 }
 body{
+    margin:0 auto;
     background:black;
     /* background:blue; */
     width:<?=$r*2?>;

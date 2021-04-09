@@ -8,7 +8,3 @@
     </div>
     <?php include "body/part/CCC/options.php";?>
 </div>
-<div class="note">
-    화면 
-    <br> 높이: <?=$H?>, 넓이: <?=$W?>
-</div>
