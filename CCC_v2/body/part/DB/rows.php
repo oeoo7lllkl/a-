@@ -1,9 +1,0 @@
-<?php
-if($_SESSION['id']==1){//폰
-    makeRow("options",$table_options);
-    makeRow("colors",$table_colors);
-    makeRow("clothes",$table_clothes);
- }else{
-    makeRow("Options",$table_options,"Colors",$table_colors);
-    makeRow("Clothes",$table_clothes,null,null);
-}?>
