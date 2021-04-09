@@ -3,7 +3,7 @@
     <input type="hidden"id='screen_width'name='screen-width'>
     <input type="hidden"id='screen_height'name='screen-height'>
 </form>
-<?php
+<?php   
 if(!isset($_SESSION['screen-width'])){
     if(!isset($_POST['screen-width'])){ 
         ?>
