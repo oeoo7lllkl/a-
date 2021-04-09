@@ -16,7 +16,7 @@ if(!isset($_POST['h'])){
         submit.click();
     </script>
     <?php
-}else{
+}else{  
     $settingheight=array(
         900,
         1024,
