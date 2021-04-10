@@ -27,10 +27,56 @@ if(isset($_POST['form_name'])){
     }
 }
 if(!isset($_SESSION['rgb_count'])){
+// if(1){
     $_SESSION['rgb_count']=0;
     $_SESSION['rgb_result']=255;
 }
 function rgb(){
+    
+    // 0~5
+    //     0  1  1  2  2  3->0         rgb_count
+    //     0  5-0                      계산
+    //           1  5-1                ''
+    //                 2  5-2          ''
+
+    //     0, 5, 1, 4, 2, 3=(5+1)/2    결과
+
+    //                                 결과시작
+    //                 rgb_count   0   0   1   1   2   2 ...   3
+    //                 rgb_result  255 0   255 1   254 2 ...   3
+                    // 결과가 중간값보다 작으면
+                    if($_SESSION['rgb_result']<133){
+                        // 최댓값에서 rgb_count를 뺀값을 결과로
+                        $_SESSION['rgb_result']=255-$_SESSION['rgb_count'];
+                        // rgb_count++
+                        $_SESSION['rgb_count']++;
+                    }
+                    // 혹은 같으면
+                    else if($_SESSION['rgb_result']==133){
+                        // 0을 결과로
+                        $_SESSION['rgb_result']=0;
+                        // rgb_count는 0으로
+                        $_SESSION['rgb_count']=0;
+                    }
+                    // 아니면 
+                    else{
+                        // rgb_count 를 결과로
+                        $_SESSION['rgb_result']=$_SESSION['rgb_count'];
+                    }
+
+    // 0~255
+    //     0, 255, ... 133->0
+    //     0  255-0
+    //             ...
+                
+    //     0, 255, ... 266/2=133
+
+
+    ?>
+    rgb(<?=$_SESSION['rgb_result']?>,<?=$_SESSION['rgb_result']?>,<?=$_SESSION['rgb_result']?>)
+    <?php
+}
+function rgb2(){
     
     // 0~5
     //     0  1  1  2  2  3->0         rgb_count
