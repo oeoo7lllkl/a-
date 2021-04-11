@@ -12,6 +12,9 @@
             $_SESSION['s6']=600; 
             $_SESSION['s7']=770;
             $_SESSION['s8']=270;
+            $_SESSION['s13']=1;
+            $_SESSION['s14']=1;
+            $_SESSION['s15']=1;
         }
         $passwd='11513122';
     // 폼이 포스트 제출 됬을 때
@@ -81,7 +84,7 @@
                     // 디스플레이 높이
                     $_SESSION['s7']=900;
                     // 사람 너비 -> 전체 크기로 될거임
-                    $_SESSION['s8']=300;
+                    $_SESSION['s8']=320;
                 }else{
                     die("화면<br>- 넓이: $p1<br>- 높이: $p2");
                 }
@@ -92,7 +95,8 @@
                 // 옵션 종류
                 $value=$_POST['value'];
                 if($value==0){//    모자
-                    
+                    if($_SESSION['s13']==0)$_SESSION['s13']=1;
+                    $_SESSION['s13']=1;
                 }else if($value==1){//    자켓
 
                 }else if($value==2){//    마스크
@@ -137,101 +141,113 @@
     // 함수
         // 쓸데없는
             // 색변화 함수
-                function rgb($num){
-                    ?>
-                    rgb(<?=$num?>,<?=$num?>,<?=$num?>)
-                    <?php
-                }
-                function rgb3(){
-                    // 0   0   1   1   2   2   3   ... 127 127 128
-                    // 0   1   1   2   2   3   3   ... 127 128 0
-                    // 255 0   128 1   129 2   130 ... 254 127 255
-                    // 0   128 1   129 2   130 3   ... 127 255 0
-                    // 결과가 중간값보다 작으면
-                    if($_SESSION['rgb_result']<128){
-                        // 최댓값에서 rgb_count를 뺀값을 결과로
-                        $_SESSION['rgb_result']=128+$_SESSION['rgb_count'];
-                        // rgb_count++
-                        $_SESSION['rgb_count']+=10;
+                    function rgb($num){
+                        ?>
+                        rgb(<?=$num?>,<?=$num?>,<?=$num?>)
+                        <?php
                     }
-                    // 최대값을 넘으면
-                    else if($_SESSION['rgb_result']>=255|$_SESSION['rgb_count']>=127){
-                        // 0을 결과로
-                        $_SESSION['rgb_result']-=255;
-                        // rgb_count는 0으로
-                        $_SESSION['rgb_count']-=128;
+                    function rgb3(){
+                        // 0   0   1   1   2   2   3   ... 127 127 128
+                        // 0   1   1   2   2   3   3   ... 127 128 0
+                        // 255 0   128 1   129 2   130 ... 254 127 255
+                        // 0   128 1   129 2   130 3   ... 127 255 0
+                        // 결과가 중간값보다 작으면
+                        if($_SESSION['rgb_result']<128){
+                            // 최댓값에서 rgb_count를 뺀값을 결과로
+                            $_SESSION['rgb_result']=128+$_SESSION['rgb_count'];
+                            // rgb_count++
+                            $_SESSION['rgb_count']+=10;
+                        }
+                        // 최대값을 넘으면
+                        else if($_SESSION['rgb_result']>=255|$_SESSION['rgb_count']>=127){
+                            // 0을 결과로
+                            $_SESSION['rgb_result']-=255;
+                            // rgb_count는 0으로
+                            $_SESSION['rgb_count']-=128;
+                        }
+                        // 아니면 
+                        else{
+                            // rgb_count 를 결과로
+                            $_SESSION['rgb_result']=$_SESSION['rgb_count'];
+                        }
+                        ?>
+                        rgb(<?=$_SESSION['rgb_result']?>,<?=$_SESSION['rgb_result']?>,<?=$_SESSION['rgb_result']?>)
+                        <?php
                     }
-                    // 아니면 
-                    else{
-                        // rgb_count 를 결과로
-                        $_SESSION['rgb_result']=$_SESSION['rgb_count'];
+                    function rgb2(){
+                        
+                        // 0~5
+                        //     0  1  1  2  2  3->0         rgb_count
+                        //     0  5-0                      계산
+                        //           1  5-1                ''
+                        //                 2  5-2          ''
+
+                        //     0, 5, 1, 4, 2, 3=(5+1)/2    결과
+
+                        //                                 결과시작
+                        //                 rgb_count   0   0   1   1   2   2 ...   3
+                        //                 rgb_result  255 0   255 1   254 2 ...   3
+                                        // 결과가 중간값보다 작으면
+                                        if(intval($_SESSION['rgb_result'])<128){
+                                            // 최댓값에서 rgb_count를 뺀값을 결과로
+                                            $_SESSION['rgb_result']=255-$_SESSION['rgb_count'];
+                                            // rgb_count++
+                                            $_SESSION['rgb_count']++;
+                                        }
+                                        // 혹은 같으면
+                                        else if($_SESSION['rgb_result']==128){
+                                            // 0을 결과로
+                                            $_SESSION['rgb_result']=0;
+                                            // rgb_count는 0으로
+                                            $_SESSION['rgb_count']=0;
+                                        }
+                                        // 아니면 
+                                        else{
+                                            // rgb_count 를 결과로
+                                            $_SESSION['rgb_result']=$_SESSION['rgb_count'];
+                                        }
+
+                        // 0~255
+                        //     0, 255, ... 128->0
+                        //     0  255-0
+                        //             ...
+                                    
+                        //     0, 255, ... 266/2=128
+
+
+                        ?>
+                        rgb(<?=$_SESSION['rgb_result']?>,<?=$_SESSION['rgb_result']?>,<?=$_SESSION['rgb_result']?>)
+                        <?php
                     }
-                    ?>
-                    rgb(<?=$_SESSION['rgb_result']?>,<?=$_SESSION['rgb_result']?>,<?=$_SESSION['rgb_result']?>)
-                    <?php
-                }
-                function rgb2(){
-                    
-                    // 0~5
-                    //     0  1  1  2  2  3->0         rgb_count
-                    //     0  5-0                      계산
-                    //           1  5-1                ''
-                    //                 2  5-2          ''
-
-                    //     0, 5, 1, 4, 2, 3=(5+1)/2    결과
-
-                    //                                 결과시작
-                    //                 rgb_count   0   0   1   1   2   2 ...   3
-                    //                 rgb_result  255 0   255 1   254 2 ...   3
-                                    // 결과가 중간값보다 작으면
-                                    if(intval($_SESSION['rgb_result'])<128){
-                                        // 최댓값에서 rgb_count를 뺀값을 결과로
-                                        $_SESSION['rgb_result']=255-$_SESSION['rgb_count'];
-                                        // rgb_count++
-                                        $_SESSION['rgb_count']++;
-                                    }
-                                    // 혹은 같으면
-                                    else if($_SESSION['rgb_result']==128){
-                                        // 0을 결과로
-                                        $_SESSION['rgb_result']=0;
-                                        // rgb_count는 0으로
-                                        $_SESSION['rgb_count']=0;
-                                    }
-                                    // 아니면 
-                                    else{
-                                        // rgb_count 를 결과로
-                                        $_SESSION['rgb_result']=$_SESSION['rgb_count'];
-                                    }
-
-                    // 0~255
-                    //     0, 255, ... 128->0
-                    //     0  255-0
-                    //             ...
-                                
-                    //     0, 255, ... 266/2=128
-
-
-                    ?>
-                    rgb(<?=$_SESSION['rgb_result']?>,<?=$_SESSION['rgb_result']?>,<?=$_SESSION['rgb_result']?>)
-                    <?php
-                }
-        function f1($R,$RR,$RRR){// 색 버튼 만들기
+        //-------------------------------------------
+        // 색 버튼 만들기
+            function f1($R,$RR,$RRR){
                 // red 빨강 3
                 //  value   텍스트  세션넘버
             ?>
+            <!-- <?=$R.', '.$RR.', '.$RRR.'<br>'?> -->
             <div class="button<?php if($_SESSION['s'.$RRR]==$R)echo(' selected');?>"
             onclick='num.value=5;value.value="<?=$R?>";form_if.submit();'><?=$RR?></div>
             <?php
-        }
-        if(!isset($_SESSION['s2']))$_SESSION['s2']=0;
-        function f2($R,$RR,$RRR){// 옷 버튼 만들기
-                // shirts 셔츠 2
-                //  value   텍스트  세션넘버
-            ?>
-            <div class="button<?php if($_SESSION['s'.$RRR]==$R)echo(' selected');?>"
-            onclick='num.value=4;value.value="<?=$R?>";form_if.submit();'><?=$RR?></div>
-            <?php 
-        }
+            }
+        // 옷 버튼 만들기
+            if(!isset($_SESSION['s2']))$_SESSION['s2']=0;
+            function f2($R,$RR,$RRR){
+                    // shirts 셔츠 2
+                    //  value   텍스트  세션넘버
+                ?>
+                <div class="button<?php if($_SESSION['s'.$RRR]==$R)echo(' selected');?>"
+                onclick='num.value=4;value.value="<?=$R?>";form_if.submit();'><?=$RR?></div>
+                <?php 
+            }
+        // 옵션 버튼 만들기
+            function f3($session_num,$value,$text){
+                //      13          0          
+                ?>
+                <div class="button-horizon<?php if($_SESSION['s'.$session_num]==1)echo(' option-on');?>"
+                onclick='num.value=7;value.value="<?=$value?>";form_if.submit();'><?=$text?></div>
+                <?php 
+            }
     ?>
 <!-- 키 반응 -->
     <script>
@@ -325,11 +341,7 @@
             width:100%;
         }
 
-    /* top */
-        .top{
-            height:90%;
-            display:flex;
-        }
+    /* menues */
         .navi{
             height:4%;
         }
@@ -358,7 +370,7 @@
                 align-items:center;
             }
             .button{
-                background:<?=rgb3()?>;
+                background:<?=rgb(25)?>;
                 height:50;
                 margin-bottom:6;
                 cursor:pointer;
@@ -368,11 +380,20 @@
                 justify-content:center;
             }
             .selected{
-                background:gray;
+                background:<?=rgb(55)?>;
+                border:1px solid red;
             }
             .button:hover{
                 opacity:50%;
             }
+        .option-on{
+            background:green;
+        }
+    /* top */
+        .top{
+            height:90%;
+            display:flex;
+        }
         .screen{
             width:<?=$screen_width?>;
             height:<?=$screen_height?>;
@@ -413,8 +434,7 @@
                 $head_height=$head_height_percent;
                 $head_width=30;?>
             .head{
-                background:<?=rgb3()?>;
-                background:<?=rgb3()?>;
+                background:<?=rgb(150)?>;
                 width:<?=$head_width?>%;
                 height:<?=h($head_height_percent)?>%;
                 margin:0 auto;
@@ -711,7 +731,7 @@
         <script>
         <?php
         $new=
-        13
+        16
         ;
         if(isset($_SESSION['s'.$new])){
         ?>
@@ -824,7 +844,13 @@
                             }else{
                                 $color=$row['value'];
                             }
-                            f1($color,$row['colorName'],3);
+                            if($_SESSION['s2']=='shirts')$session_num=3;
+                            else if($_SESSION['s2']=='pants')$session_num=4;
+                            else if($_SESSION['s2']=='shoes')$session_num=9;
+                            else if($_SESSION['s2']=='hat')$session_num=10;
+                            else if($_SESSION['s2']=='mask')$session_num=11;
+                            else if($_SESSION['s2']=='jacket')$session_num=12;
+                            f1($color,$row['colorName'],$session_num);
                         }
                         ?>
                     </div>
