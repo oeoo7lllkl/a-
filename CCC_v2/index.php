@@ -68,7 +68,7 @@ if(isset($_POST['num'])){
                 // 최댓값에서 rgb_count를 뺀값을 결과로
                 $_SESSION['rgb_result']=128+$_SESSION['rgb_count'];
                 // rgb_count++
-                $_SESSION['rgb_count']+=23;
+                $_SESSION['rgb_count']+=10;
             }
             // 최대값을 넘으면
             else if($_SESSION['rgb_result']>=255|$_SESSION['rgb_count']>=127){
@@ -144,8 +144,7 @@ if(isset($_POST['num'])){
     <input type="hidden"id='num'name='num'>
     <input type="hidden"id='value'name='value'>
 </form>
-<script>
-    // 키 반응
+<script>// 키 반응
     function keydown(){
         t=1;
         k=event.keyCode;
@@ -175,7 +174,7 @@ if(isset($_POST['num'])){
         t++;
     }
 </script>
-<style>
+<style> /* CSS */
     body{
         background:<?=rgb()?>;
         color:white;
@@ -327,7 +326,14 @@ if(isset($_POST['num'])){
     }
     <?php $neck_height_percent=10-3.33;// 머리 높이 퍼센트
         $neck_height=$neck_height_percent;?>
+    
+    
+    
     .neck{
+        background:<?=rgb()?>;
+        background:<?=rgb()?>;
+        background:<?=rgb()?>;
+        background:<?=rgb()?>;
         background:<?=rgb()?>;
         height:<?=h($neck_height_percent)?>%;
         width:19%;
@@ -397,6 +403,7 @@ if(isset($_POST['num'])){
         justify-content:center;
     }
     .foot{
+        background:<?=rgb()?>;
         background:<?=rgb()?>;
         margin:0 auto;
         <?php $foot_height=15;?>
