@@ -139,7 +139,7 @@ body{
             }else if($_SESSION['screenH']==1024){//아이패드미니5
                 $height_for_phone=20;
             }else if($_SESSION['screenH']==1080){//윈도우
-                $height_for_phone=0;
+                $height_for_phone=30;
             }else if($_SESSION['screenH']==823){//내폰
                 $height_for_phone=200;
             }
