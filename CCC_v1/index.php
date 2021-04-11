@@ -2,6 +2,7 @@
     <?php include "!include/!-/header.php";
     ?>
     <div class="myBody">
+        <div class="for-phone"></div>
         <div class="RefreshPage" onclick="location.href='!INCLUDE/!FUNCTION/_sessionD.php'">
             Reset
         </div>
