@@ -43,6 +43,8 @@ if(!isset($_SESSION['start'])){
         $myBodyH*=0.9;//윈도우
     }else if($screenH==823){
         $myBodyH*=3.5;//내폰
+    }else if($screenH==873){
+        $myBodyH*=3.5;//레드미10
     }else{
         die("화면 높이에 맞게 설정해주세요.".$screenH);
     }
@@ -67,6 +69,8 @@ if($_SESSION['screenH']==900){//맥북에어
     $topB*=1;
 }else if($_SESSION['screenH']==823){//내폰
     $topB*=1;
+}else if($_SESSION['screenH']==873){//레드미10
+    $topB*=2;
 }
 /*
 세션 목록
