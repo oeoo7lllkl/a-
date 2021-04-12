@@ -19,11 +19,3 @@ s8  사람너비 -> 전체 크기 조절
     s14 마스크
     s15 자켓
 
-
-    <?php // 옵션이 0 이면
-                if($_SESSION['s15']==0){
-                    ?>
-                    background:transparent;
-                    border-color:transparent;
-                    <?php
-                }?>
