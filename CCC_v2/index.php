@@ -93,6 +93,7 @@
                         $_SESSION['s16']=25;
                         $_SESSION['s18']="font-size:10;";//!!
                         $_SESSION['s19']="margin-bottom:6;";
+                        $_SESSION['s20']="margin:2 3 2 3;width:100%;";
                     }else// 맥북----------------------------------------------------
                     if($p1==1440&$p2==900){// &다음 안띄우는 이게 왜 되지 윈도우에서만 되나?
                         // 기기 아이디
@@ -107,6 +108,7 @@
                         $_SESSION['s16']=10;
                         $_SESSION['s18']="font-size:17;";
                         $_SESSION['s19']="margin-bottom:6;";
+                        $_SESSION['s20']="margin:2 3 2 3;width:100%;";
                     }else// 레드미10 ----------------------------------------------------
                     if($p1==393&$p2==873){
                         // 기기 아이디
@@ -114,14 +116,16 @@
                         // 디스플레이 너비
                         $_SESSION['s6']=970; 
                         // 디스플레이 높이
-                        $_SESSION['s7']=1990;
+                        $_SESSION['s7']=1976;
                         // 사람 크기 100프로일때 천장높이에 맞추기
                         $_SESSION['s8']=214;//!!1
                         // 화면 마진 탑
-                        $_SESSION['s16']=2;
-                        $_SESSION['s18']="font-size:27;";
+                        $_SESSION['s16']=4;
+                        $_SESSION['s18']="font-size:35;";
                         $_SESSION['s19']="margin-bottom:6;
                                           height:100;";
+                        $_SESSION['s20']="margin:2 3 2 3;width:100%;";
+                                          
                     }else{
                         die("화면<br>- 넓이: $p1<br>- 높이: $p2");
                     }               
@@ -174,108 +178,13 @@
             <?php
             die();
         }
-    // 쓸데 없는
-        // 페이지 리로드 카운트
-            if(!isset($_SESSION['page_load_count'])){
-                $_SESSION['page_load_count']=1;
-            }else{
-                $_SESSION['page_load_count']++;
-            }
-        // rgb 세션
-        // if(!isset($_SESSION['rgb_count'])){
-            if(1){
-            $_SESSION['rgb_count']=128;
-            $_SESSION['rgb_result']=255;
-            }
-        
-        // 쓸데없는
-            if(!isset($_SESSION['hide_font_color'])){
-                $_SESSION['hide_font_color']='transparent';
-                $_SESSION['hide_background_color']='transparent';
-            }
-
-
     // 함수
-        // 쓸데없는
-            // 색변화 함수
-                    function rgb($num){
-                        ?>
-                        rgb(<?=$num?>,<?=$num?>,<?=$num?>)
-                        <?php
-                    }
-                    function rgb3(){
-                        // 0   0   1   1   2   2   3   ... 127 127 128
-                        // 0   1   1   2   2   3   3   ... 127 128 0
-                        // 255 0   128 1   129 2   130 ... 254 127 255
-                        // 0   128 1   129 2   130 3   ... 127 255 0
-                        // 결과가 중간값보다 작으면
-                        if($_SESSION['rgb_result']<128){
-                            // 최댓값에서 rgb_count를 뺀값을 결과로
-                            $_SESSION['rgb_result']=128+$_SESSION['rgb_count'];
-                            // rgb_count++
-                            $_SESSION['rgb_count']+=10;
-                        }
-                        // 최대값을 넘으면
-                        else if($_SESSION['rgb_result']>=255|$_SESSION['rgb_count']>=127){
-                            // 0을 결과로
-                            $_SESSION['rgb_result']-=255;
-                            // rgb_count는 0으로
-                            $_SESSION['rgb_count']-=128;
-                        }
-                        // 아니면 
-                        else{
-                            // rgb_count 를 결과로
-                            $_SESSION['rgb_result']=$_SESSION['rgb_count'];
-                        }
-                        ?>
-                        rgb(<?=$_SESSION['rgb_result']?>,<?=$_SESSION['rgb_result']?>,<?=$_SESSION['rgb_result']?>)
-                        <?php
-                    }
-                    function rgb2(){
-                        
-                        // 0~5
-                        //     0  1  1  2  2  3->0         rgb_count
-                        //     0  5-0                      계산
-                        //           1  5-1                ''
-                        //                 2  5-2          ''
-
-                        //     0, 5, 1, 4, 2, 3=(5+1)/2    결과
-
-                        //                                 결과시작
-                        //                 rgb_count   0   0   1   1   2   2 ...   3
-                        //                 rgb_result  255 0   255 1   254 2 ...   3
-                                        // 결과가 중간값보다 작으면
-                                        if(intval($_SESSION['rgb_result'])<128){
-                                            // 최댓값에서 rgb_count를 뺀값을 결과로
-                                            $_SESSION['rgb_result']=255-$_SESSION['rgb_count'];
-                                            // rgb_count++
-                                            $_SESSION['rgb_count']++;
-                                        }
-                                        // 혹은 같으면
-                                        else if($_SESSION['rgb_result']==128){
-                                            // 0을 결과로
-                                            $_SESSION['rgb_result']=0;
-                                            // rgb_count는 0으로
-                                            $_SESSION['rgb_count']=0;
-                                        }
-                                        // 아니면 
-                                        else{
-                                            // rgb_count 를 결과로
-                                            $_SESSION['rgb_result']=$_SESSION['rgb_count'];
-                                        }
-
-                        // 0~255
-                        //     0, 255, ... 128->0
-                        //     0  255-0
-                        //             ...
-                                    
-                        //     0, 255, ... 266/2=128
-
-
-                        ?>
-                        rgb(<?=$_SESSION['rgb_result']?>,<?=$_SESSION['rgb_result']?>,<?=$_SESSION['rgb_result']?>)
-                        <?php
-                    }
+        // 색상 함수
+            function rgb($num){
+                ?>
+                rgb(<?=$num?>,<?=$num?>,<?=$num?>)
+                <?php
+            }
         //-------------------------------------------
         // 색 버튼 만들기
             function f1($R,$RR,$RRR){
@@ -366,29 +275,10 @@
     </script>
 <!-- CSS -->
     <style>
-    /* 쓸데없는 */
-        .reload{
-            color:<?=$_SESSION['hide_font_color']?>;
-            background:<?=$_SESSION['hide_background_color']?>;
-            position:fixed;
-            left:<?=$display_width/2+400?>;
-            top:<?=$display_height/2-30?>;
-            width:70;height:100;
-            z-index:100;
-        }
-        .rgb{
-            color:<?=$_SESSION['hide_font_color']?>;
-            background:<?=$_SESSION['hide_background_color']?>;
-            position:fixed;
-            left:<?=$display_width/2+400?>;
-            top:<?=$display_height/2?>;
-            width:0;height:0;
-            z-index:100;
-        } 
     /*  */
         body{
-            <?php $rgb=55;?>
-            background:rgb(<?=$rgb?>,<?=$rgb?>,<?=$rgb?>);
+            background:red;
+            background:<?=rgb(55)?>;
             opacity:100%;
             color:white;
             font-size:100;
@@ -426,9 +316,8 @@
                 justify-content:center;
             }
             .button-horizon{
-                background:<?=rgb3()?>;
-                margin:2;
-                width:100;
+                background:<?=rgb(35)?>;
+                <?=$_SESSION['s20']?>
                 cursor:pointer;
                 text-align:center;
                 display:flex;
@@ -445,7 +334,7 @@
                 align-items:center;
             }
             .button{
-                background:<?=rgb(25)?>;
+                background:<?=rgb(35)?>;
                 height:50;
                 <?=$_SESSION['s19']?>
                 cursor:pointer;
@@ -799,25 +688,6 @@
                 left:<?=$Rr?>%;
             }
     </style>
-<!-- 쓸데없는 -->
-    <!-- 리로드 rgb카운트 -->
-    <div class="reload">reload: <?=$_SESSION['page_load_count']?></div>
-        <div class="rgb">rgb_count: <?=var_dump($_SESSION['rgb_count'])?>   <br>
-            rgb_result: <?=var_dump($_SESSION['rgb_result'])?>   
-        </div>
-    <!-- 새로운 세션이 생기면 -->
-        <script>
-        <?php
-        $new=
-        20
-        ;
-        if(isset($_SESSION['s'.$new])){
-        ?>
-        alert('새로운 세션이 생겼습니다.\n세션<?=$new?>번: <?=$_SESSION['s'.$new]?>');
-        <?php
-        }
-        ?>
-        </script>
 <!-- body -->
     <body onkeydown='keydown()'>
     <!-- 눈에 보여지는 전체 화면 -->
@@ -825,9 +695,9 @@
         <!-- 네비게이션메뉴 -->
             <div class="navi">
                 <div class="menu-horizon">
-                    <div class="button-horizon"onclick='location.href=".."'><div class='flex-centered'>홈</div></div>
                     <div class="button-horizon"></div>
-                    <div class="button-horizon"></div>
+                    <div class="button-horizon"onclick="location.href='';"></div>
+                    <div class="button-horizon"onclick='location.href="..";'><div class='flex-centered'>홈</div></div>
                     <div class="button-horizon"onclick='num.value=1;form_if.submit();'><div class="flex-centered">재시작</div></div>
                 </div>
             </div>
