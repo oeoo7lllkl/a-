@@ -17,7 +17,7 @@
             $_SESSION['s15']=1;
 
             $_SESSION['s17']=100;//기기처음 맞출때 사람 크기 천장에 맞추기 위함
-            $_SESSION['s17']=94;
+            $_SESSION['s17']=94;//!!1
         }
     // 폼이 포스트 제출 됬을 때
         if(isset($_POST['num'])){
@@ -88,9 +88,11 @@
                         // 디스플레이 높이
                         $_SESSION['s7']=900;
                         // 사람 크기 100프로일때 천장높이에 맞추기
-                        $_SESSION['s8']=90;//!!
+                        $_SESSION['s8']=90;//!!1
                         // 화면 마진 탑
                         $_SESSION['s16']=25;
+                        $_SESSION['s18']="font-size:10;";//!!
+                        $_SESSION['s19']="margin-bottom:6;";
                     }else// 맥북----------------------------------------------------
                     if($p1==1440&$p2==900){// &다음 안띄우는 이게 왜 되지 윈도우에서만 되나?
                         // 기기 아이디
@@ -103,12 +105,29 @@
                         $_SESSION['s8']=107/100*80;
                         // 화면 마진 탑
                         $_SESSION['s16']=10;
+                        $_SESSION['s18']="font-size:17;";
+                        $_SESSION['s19']="margin-bottom:6;";
+                    }else// 레드미10 ----------------------------------------------------
+                    if($p1==393&$p2==873){
+                        // 기기 아이디
+                        $_SESSION['s-1']=2;
+                        // 디스플레이 너비
+                        $_SESSION['s6']=970; 
+                        // 디스플레이 높이
+                        $_SESSION['s7']=1990;
+                        // 사람 크기 100프로일때 천장높이에 맞추기
+                        $_SESSION['s8']=214;//!!1
+                        // 화면 마진 탑
+                        $_SESSION['s16']=2;
+                        $_SESSION['s18']="font-size:27;";
+                        $_SESSION['s19']="margin-bottom:6;
+                                          height:100;";
                     }else{
                         die("화면<br>- 넓이: $p1<br>- 높이: $p2");
                     }               
                 }
             // ------------------------------------------------------------------------------------------------
-            // 옵션 클릭
+            // 옵션 클릭 !!!
             if($_POST['num']==7){
                 // 옵션 종류
                 $value=$_POST['value'];
@@ -116,22 +135,23 @@
                     if($_SESSION['s13']==0)$_SESSION['s13']=1;
                     $_SESSION['s13']=1;
                 }else if($value==1){//    자켓
-
+                    if($_SESSION['s14']==0)$_SESSION['s14']=1;
+                    $_SESSION['s14']=1;
                 }else if($value==2){//    마스크
-
+                    if($_SESSION['s15']==0)$_SESSION['s15']=1;
+                    $_SESSION['s15']=1;
                 }
                 //----------------------------------
                 }
             // ------------------------------------------------------------------------------------------------
             // - 클릭
             if($_POST['num']==8& $_SESSION['s17']>10){
-                $_SESSION['s8']-=5;
-                if($_SESSION['s8']<10)$_SESSION['s8']=10;
+                $_SESSION['s17']-=5;
+                if($_SESSION['s17']<10)$_SESSION['s17']=10;
                 //----------------------------------
                 }
             // ------------------------------------------------------------------------------------------------
-            // 옵션 클릭 !!
-            // die("{$_SESSION['s17']}");
+            // + 클릭 
             if($_POST['num']==9& $_SESSION['s17']<100){
                 $_SESSION['s17']+=5;
                 if($_SESSION['s17']>100){
@@ -336,7 +356,7 @@
             // 차례로 추가만 하면됨 ==================
     // --------------------------------------------------------------------------------------------
     // + 키 // post num = 9
-            if(k==107|k==187){//!!
+            if(k==107|k==187){
             // 전부 손댈 필요없음 ===================
                 num.value=9;
                 form_if.submit();
@@ -371,6 +391,8 @@
             background:rgb(<?=$rgb?>,<?=$rgb?>,<?=$rgb?>);
             opacity:100%;
             color:white;
+            font-size:100;
+            text-align:center;
         }
         <?php // 화면 높 넓이 ////////////////////////////
             // ========================================
@@ -411,6 +433,7 @@
                 text-align:center;
                 display:flex;
                 align-items:center;
+                <?=$_SESSION['s18']?>
             }
             .button-horizon:hover{
                 opacity:50%;
@@ -424,12 +447,13 @@
             .button{
                 background:<?=rgb(25)?>;
                 height:50;
-                margin-bottom:6;
+                <?=$_SESSION['s19']?>
                 cursor:pointer;
                 text-align:center;
                 display:flex;
                 align-items:center;
                 justify-content:center;
+                <?=$_SESSION['s18']?>
             }
             .selected{
                 background:<?=rgb(55)?>;
@@ -638,8 +662,9 @@
                 <?php // 팔 높 너비
                     // 팔너비퍼센트
                     $R=$width_percent_arm;
+                    $shirts_short=2;
                     // 팔높이퍼센트
-                    $Rr=$height_percent_arm+-2?>
+                    $Rr=$height_percent_arm+-$shirts_short?>
                 width:<?=$R?>%;
                 height:<?=$Rr?>%;
                 <?php // 탑 레프트
@@ -672,7 +697,7 @@
                 left:<?=50-$lowerbody_width/2?>%;
             }
             .pants .leg{
-                <?php $leg_short=10;?>
+                <?php $leg_short=8;?>
                 width:<?=$lowerbody_width/100*$leg_width?>%;
                 height:<?=$lower_body_height/100*$legs_height-$leg_short?>%;
                 top:<?=$head_height+$neck_height+$upperbody_height+$hip_height*$lower_body_height/100?>%;
@@ -754,8 +779,9 @@
                 <?php // 팔 높 너비
                     // 팔너비퍼센트
                     $R=$width_percent_arm;
+                    $jacket_short=0.5;
                     // 팔높이퍼센트
-                    $Rr=$height_percent_arm+-2?>
+                    $Rr=$height_percent_arm+-$jacket_short;?>
                 width:<?=$R?>%;
                 height:<?=$Rr?>%;
                 <?php // 탑 레프트
@@ -783,7 +809,7 @@
         <script>
         <?php
         $new=
-        18
+        20
         ;
         if(isset($_SESSION['s'.$new])){
         ?>
@@ -888,6 +914,9 @@
                     <!-- // 오른메뉴 만들기 -->
                         <?php
                         $sql="select * from clothes where name='".$_SESSION['s2']."'";
+                        if($_SESSION['s-1']!=0){
+                            $sql="select * from clothes where cloth='".$_SESSION['s2']."'";
+                        }
                         $result=mysqli_query($conn,$sql);
                         $color='red';
                         while($row=mysqli_fetch_array($result)){
@@ -905,7 +934,10 @@
                             else if($_SESSION['s2']=='hat')$session_num=10;
                             else if($_SESSION['s2']=='mask')$session_num=11;
                             else if($_SESSION['s2']=='jacket')$session_num=12;
-                            f1($color,$row['colorName'],$session_num);
+                            if($_SESSION['s-1']==0)
+                                f1($color,$row['colorName'],$session_num);
+                            else
+                                f1($color,$row['name'],$session_num);
                         }
                         ?>
                     </div>
