@@ -14,12 +14,17 @@
             $_SESSION['s6']=600; 
             $_SESSION['s7']=770;
             $_SESSION['s8']=90;
-            $_SESSION['s13']=1;
-            $_SESSION['s14']=1;
-            $_SESSION['s15']=1;
+            //옵션들 !!2
+            $_SESSION['s13']=0;// 모자
+            $_SESSION['s14']=1;// 자켓
+            $_SESSION['s15']=0;// 마스크
+            $_SESSION['s21']=0;// 안경
+            $_SESSION['s22']=0;// 지퍼
+            $_SESSION['s23']=0;// 셔츠팔
+            $_SESSION['s25']=0;// 자켓팔
 
-            $_SESSION['s17']=100;//기기처음 맞출때 사람 크기 천장에 맞추기 위함
             $_SESSION['s17']=94;//!!1
+            $_SESSION['s17']=100;//기기처음 맞출때 사람 크기 천장에 맞추기 위함
         }
     // 폼이 포스트 제출 됬을 때
         if(isset($_POST['num'])){
@@ -70,7 +75,7 @@
                 }
             // ------------------------------------------------------------------------------------------------
             // 기기 화면 높 너비 구하기 
-            if($_POST['num']==6){
+                if($_POST['num']==6){
                     // 화면 넓이
                     $p1=$_POST['value'];
                     // 화면 높이
@@ -80,18 +85,18 @@
                         // 기기 아이디
                         $_SESSION['s-1']=0;
                         // 디스플레이 너비
-                        $_SESSION['s6']=600; 
+                        $_SESSION['s6']=800; 
                         // 디스플레이 높이
-                        $_SESSION['s7']=900;
+                        $_SESSION['s7']=945;
                         // 사람 크기 100프로일때 천장높이에 맞추기
-                        $_SESSION['s8']=90;//!!1
+                        $_SESSION['s8']=103;//!!1
                         // 화면 마진 탑
-                        $_SESSION['s16']=25;
-                        $_SESSION['s18']="font-size:10;";//!!
+                        $_SESSION['s16']=3;
+                        $_SESSION['s18']="font-size:18;";
                         $_SESSION['s19']="margin-bottom:6;";
                         $_SESSION['s20']="margin:2 3 2 3;width:100%;";
                     }else// 맥북----------------------------------------------------
-                    if($p1==1440&$p2==900){// &다음 안띄우는 이게 왜 되지 윈도우에서만 되나?
+                    if($p1==1440&$p2==900){//
                         // 기기 아이디
                         $_SESSION['s-1']=1;
                         // 디스플레이 너비
@@ -119,15 +124,15 @@
                         $_SESSION['s16']=4;
                         $_SESSION['s18']="font-size:35;";
                         $_SESSION['s19']="margin-bottom:6;
-                                          height:100;";
+                                            height:100;";
                         $_SESSION['s20']="margin:2 3 2 3;width:100%;";
-                                          
+                                            
                     }else{
                         die("화면<br>- 넓이: $p1<br>- 높이: $p2");
                     }               
                 }
             // ------------------------------------------------------------------------------------------------
-            // 옵션 클릭 !!!!
+            // 옵션 클릭 !!2
             if($_POST['num']==7){
                 // 옵션 종류
                 $value=$_POST['value'];
@@ -143,6 +148,24 @@
                     if($_SESSION['s15']==0)$_SESSION['s15']=1;
                     else
                     $_SESSION['s15']=0;
+                }else if($value==3){//    안경
+                    if($_SESSION['s21']==0)$_SESSION['s21']=1;
+                    else
+                    $_SESSION['s21']=0;
+                }else if($value==4){//    지퍼!!!
+                    if($_SESSION['s22']==0)$_SESSION['s22']=1;
+                    else
+                    $_SESSION['s22']=0;
+                }else if($value==5){//    셔츠팔
+                    if($_SESSION['s23']==0)$_SESSION['s23']=1;
+                    else if($_SESSION['s23']==1)$_SESSION['s23']=2;
+                    else
+                    $_SESSION['s23']=0;
+                }else if($value==7){//    자켓팔
+                    if($_SESSION['s25']==0)$_SESSION['s25']=1;
+                    else if($_SESSION['s25']==1)$_SESSION['s25']=2;
+                    else
+                    $_SESSION['s25']=0;
                 }
                 //----------------------------------
                 }
@@ -200,8 +223,17 @@
             function f2($R,$RR,$RRR){
                     // shirts 셔츠 2
                     //  value   텍스트  세션넘버
+                    if(
+                        $_SESSION['s13']==0& $R=='hat'|
+                        $_SESSION['s15']==0& $R=='mask'|
+                        $_SESSION['s14']==0& $R=='jacket'
+                        ){
+                            $hidden=' display:none;';
+                    }else{
+                        $hidden='';
+                    }
                 ?>
-                <div class="button<?php if($_SESSION['s'.$RRR]==$R)echo(' selected');?>"
+                <div style="<?=$hidden?>" class="button<?php if($_SESSION['s'.$RRR]==$R)echo(' selected');?>"
                 onclick='num.value=4;value.value="<?=$R?>";form_if.submit();'><?=$RR?></div>
                 <?php 
             }
@@ -209,10 +241,23 @@
             function f3($session_num,$value,$text){
                 //      13          0          
                 ?>
-                <div class="button-horizon<?php if($_SESSION['s'.$session_num]==1)echo(' option-on');?>"
-                onclick='num.value=7;value.value="<?=$value?>";form_if.submit();'><?=$text?></div>
-                <?php 
+                <div class="button-horizon<?php if($_SESSION['s'.$session_num]!=0){?> option-on<?php }?>">
+                    <div class="flex-centered"onclick='num.value=7;value.value="<?=$value?>";form_if.submit();'>
+                        <?=$text?></div></div>
+                <?php
             }
+
+          
+        // 탑 네비게이션 버튼 만들기
+        function f4($onclick,$show_text){
+            //             f4($onclick,$show_text)
+            ?>
+            <div class="button-horizon"onclick="<?=$onclick?>">
+                <div class='flex-centered'><?=$show_text?></div>
+            </div>
+            <?php
+        }
+           
     ?>
 <!-- ---------------------------------------------------------------- -->
 
@@ -280,10 +325,6 @@
         }
         <?php // 화면 높 넓이 ////////////////////////////
             // ========================================
-            if(0){
-                sasdqwd;
-                die();
-            }
             $screen_width=$_SESSION['s6']*0.7;$screen_height=0.9*$_SESSION['s7'];?>
         .display{
             width:<?=$_SESSION['s6']?>;
@@ -350,7 +391,8 @@
                 opacity:50%;
             }
         .option-on{
-            background:green;
+            background:transparent;
+            border:1px solid green;
         }
     /* top */
         .top{
@@ -394,13 +436,14 @@
                     return $R;
                 }    ?>
             <?php $head_height_percent=15;// 머리 높이 퍼센트
-                $head_height=$head_height_percent;
-                $head_width=28;?>
+            $head_height=$head_height_percent;
+            $head_width=27;?>
             .head{
                 background:<?=rgb(150)?>;
                 width:<?=$head_width?>%;
                 height:<?=h($head_height_percent)?>%;
                 margin:0 auto;
+                border-bottom:1px solid black;
             }
             .hair{
                 background:black;
@@ -417,7 +460,7 @@
         /* 상체 */
             .upper-body{
                 <?php $E=50;// 몸통 너비 
-                $upper_body_short=5;//!!!
+                $upper_body_short=5;//
                 $lower_body_long=$upper_body_short;
                 $arm_short=3;
                 $width_percent_upper_body=$E;
@@ -454,6 +497,7 @@
                 <?php $R=15;?>
                 width:<?=100+$R?>%;
                 left:<?=-$R/2?>%;
+                border-bottom:1px solid black;
             }
             .arm.left{
                 <?php // 왼팔 레프트
@@ -471,16 +515,16 @@
             }
         /* 하체 */
             .lower-body{
-                <?php $hip_width=40;$lower_body_height=43;
+                <?php $hip_width=40;$lower_body_height=43+$lower_body_long;
                     $lowerbody_width=$hip_width;
                     $lower_body_width=$hip_width;?>
                 width:<?=$hip_width?>%;
-                height:<?=h($lower_body_height+$lower_body_long)?>%;
+                height:<?=h($lower_body_height)?>%;
                 margin:0 auto;
                 position:absolute;
                 z-index:0;
                 top:<?=$head_height+$neck_height_percent+$upperbody_height
-                -$upper_body_short?>%;/*!!!*/
+                -$upper_body_short?>%;
                 left:<?=50-$hip_width/2?>%;
             }
 
@@ -520,13 +564,16 @@
                 /* padding:0 95% 0 95%; */
                 left:<?=-$foot_width/2+100/2?>%;
                 position:absolute;
+                border-bottom:1px solid black;
             }
 
     /* 옷 */
         /* 셔츠 */  
             .shirts *{
                 border-bottom:1px solid black;
-                <?php if(!isset($_SESSION['s3'])){$_SESSION['s3']='white';}?>
+                <?php 
+                $shirts_color=$_SESSION['s3'];
+                if(!isset($_SESSION['s3'])){$_SESSION['s3']='white';}?>
                 background:<?=$_SESSION['s3']?>;
                 <?php if(!isset($_SESSION['s5']))$_SESSION['s5']='';?>
                 position:absolute;
@@ -536,8 +583,15 @@
             .shirts .body{
                 /* background:blue; */
                 <?php // 높 너비
-                $shirts_short=1;
-                
+                $shirts_short=3;
+                $shirts_body_long=4;
+                if($_SESSION['s23']==1){
+                    $shirts_arm_short=2;
+                }else if($_SESSION['s23']==2){
+                    $shirts_arm_short=17;
+                }else{
+                    $shirts_arm_short=-1;
+                }
                 // 몸통너비퍼센트
                 $R=$width_percent_upper_body;
                 // 몸통 슬림
@@ -545,7 +599,7 @@
                 // 몸통높이퍼센트
                 $Rr=$height_percent_upper_body+0?>
                 width:<?=$R-$body_slim?>%;
-                height:<?=$Rr-$shirts_short?>%;
+                height:<?=$Rr-$shirts_short+$shirts_body_long?>%;
                 <?php 
                     // 머리높이+목높이
                     $R=$head_height_percent+$neck_height_percent;
@@ -553,32 +607,31 @@
                     $Rr=50-$width_percent_upper_body/2?>
                 top:<?=$R?>%;
                 left:<?=$Rr+$body_slim/2?>%;
-                /*!!!*/
             }
             .shirts .arm{
                 /* background:green; */
                 <?php // 팔 높 너비
-                    $shirts_arm_slim=3;
+                    $shirts_arm_slim=5;
                     $jacket_arm_slim=2;
                     // 팔너비퍼센트
                     $R=$width_percent_arm;
                     // 팔높이퍼센트
                     $Rr=$height_percent_arm+-$shirts_short?>
                 width:<?=$R-$shirts_arm_slim?>%;
-                height:<?=$Rr?>%;
+                height:<?=$Rr-$shirts_arm_short?>%;
                 <?php // 탑 레프트
                     // 머리높이+목높이
                     $R=$head_height_percent+$neck_height_percent;
                     // 중앙-몸통너비퍼센트/2-팔너비퍼센트
                     $Rr=50-$width_percent_upper_body/2-$arm_width_percent?>
                 top:<?=$R?>%;
-                left:<?=$Rr+$shirts_arm_slim?>%;
+                left:<?=$Rr+$shirts_arm_slim/2?>%;
             }
             .shirts .arm.right{
                 <?php // 탑 레프트
                     // 중앙+몸통너비퍼센트/2
                     $Rr=50+$width_percent_upper_body/2?>
-                left:<?=$Rr?>%;
+                left:<?=$Rr+$shirts_arm_slim/2?>%;
             }
         /* 바지 */
             .pants *{
@@ -588,25 +641,24 @@
                 position:absolute;
                 z-index:1;
                 <?=$_SESSION['s5']?>
-                opacity:90%;
-                /*!!!*/
             }
             .pants .upper{
-                width:<?=$hip_width?>%;
+                <?php $pants_upper_plus=3;?>
+                width:<?=$hip_width+$pants_upper_plus?>%;
                 height:<?=$hip_height*$lower_body_height/100?>%;
                 top:<?=$head_height+$neck_height+$upperbody_height
                 -$upper_body_short?>%;
-                left:<?=50-$lowerbody_width/2?>%;
+                left:<?=50-$lowerbody_width/2-$pants_upper_plus/2?>%;
             }
             .pants .leg{
-                <?php $leg_short=8;?>
-                width:<?=$lowerbody_width/100*$leg_width?>%;
+                <?php $leg_short=11.5;$pants_slim=0;?>
+                width:<?=$lowerbody_width/100*($leg_width-$pants_slim)?>%;
                 height:<?=$upper_body_short+$lower_body_height/100*$legs_height-$leg_short?>%;
                 top:<?=-$upper_body_short+$head_height+$neck_height+$upperbody_height+$hip_height*$lower_body_height/100?>%;
-                left:<?=50-$lowerbody_width/2?>%;
+                left:<?=50-$lowerbody_width/2-$pants_upper_plus*$lowerbody_width/100?>%;
             }
             .pants .leg.right{
-                left:<?=(50+$lowerbody_width*(50-$leg_width)/100)*1.001?>%;
+                left:<?=50+$pants_slim*$lowerbody_width/100+$pants_upper_plus*$lowerbody_width/100?>%;
             }
         /* 신발 */
             .shoe{
@@ -625,7 +677,7 @@
             .hat{
                 <?php if(!isset($_SESSION['s10']))$_SESSION['s10']='white';?>
                 background:<?=$_SESSION['s10']?>;
-                <?php $hat_height=5;?>
+                <?php $hat_height=5.3;?>
                 position:absolute;
                 width:<?=$head_width?>%;
                 height:<?=$hat_height?>%;
@@ -635,7 +687,7 @@
                 z-index:1;
                 <?=$_SESSION['s5']?>
                 <?php 
-                if($_SESSION['s13']==1){
+                if($_SESSION['s13']==0){
                     ?>
                     background:transparent;
                     border-color:transparent;
@@ -646,7 +698,7 @@
             .mask{
                 <?php if(!isset($_SESSION['s11']))$_SESSION['s11']='white';?>
                 background:<?=$_SESSION['s11']?>;
-                <?php $mask_height=6;?>
+                <?php $mask_height=5.5;?>
                 position:absolute;
                 width:<?=$head_width?>%;
                 height:<?=$mask_height?>%;
@@ -656,7 +708,7 @@
                 z-index:1;
                 <?=$_SESSION['s5']?>
                 <?php 
-                if($_SESSION['s15']==1){
+                if($_SESSION['s15']==0){
                     ?>
                     background:transparent;
                     border-color:transparent;
@@ -671,10 +723,8 @@
                 position:absolute;
                 z-index:3;
                 <?=$_SESSION['s5']?>
-                opacity:10%; 
-                /* !!! */
                 <?php 
-                if($_SESSION['s15']==1){
+                if($_SESSION['s14']==0){
                     ?>
                     background:transparent;
                     border-color:transparent;
@@ -684,12 +734,14 @@
             .jacket .body{
                 /* background:blue; */
                 <?php // 높 너비
-                    // 몸통너비퍼센트
-                    $R=$width_percent_upper_body;
-                    // 몸통 슬림
-                    $body_slim=2;
-                    // 몸통높이퍼센트
-                    $Rr=$height_percent_upper_body+0?>
+                // 몸통너비퍼센트
+                $R=$width_percent_upper_body;
+                // 몸통 슬림
+                $body_slim=2;
+                $jacket_short=1;
+                // 몸통높이퍼센트
+                $jacket_height=$height_percent_upper_body-$jacket_short;
+                $Rr=$jacket_height?>
                 width:<?=$R-$body_slim?>%;
                 height:<?=$Rr?>%;
                 <?php 
@@ -702,11 +754,17 @@
             }
             .jacket .arm{
                 <?php // 팔 높 너비
-                    // 팔너비퍼센트
-                    $R=$width_percent_arm;
+                // 팔너비퍼센트
+                $R=$width_percent_arm;
+                if($_SESSION['s25']==0){
                     $jacket_short=0.5;
-                    // 팔높이퍼센트
-                    $Rr=$height_percent_arm+-$jacket_short;?>
+                }else if($_SESSION['s25']==1){
+                    $jacket_short=8;
+                }else {
+                    $jacket_short=19.5;
+                }
+                // 팔높이퍼센트
+                $Rr=$height_percent_arm+-$jacket_short;?>
                 width:<?=$R-$jacket_arm_slim?>%;
                 height:<?=$Rr?>%;
                 <?php // 탑 레프트
@@ -723,16 +781,112 @@
                     $Rr=50+$width_percent_upper_body/2?>
                 left:<?=$Rr?>%;
             }
+            
+            <?php 
+            //========
+            //====================
+            //=====================================
+            $max=50;
+            if($_SESSION['s22']==1)
+            $start_width=0;
+            else
+            $start_width=40;
+            $total_height=25;
+            //=====================================
+            //====================
+            //========
+            $jacket_open_height=$total_height/$max;
+            $jacket_open_width=$start_width;
+
+            $top=-$jacket_open_height;
+            $num=1;
+            while($num<$max+1){?>
+                .jacket_open<?=$num++?>{
+                    background:<?=$shirts_color?>;
+                    margin:0 auto;
+                    border:1px solid black;
+                    border-top:0px;
+                    position:absolute;
+
+                    width:<?=$jacket_open_width?>%;
+                    height:<?=$jacket_open_height?>%;
+                    <?php $top+=$jacket_open_height;?>
+                        top:<?=$top?>%;
+                    left:<?=50-$jacket_open_width/2?>%;
+                    <?php 
+                    //========
+                    //====================
+                    //=====================================
+                    // $jacket_open_width-=$start_width/$max;//직선
+                    // $jacket_open_width=sqrt(pow($start_width,2)-pow(($num-2)/$max*$start_width,2));//바깥쪽곡선
+                    $jacket_open_width*=0.95;//안쪽곡선
+                    //=====================================
+                    //====================
+                    //========
+                    ?>
+                }<?php
+            }?>
+            .zipper{
+                border:1px solid white;
+                /* !!!! */
+                height:<?=$jacket_height?>%;
+                position:absolute;
+                left:52%;
+                top:<?=$total_height?>%;
+                
+            }
         /* 안경 */
             .glasses{
-                background:red;
                 width:<?=$head_width?>%;
-                height:<?=$glasses_height=25*$head_height/100?>%;
+                height:<?=$glasses_height=23*$head_height/100?>%;
                 position:absolute;
                 left:<?=50-$head_width/2?>%;
                 top:<?=($hair_height+5)*$head_height/100?>%;
                 z-index:2;
-                /*!!!!*/
+                display:flex;
+            }.glass{
+                <?php 
+                $ear_width=11;
+                $nose_width=$ear_width*2;
+                $glass_width=100-$nose_width*2;
+                ?>
+                background:transparent;
+                width:<?=$glass_width?>%;
+                height:100%;
+                border:1px solid black;
+                <?php if($_SESSION['s21']==0){//
+                    ?>
+                    background:transparent;
+                    border-color:transparent;
+                    <?php
+                }?>
+            }
+            .glasses_ear{
+                position:relative;
+                width:<?=$ear_width?>%;
+                height:1%;
+                background:yellow;
+                top:<?=100/3?>%;
+                <?php if($_SESSION['s21']==0){
+                    ?>
+                    background:transparent;
+                    border-color:transparent;
+                    <?php
+                }?>
+
+            }
+            .glasses_nose{
+                position:relative;
+                top:<?=100/4?>%;
+                width:<?=$nose_width?>%;
+                height:1%;
+                background:yellow;
+                <?php if($_SESSION['s21']==0){
+                    ?>
+                    background:transparent;
+                    border-color:transparent;
+                    <?php
+                }?>
             }
     </style>
 
@@ -746,12 +900,18 @@
         <!-- 네비게이션메뉴 -->
             <div class="navi">
                 <div class="menu-horizon">
-                    <div class="button-horizon"></div>
-                    <div class="button-horizon"onclick="location.href='';"></div>
-                    <div class="button-horizon"onclick='location.href="..";'><div class='flex-centered'>홈</div></div>
-                    <div class="button-horizon"onclick='num.value=1;form_if.submit();'><div class="flex-centered">재시작</div></div>
+                    <?php
+                     //             f4($onclick,$show_text)
+                     f4("num.value=9;form_if.submit();",'+');
+                     f4("num.value=8;form_if.submit();",'-');
+                     f4("location.href='..';",'홈');
+                     f4("num.value=1;form_if.submit();",'재시작');
+                     ?>
                 </div>
             </div>
+        <!-- ------------- -->
+        <!-- ------------- -->
+        <!-- ------------- -->
         <!-- 메뉴 사람나오는곳 메뉴 -->
             <div class="top">
             <!-- 왼메뉴 -->
@@ -781,6 +941,8 @@
                 </div>
             
             <!-- - -->
+            <!-- - -->
+            <!-- - -->
             <!-- 사람나오는 -->
                 <div class="screen">
                     <div class="man">
@@ -805,10 +967,17 @@
                         <div class="hat"></div>
                         <div class="mask"></div>
                         <div class="jacket">
-                            <div class="body"></div>
+                            <div class="body">  
+                                <div class="zipper"></div>
+                            <?php $num=1; while($num<$max+1){?>
+                                <div class="jacket_open<?=$num++?>"></div>
+                            <?php }?>
+                            </div>
                             <div class="arm left"></div>
                             <div class="arm right"></div>
                         </div>
+                    <!-- - -->
+                    <!-- - -->
                     <!--사람자체-->
                         <div class="head">
                         <div class="hair"></div>
@@ -841,15 +1010,14 @@
                     </div>
                 </div>
             <!-- - -->
+            <!-- - -->
+            <!-- - -->
             <!-- 오른메뉴 -->
                 <div class="menu">
                     <div class="flex-centered">
                     <!-- // 오른메뉴 만들기 -->
-                        <?php
-                        $sql="select * from clothes where name='".$_SESSION['s2']."'";
-                        if($_SESSION['s-1']!=0){
-                            $sql="select * from clothes where cloth='".$_SESSION['s2']."'";
-                        }
+                        <?php 
+                        $sql="select * from clothes where cloth='".$_SESSION['s2']."'";
                         $result=mysqli_query($conn,$sql);
                         $color='red';
                         while($row=mysqli_fetch_array($result)){
@@ -876,14 +1044,19 @@
                     </div>
                 </div>
             </div>
+        <!-- ------------- -->
+        <!-- ------------- -->
+        <!-- ------------- -->
         <!-- 옵션메뉴 -->
             <div class="bottom">
                 <div class="menu-horizon">
-                        <!-- !!!! -->
-                    <div class="button-horizon"><div class="flex-centered"onclick='num.value=7;value.value=0;form_if.submit();'>모자</div></div>
-                    <div class="button-horizon"><div class="flex-centered"onclick='num.value=7;value.value=1;form_if.submit();'>자켓</div></div>
-                    <div class="button-horizon"><div class="flex-centered"onclick='num.value=7;value.value=2;form_if.submit();'>마스크</div></div>
-                    <div class="button-horizon"></div>
+                    <?php
+                    $sql="select * from options";
+                    $result=mysqli_query($conn,$sql);
+                    while($row=mysqli_fetch_array($result)){
+                        f3($row['session_num'],$row['value'],$row['text']);
+                    }
+                    ?>   
                 </div>
             </div>
         </div>
