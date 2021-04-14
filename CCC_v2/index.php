@@ -435,13 +435,13 @@
                         die('</style>너비 전체 비율: '.$_SESSION['s1']);}
                     return $R;
                 }    ?>
-            <?php $head_height_percent=15;// 머리 높이 퍼센트
+            <?php $head_height_percent=14;// 머리 높이 퍼센트
             $head_height=$head_height_percent;
-            $head_width=27;?>
+            $head_width=25;?>
             .head{
                 background:<?=rgb(150)?>;
                 width:<?=$head_width?>%;
-                height:<?=h($head_height_percent)?>%;
+                height:<?=h($head_height)?>%;
                 margin:0 auto;
                 border-bottom:1px solid black;
             }
@@ -454,7 +454,7 @@
             .neck{
                 background:<?=rgb(100)?>;
                 height:<?=h($neck_height_percent)?>%;
-                width:19%;
+                width:17%;
                 margin:0 auto;
             }
         /* 상체 */
@@ -515,7 +515,7 @@
             }
         /* 하체 */
             .lower-body{
-                <?php $hip_width=40;$lower_body_height=43+$lower_body_long;
+                <?php $hip_width=40;$lower_body_height=44+$lower_body_long;
                     $lowerbody_width=$hip_width;
                     $lower_body_width=$hip_width;?>
                 width:<?=$hip_width?>%;
@@ -535,29 +535,74 @@
                 position:absolute;
                 width:100%;
             }
-            .legs{<?php $legs_height=100-$hip_height;?>
+            .legs{<?php $legs_height=100-$hip_height;
+            $leg_height=$legs_height;?>
                 height:<?=$legs_height?>%;
                 position:absolute;
                 width:100%;
                 top:<?=$hip_height?>%;
             }
             .leg{
-                <?php $leg_width=50;$leg_slim=20;?>
+                <?php $leg_slim=1;$leg_width=50-$leg_slim;?>
                 background:<?=rgb(130)?>;
-                width:<?=$leg_width-$leg_slim?>%;
+                width:<?=$leg_width?>%;
                 display:flex;
                 align-items:flex-end;
                 position:absolute;
                 height:100%;
                 left:<?=50-$leg_width+$leg_slim/3?>%;
+                background:transparent;
             }
+            /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+            <?php  //`
+            //========
+            //====================
+            //=====================================
+            $max=50;
+            $total_height=$legs_height;
+            //=====================================
+            //====================
+            //========
+            $part_height=$total_height/$max;
+            $part_width=$start_width;
+            $top=0;
+            $num=1;//`
+            while($num<$max+1){?>
+                .line_leg<?=$num++?>{
+                    background:<?=rgb(130)?>;
+                    background:white;
+                    margin:0 auto;
+                    position:absolute;
+                    width:<?=$part_width?>%;
+                    height:<?=$part_height?>%;
+
+                    width:10%;
+                    
+                    <?php $top+=$part_height;?>
+                        top:<?=$top?>%;
+                    left:<?=50-($part_width)/2?>%;
+                    <?php 
+                    //========
+                    //====================
+                    //=====================================
+                    $part_width-=$start_width/$max;//직선
+                    // $line_leg_width=sqrt(pow($start_width,2)-pow(($num-2)/$max*$start_width,2));//바깥쪽곡선
+                    // $line_leg_width*=0.95;//안쪽곡선
+                    //=====================================
+                    //====================
+                    //========
+                    ?>
+                }<?php
+            }
+            ?>
+            /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
             .leg.right{
                 left:<?=50+$leg_slim*2/3?>%;
             }
             .foot{
                 background:<?=rgb(150)?>;
                 margin:0 auto;
-                <?php $foot_height=15;?>
+                <?php $foot_height=14;?>
                 height:<?=$foot_height?>%;
                 <?php $foot_width=150;?>
                 width:<?=$foot_width?>%;
@@ -597,7 +642,8 @@
                 // 몸통 슬림
                 $body_slim=2;
                 // 몸통높이퍼센트
-                $Rr=$height_percent_upper_body+0?>
+                $Rr=$height_percent_upper_body+0;
+                $upper_body_height=$height_percent_upper_body;?>
                 width:<?=$R-$body_slim?>%;
                 height:<?=$Rr-$shirts_short+$shirts_body_long?>%;
                 <?php 
@@ -783,55 +829,69 @@
             }
             
             <?php 
+            if($_SESSION['s12']=='#3c3f3a'|$_SESSION['s12']=='#d9d4ce'){
+                $zipper_color='white';
+            }else{
+                $zipper_color='black';
+            }
+            /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
             //========
             //====================
             //=====================================
             $max=50;
-            if($_SESSION['s22']==1)
-            $start_width=0;
-            else
-            $start_width=40;
-            $total_height=25;
+            if($_SESSION['s22']==1){
+                $start_width=0;
+                $background_color=$zipper_color;
+            }
+            else{
+                $start_width=40;
+                $background_color=$shirts_color;
+            }
+            $total_height=15;
             //=====================================
             //====================
             //========
             $jacket_open_height=$total_height/$max;
             $jacket_open_width=$start_width;
-
+            $zipper_width=1;
             $top=-$jacket_open_height;
             $num=1;
             while($num<$max+1){?>
                 .jacket_open<?=$num++?>{
-                    background:<?=$shirts_color?>;
+                    background:<?=$background_color?>;
                     margin:0 auto;
-                    border:1px solid black;
+                    border:<?=$zipper_width?>px solid <?=$zipper_color?>;
                     border-top:0px;
+                    border-bottom:0px;
                     position:absolute;
-
+                    <?=$_SESSION['s5']?>
                     width:<?=$jacket_open_width?>%;
                     height:<?=$jacket_open_height?>%;
                     <?php $top+=$jacket_open_height;?>
                         top:<?=$top?>%;
-                    left:<?=50-$jacket_open_width/2?>%;
+                    left:<?=50-($jacket_open_width+$zipper_width)/2?>%;
                     <?php 
                     //========
                     //====================
                     //=====================================
-                    // $jacket_open_width-=$start_width/$max;//직선
+                    $jacket_open_width-=$start_width/$max;//직선
                     // $jacket_open_width=sqrt(pow($start_width,2)-pow(($num-2)/$max*$start_width,2));//바깥쪽곡선
-                    $jacket_open_width*=0.95;//안쪽곡선
+                    // $jacket_open_width*=0.95;//안쪽곡선
                     //=====================================
                     //====================
                     //========
                     ?>
                 }<?php
             }?>
+            /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
             .zipper{
-                border:1px solid white;
-                /* !!!! */
-                height:<?=$jacket_height?>%;
+                border:<?=$zipper_width?>px solid <?=$zipper_color?>;
+                background:<?=$zipper_color?>;
+                    <?=$_SESSION['s5']?>
+                <?php $idontknow=2;?>
+                height:<?=$jacket_height/$upper_body_height*100-$total_height+$idontknow?>%;
                 position:absolute;
-                left:52%;
+                left:<?=50-$zipper_width/2?>%;
                 top:<?=$total_height?>%;
                 
             }
@@ -969,9 +1029,11 @@
                         <div class="jacket">
                             <div class="body">  
                                 <div class="zipper"></div>
+
                             <?php $num=1; while($num<$max+1){?>
                                 <div class="jacket_open<?=$num++?>"></div>
                             <?php }?>
+
                             </div>
                             <div class="arm left"></div>
                             <div class="arm right"></div>
@@ -995,11 +1057,17 @@
                         <div class="lower-body">
                             <div class="hip"></div>
                             <div class="legs display-flex">
+                                
                                 <div class="leg">
+                                    <?php $num=1; while($num<$max+1){?>
+                                        <div class="line_leg<?=$num++?>"></div>
+                                    <?php }?>
+                                </div>    
+                                <!-- <div class="leg">
                                     <div class="foot">
                                         <div class="shoe"></div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="leg right">
                                     <div class="foot right">
                                         <div class="shoe"></div>
