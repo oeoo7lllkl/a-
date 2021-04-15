@@ -552,7 +552,6 @@ function skin($per){
                 margin:0 auto;
             }
             <?php
-            $chin_slim=0;
             $chin_top=0;
 
             $slice_num=100;
@@ -563,9 +562,10 @@ function skin($per){
             $part_top=($hair_height+$face_height)/100*($head_longer+$head_height)-$part_height;
 
             for($i=0;$i<$slice_num;$i++){
-                $part_width=$head_width*sqrt(1-pow($i/$slice_num,2))-$chin_slim;
+                $part_width=($head_width*sqrt(1-pow(($i)/$slice_num,2)));
                 /* 
                 pow(x/$slice_num)+pow(y/100)=1
+                    $i               $width
                  */
                 $part_top+=$part_height-$add_tick;
             ?>
