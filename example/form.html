@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Untitled Document</title>
+    <style>
+        /* iframe을 숨기기 위한 css*/
+        /* #if{width: 0px;height: 0px;border: 0px;} */
+    
+    </style>
+</head>
+<script>
+    function ifun(msg){
+        alert(msg);
+    }
+</script>
+<body>
+    <h2>form 페이지</h2>
+    <form action="result.html" method="get" target="param">
+        <input type="submit" value="제출"/>
+    </form>
+    
+    <!-- iframe 설정 -->
+    <iframe id="if" name="param"></iframe>
+</body>
+</html>
