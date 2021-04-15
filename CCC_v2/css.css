@@ -1,0 +1,34 @@
+*{
+    color:rgb(235, 214, 192);
+    /* ebd6c0 */
+    color:#908276ff;
+    color:#90827600;
+    /* 
+    0~9,a~f : 16개
+    $zin=16;
+
+
+    
+    function skin($per){
+        $zin=16;
+        $num=round(pow($zin,2)/100*$per);
+        
+        $first_num=floor($num/$zin);
+        $second_num=$num-$first_num*$zin;
+
+        function alpha($N){
+            if($N>9){
+                $alpha=array('a','b','c','d','e','f');
+                $N=$alpha[$N-9-1];
+            }
+            return $N;
+        }
+        $first_num=alpha($first_num);
+        $second_num=alpha($second_num);
+        $color="#908276".$first_num.$second_num;
+
+        return $color;
+    }
+
+    */
+}
