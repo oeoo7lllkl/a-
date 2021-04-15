@@ -92,7 +92,7 @@
                     // 디스플레이 높이
                     $_SESSION['s7']=945;
                     // 사람 크기 100프로일때 천장높이에 맞추기
-                    $_SESSION['s8']=103;//?=skin(100/255*150
+                    $_SESSION['s8']=105;//?=skin(100/255*150
                     // 화면 마진 탑
                     $_SESSION['s16']=3;
                     $_SESSION['s18']="font-size:18;";
@@ -297,6 +297,7 @@
             }
             $_SESSION['load_database']=1;
         }
+    
     ?>
 <!-- ---------------------------------------------------------------- -->
 
@@ -360,7 +361,6 @@
     </script>
 <!-- ---------------------------------------------------------------- -->
 <?php
-
 function alpha($N){
     if($N>9){
         $alpha=array('a','b','c','d','e','f');
@@ -395,6 +395,9 @@ function skin($per){
     <style>
     /*  */
         body{
+            <?php
+            $body_color=rgb(55);
+            ?>
             background:red;
             background:<?=rgb(55)?>;
             opacity:100%;
@@ -503,6 +506,8 @@ function skin($per){
                 position:relative;
             }
         /* 머리 목 */
+        
+            <?php if(!isset($_SESSION['s5']))$_SESSION['s5']='';?>
             <?php // 사람키가 100%를 넘으면 다이
                 $_SESSION['s0']=0;
                 function h($R){
@@ -527,18 +532,13 @@ function skin($per){
             ?>
             <?php
             $hair_height=35;
-            $face_height=35;
-            // `
+            $face_height=40;
             $chin_height=100-$hair_height-$face_height;
             ?>
             .head{
-                background:blue;
-
                 width:<?=$head_width?>%;
                 height:<?=h($head_height+$head_longer)?>%;
                 margin:0 auto;
-                border:3px solid white;
-                border-top:0px;
             }
             .hair{
                 background:black;
@@ -562,7 +562,7 @@ function skin($per){
             $part_top=($hair_height+$face_height)/100*($head_longer+$head_height)-$part_height;
 
             for($i=0;$i<$slice_num;$i++){
-                $part_width=($head_width*sqrt(1-pow(($i)/$slice_num,2)));
+                $part_width=$head_width*(1-$i/$slice_num);
                 /* 
                 pow(x/$slice_num)+pow(y/100)=1
                     $i               $width
@@ -570,16 +570,23 @@ function skin($per){
                 $part_top+=$part_height-$add_tick;
             ?>
             .chin<?=$i?>{
-                opacity:50%;
                 left:<?=50-$part_width/2?>%;
                 top:<?=$part_top?>%;
                 
                 height:<?=$part_height?>%;
                 width:<?=$part_width?>%;
                 
-                z-index:100;
-                <?=skin(100)?>
-                background:red;
+                <?php
+                if($_SESSION['s15']==1&$_SESSION['s5']==''){
+                    ?>
+                    background:<?=$_SESSION['s11']?>;
+                    <?php
+                }else{
+                    ?>
+                    <?=skin(100)?>
+                    <?php
+                }
+                ?>
                 position:absolute;
                 margin:0 auto;
             }
@@ -589,13 +596,12 @@ function skin($per){
             <?php $neck_height_percent=10-3.33-1.67;// 목 높이 퍼센트
                 $neck_height=$neck_height_percent;?>
             .neck{
-                height:<?=h($neck_height_percent-$head_longer)?>%;
+                height:<?=h($neck_height_percent-$head_longer)+0.5?>%;
                 <?php
                 $neck_width=17;
                 ?>
                 width:<?=$neck_width?>%;
                 margin:0 auto;
-                /* ` */
                 /* visibility:hidden; */
             }
             .neck_clone{
@@ -627,15 +633,20 @@ function skin($per){
                 position:absolute;
             }
             <?php $RR=17;// 팔 너비
-                // 팔 높이
-                $height_percent_arm=37;
-                $width_percent_arm=$RR;
-                $arm_width_percent=$width_percent_arm;
-                $R=w($RR*2);
-                $arm_width_percent=$RR;?>
+            // 팔 높이
+            $height_percent_arm=36;
+            $width_percent_arm=$RR;
+            $arm_width_percent=$width_percent_arm;
+            $R=w($RR*2);
+            $arm_width_percent=$RR;?>
             .arm{
+                <?php
+                $arm_short=4;
+                ?>
+                top:<?=$head_height+$neck_height+$arm_short?>%;
                 <?=skin(90)?>
                 height:<?=$height_percent_arm-$arm_short?>%;
+                /* top:0; */
                 position:absolute;
                 z-index:0;
                 <?php $arm_slim=8;?>
@@ -646,7 +657,7 @@ function skin($per){
                 margin:0 auto;
                 position:relative;
                 top:100%;
-                height:20%;
+                height:<?=20+$arm_short*$height_percent_arm/100?>%;
                 <?php $R=15;?>
                 width:<?=100+$R?>%;
                 left:<?=-$R/2?>%;
@@ -795,7 +806,6 @@ function skin($per){
                     if(!isset($_SESSION['s3'])){$_SESSION['s3']='white';}?>
                     $shirts_color=$_SESSION['s3'];
                     background:<?=$_SESSION['s3']?>;
-                    <?php if(!isset($_SESSION['s5']))$_SESSION['s5']='';?>
                     position:absolute;
                     z-index:2;
                     <?=$_SESSION['s5']?>
@@ -864,68 +874,111 @@ function skin($per){
                     else{
                         $shoulder_shirts_height=63;
                     }
+                    $fix_shoulder_width=0;
                     ?>
                     height:<?=$shoulder_shirts_height?>%;
-                    width:101%;
+                    width:<?=101+$fix_shoulder_width?>%;
                     border:0px;
+                    background:blue;
+                    /* background:transparent; */
+                    display:flex;
+                }
+                <?php
+                $line_shirts_shoulder_max=50;
+                $part_height=100/$line_shirts_shoulder_max;
+                $part_top=-2*$part_height;
+                for($i=0;$i<$line_shirts_shoulder_max;$i++){
+                    $part_width=sqrt(pow(100,2)-pow(100*($line_shirts_shoulder_max-$i)/$line_shirts_shoulder_max,2));
+                    $part_left=100-$part_width;
+                    $part_top+=$part_height;
+                    ?>
+                    /* ` */
+                    .line_shirts_shoulder<?=$i?>{
+                        position:absolute;
+                        width:<?=$part_width?>%;
+                        height:<?=$part_height+$add_tick?>%;
+                        left:<?=$part_left?>%;
+                        top:<?=$part_top-$add_tick?>%;
+                        background:red;
+                    }
+                    .line_shirts_shoulder<?=$i?>.right{
+                        left:0%;
+                    }
+                    <?php
+                }
+                ?>
+                .shoulder_inside{
+                    <?php
+                    $shoulder_inside_width=60;
+                    ?>
+                    width:<?=$shoulder_inside_width?>%;
+                    height:100%;
+                    position:relative;
+                    background:red;
+                }
+                .shoulder_outside{
+                    width:<?=100-$shoulder_inside_width?>%;
+                    height:100%;
+                    position:relative;
+                    background:green;
                 }
                 .shoulder_shirts.right{
                     left:-1%;
                 }
                 /* .shirts_arm_line_left<?=$num++?>{ */
                     /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-                        <?php 
-                        $add_tick=0.5;
-                        //========
-                        //====================
-                        //=====================================
-                        $max=50;
-                        $total_height=100-$shoulder_shirts_height;
-                        $start_width=100;
-                        $last_width=140;
-                        //=====================================
-                        //====================
-                        //========
-                        $part_height=$total_height/$max;
-                        $part_width=$start_width;
-                        $top=-$part_height+$shoulder_shirts_height;
-                        $num=1;
-                        while($num<$max+1){?>
-                            .shirts_arm_line_left<?=$num++?>{
-                                /* background:white; */
-                                /* background:transparent; */
-                                margin:0 auto;
-                                /* border:<?=$zipper_width*$_SESSION['s17']/100?>px solid <?=$zipper_color?>; */
-                                border-top:0px;
-                                border-bottom:0px;
-                                position:absolute;
-                                <?=$_SESSION['s5']?>
-                                width:<?=$part_width+($num-2)/100*$last_width?>%;
-                                height:<?=$part_height+$add_tick?>%;
-                                <?php $top+=$part_height;?>
-                                top:<?=$top-$add_tick?>%;
-                                left:<?=50-($part_width)/2-($num-2)/100*$last_width*0.7?>%;
-                                <?php 
-                                //========
-                                //====================
-                                //=====================================
-                                $part_width-=$start_width/$max;//직선
-                                // $part_width=sqrt(pow($start_width,2)-pow(($num-2)/$max*$start_width,2));//바깥쪽곡선
-                                // $part_width*=0.95;//안쪽곡선
-                                //=====================================
-                                //====================
-                                //========
+                    <?php 
+                    $add_tick=0.5;
+                    //========
+                    //====================
+                    //=====================================
+                    $max=50;
+                    $total_height=100-$shoulder_shirts_height;
+                    $start_width=100;
+                    $last_width=140;
+                    //=====================================
+                    //====================
+                    //========
+                    $part_height=$total_height/$max;
+                    $part_width=$start_width;
+                    $top=-$part_height+$shoulder_shirts_height;
+                    $num=1;
+                    while($num<$max+1){?>
+                        .shirts_arm_line_left<?=$num++?>{
+                            /* background:white; */
+                            /* background:transparent; */
+                            margin:0 auto;
+                            /* border:<?=$zipper_width*$_SESSION['s17']/100?>px solid <?=$zipper_color?>; */
+                            border-top:0px;
+                            border-bottom:0px;
+                            position:absolute;
+                            <?=$_SESSION['s5']?>
+                            width:<?=$part_width+($num-2)/100*$last_width?>%;
+                            height:<?=$part_height+$add_tick?>%;
+                            <?php $top+=$part_height;?>
+                            top:<?=$top-$add_tick?>%;
+                            left:<?=50-($part_width)/2-($num-2)/100*$last_width*0.7?>%;
+                            <?php 
+                            //========
+                            //====================
+                            //=====================================
+                            $part_width-=$start_width/$max;//직선
+                            // $part_width=sqrt(pow($start_width,2)-pow(($num-2)/$max*$start_width,2));//바깥쪽곡선
+                            // $part_width*=0.95;//안쪽곡선
+                            //=====================================
+                            //====================
+                            //========
+                            ?>
+                            /* <?php
+                            if($_SESSION['s14']==0){
                                 ?>
-                                /* <?php
-                                if($_SESSION['s14']==0){
-                                    ?>
-                                    background:transparent;
-                                    border-color:transparent;
-                                    <?php
-                                }
-                                ?> */
-                            }<?php
-                        }?>
+                                background:transparent;
+                                border-color:transparent;
+                                <?php
+                            }
+                            ?> */
+                        }<?php
+                    }?>
                     /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
                 .shirts .arm.right{
                     <?php // 탑 레프트
@@ -1049,8 +1102,8 @@ function skin($per){
                         margin:0 auto;
                         position:absolute;
                         width:<?=$part_width+($num)*$last_width?>%;
-                        height:<?=$part_height?>%;
-                        top:<?=$top?>%;
+                        height:<?=$part_height+$add_tick?>%;
+                        top:<?=$top-$add_tick?>%;
                         <?php $top+=$part_height;?>
                         left:<?=50-($part_width)/2-($num-1)*0.4*$last_width?>%;
                         <?=$_SESSION['s5']?>
@@ -1126,8 +1179,7 @@ function skin($per){
                     <?php $mask_height=5.5;?>
                     position:absolute;
                     width:<?=$head_width?>%;
-                    height:<?=$mask_height?>%;
-                    border-bottom:<?=$_SESSION['s17']/100?>px solid black;
+                    height:<?=($face_height-$chin_height+5)/100*$head_height?>%;
                     top:<?=$head_height-$mask_height?>%;
                     left:<?=50-$head_width/2?>%;
                     z-index:1;
@@ -1216,12 +1268,65 @@ function skin($per){
                         $shoulder_jacket_height=100;
                     } 
                     ?>
-                    height:<?=$shoulder_jacket_height?>%;
+                    height:<?=$shoulder_jacket_height+1?>%;
                     width:101%;
-                    border:0px;
+                    background:transparent;
                 }
                 .shoulder_jacket.right{
                     left:-1%;
+                }
+                <?php
+                $line_jacket_shoulder_max=50;
+                $part_height=105/$line_jacket_shoulder_max;
+                $part_top=-2*$part_height;
+                for($i=0;$i<$line_jacket_shoulder_max;$i++){
+                    $part_width=sqrt(pow(100,2)-pow(100*($line_jacket_shoulder_max-$i)/$line_jacket_shoulder_max,2));
+                    $part_left=100-$part_width;
+                    $part_top+=$part_height;
+                    ?>
+                    .line_jacket_shoulder<?=$i?>{
+                        position:absolute;
+                        width:<?=$part_width?>%;
+                        height:<?=$part_height+$add_tick?>%;
+                        left:<?=$part_left?>%;
+                        top:<?=$part_top-$add_tick?>%;
+                        border:0;
+                    }
+                    .line_jacket_shoulder<?=$i?>.right{
+                        left:0%;
+                    }
+                    <?php
+                }
+                ?>
+                .jacket_shoulder_over{
+                    display:flex;
+                    background:transparent;
+                    <?php
+                    $jacket_shoulder_over_height=50;
+                    ?>
+                    height:<?=$jacket_shoulder_over_height?>%;
+                    width:100%;
+                }
+                    .jacket_shoulder_inside{
+                        <?php
+                        $shoulder_inside_width=70;
+                        ?>
+                        width:<?=$shoulder_inside_width?>%;
+                        height:105%;
+                        /* background:red; */
+                        position:relative;
+                        border:0;
+                    }
+                    .jacket_shoulder_outside{
+                        width:<?=100-$shoulder_inside_width?>%;
+                        height:100%;
+                        position:relative;
+                        background:<?=rgb(55)?>;
+                    }
+                .jacket_shoulder_under{
+                    /* background:red; */
+                    height:<?=100?>%;
+                    width:100%;
                 }
                 /* .jacket_arm_line_left<?=$num++?>{ */
                     /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -1542,15 +1647,9 @@ function skin($per){
         z-index:5;
         background:<?=rgb(50)?>;
         <?php
-            $device_width=$_SESSION['device_width'];
-            $device_height=$_SESSION['device_height'];
+        $device_width=$_SESSION['device_width'];
+        $device_height=$_SESSION['device_height'];
 
-    //         die("
-    // }</style>
-    //     ".
-    //     "device_width: ".$device_width.', device_height: '.$device_height
-    //     ."
-    //         ");
         $hidden_menu_width=60;
         $hidden_menu_height=8;
         $menu_count=4;
@@ -1568,6 +1667,16 @@ function skin($per){
             top:<?=$device_height/2-$hidden_menu_height*$menu_count?>;
             left:<?=$device_width/2-$hidden_menu_width/2?>;
             <?php
+        }
+        //윈도우     
+        else if($device_width==1920&$device_height==1080){
+            $hidden_menu_width*=$display_width/100;
+            $hidden_menu_height*=$display_height/100;
+            ?>
+            top:<?=$device_height/2-$hidden_menu_height*$menu_count?>;
+            left:<?=$device_width/2-$hidden_menu_width/2?>;
+            left:<?=30?>%;
+            <?php
         }else{
             $hidden_menu_width*=$display_width/100;
             $hidden_menu_height*=$display_height/100;
@@ -1576,6 +1685,10 @@ function skin($per){
             left:<?=$device_width/2-$hidden_menu_width/2?>;
             <?php
         }
+        //         die("
+        // }</style>
+        //     device_width: ".$device_width.', device_height: '.$device_height
+        //     );
         ?>
         width:<?=$hidden_menu_width?>;
     }
@@ -1662,13 +1775,36 @@ function skin($per){
                     <div class="shirts">
                         <div class="body"></div>
                         <div class="arm left">
-                            <div class="shoulder_shirts"></div>
+                            <div class="shoulder_shirts">
+                                <div class="shoulder_outside">
+                                <?php
+                                // `
+                                for($i=0;$i<$line_shirts_shoulder_max;$i++){
+                                    ?>
+                                    <div class="line_shirts_shoulder<?=$i?>"></div>
+                                    <?php
+                                }
+                                ?>
+                                </div>
+                                <div class="shoulder_inside"></div>
+                            </div>
                             <?php $num=1; while($num<$max+1){?>
                             <div class="shirts_arm_line_left<?=$num++?>"></div>
                             <?php }?>
                         </div>
                         <div class="arm right">
-                            <div class="shoulder_shirts right"></div>
+                            <div class="shoulder_shirts right">
+                                <div class="shoulder_inside"></div>
+                                <div class="shoulder_outside">
+                                <?php
+                                for($i=0;$i<$line_shirts_shoulder_max;$i++){
+                                    ?>
+                                    <div class="line_shirts_shoulder<?=$i?> right"></div>
+                                    <?php
+                                }
+                                ?>
+                                </div>
+                            </div>
                             <?php $num=1; while($num<$max+1){?>
                             <div class="shirts_arm_line_right<?=$num++?>"></div>
                             <?php }?>
@@ -1698,13 +1834,41 @@ function skin($per){
                             <?php }?>
                         </div>
                         <div class="arm left">
-                            <div class="shoulder_jacket"></div>
+                            <div class="shoulder_jacket">
+                                <div class="jacket_shoulder_under"></div>
+                                <div class="jacket_shoulder_over">
+                                    <div class="jacket_shoulder_outside">
+                                    <?php
+                                    for($i=0;$i<$line_jacket_shoulder_max;$i++){
+                                        ?>
+                                        <div class="line_jacket_shoulder<?=$i?>"></div>
+                                        <?php
+                                    }
+                                    ?>
+                                    </div>
+                                    <div class="jacket_shoulder_inside"></div>
+                                </div>
+                            </div>
                             <?php $num=1; while($num<$max+1){?>
                             <div class="jacket_arm_line_left<?=$num++?>"></div>
                             <?php }?>
                         </div>
                         <div class="arm right">
-                            <div class="shoulder_jacket right"></div>
+                            <div class="shoulder_jacket right">
+                                <div class="jacket_shoulder_under"></div>
+                                <div class="jacket_shoulder_over">
+                                    <div class="jacket_shoulder_inside"></div>
+                                    <div class="jacket_shoulder_outside">
+                                        <?php
+                                        for($i=0;$i<$line_jacket_shoulder_max;$i++){
+                                            ?>
+                                            <div class="line_jacket_shoulder<?=$i?> right"></div>
+                                            <?php
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
                             <?php $num=1; while($num<$max+1){?>
                             <div class="jacket_arm_line_right<?=$num++?>"></div>
                             <?php }?>
@@ -1716,7 +1880,6 @@ function skin($per){
                     <div class="head">
                         <div class="hair"></div>
                         <div class="face"></div>
-                        <!-- // ` -->
                         <?php
                         for($i=0;$i<$slice_num;$i++){
                             ?>
@@ -1768,28 +1931,34 @@ function skin($per){
             <div class="flex-centered">
             <!-- // 오른메뉴 만들기 -->
                 <?php 
-                $sql="select * from clothes where cloth='".$_SESSION['s2']."'";
-                $result=mysqli_query($conn,$sql);
-                $color='red';
-                while($row=mysqli_fetch_array($result)){
-                    if(substr($row['value'],0,1)=='#'){
-                        $sql="select value from _colors where name='".$row['value']."'";
-                        $result2=mysqli_query($conn,$sql);
-                        $row2=mysqli_fetch_array($result2);
-                        $color=$row2['value'];
-                    }else{
-                        $color=$row['value'];
+                if($_SESSION['s2']=='hat'&$_SESSION['s13']==0
+                |$_SESSION['s2']=='mask'&$_SESSION['s15']==0
+                |$_SESSION['s2']=='jacket'&$_SESSION['s14']==0
+                ){}
+                else{
+                    $sql="select * from clothes where cloth='".$_SESSION['s2']."'";
+                    $result=mysqli_query($conn,$sql);
+                    $color='red';
+                    while($row=mysqli_fetch_array($result)){
+                        if(substr($row['value'],0,1)=='#'){
+                            $sql="select value from _colors where name='".$row['value']."'";
+                            $result2=mysqli_query($conn,$sql);
+                            $row2=mysqli_fetch_array($result2);
+                            $color=$row2['value'];
+                        }else{
+                            $color=$row['value'];
+                        }
+                        if($_SESSION['s2']=='shirts')$session_num=3;
+                        else if($_SESSION['s2']=='pants')$session_num=4;
+                        else if($_SESSION['s2']=='shoes')$session_num=9;
+                        else if($_SESSION['s2']=='hat')$session_num=10;
+                        else if($_SESSION['s2']=='mask')$session_num=11;
+                        else if($_SESSION['s2']=='jacket')$session_num=12;
+                        if($_SESSION['s-1']==0)
+                            f1($color,$row['colorName'],$session_num);
+                        else
+                            f1($color,$row['name'],$session_num);
                     }
-                    if($_SESSION['s2']=='shirts')$session_num=3;
-                    else if($_SESSION['s2']=='pants')$session_num=4;
-                    else if($_SESSION['s2']=='shoes')$session_num=9;
-                    else if($_SESSION['s2']=='hat')$session_num=10;
-                    else if($_SESSION['s2']=='mask')$session_num=11;
-                    else if($_SESSION['s2']=='jacket')$session_num=12;
-                    if($_SESSION['s-1']==0)
-                        f1($color,$row['colorName'],$session_num);
-                    else
-                        f1($color,$row['name'],$session_num);
                 }
                 ?>
             </div>
