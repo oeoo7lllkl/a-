@@ -222,7 +222,7 @@ body{
     <?=makebox("CCC_v2","CCC_v2")?>
 </div>
 <div class="row">
-    <?=makebox("keypress","")?>
+    <?=makebox("MyPage","myPage")?>
     <div class="between"></div>
     <?=makebox("GUCCI","")?>
 </div>
