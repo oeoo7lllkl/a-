@@ -216,9 +216,9 @@
 
     <rows>
         <div class="row">
-            <?=makebox("CCC_v1","CCC_v1")?>
+            <?=makebox("CCC_v3","CCC_v3")?>
             <div class="between"></div>
-            <?=makebox("CCC_v2","CCC_v2")?>
+            <?=makebox("","")?>
         </div>
 
         <div class="row">
@@ -231,6 +231,12 @@
             <?=makebox("GUCCI","")?>
             <div class="between"></div>
             <?=makebox("Milet","")?>
+        </div>
+
+        <div class="row">
+            <?=makebox("CCC_v2","CCC_v2")?>
+            <div class="between"></div>
+            <?=makebox("CCC_v1","CCC_v1")?>
         </div>
 
         <div class="row">
