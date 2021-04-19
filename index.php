@@ -35,36 +35,8 @@
             3   회사윈도우
             4   레드미10
             */
-            //제일 안쪽의 (1)(2)만 하시오.
-            $index=0;//←여기서(1)
-            if($_POST['h']==$settingheight[$index] & $_POST['w']==$settingwidth[$index]){
-                $id=$index;
-            }else{
-                $index++;//←여기서(1)
-                if($_POST['h']==$settingheight[$index] & $_POST['w']==$settingwidth[$index]){
-                    $id=$index;
-                }else{
-                    $index++;//←여기서(1)
-                    if($_POST['h']==$settingheight[$index] & $_POST['w']==$settingwidth[$index]){
-                        $id=$index;
-                    }else{
-                        $index++;//←여기서(1)
-                        if($_POST['h']==$settingheight[$index] & $_POST['w']==$settingwidth[$index]){
-                            $id=$index;
-                        }else{
-                            $index++;//←여기서(1)
-                            if($_POST['h']==$settingheight[$index] & $_POST['w']==$settingwidth[$index]){
-                                $id=$index;
-                            }else{
-                                $index++;//←여기서(2)
-                                die("
-                                <h1>h={$_POST['h']} & w={$_POST['w']} & id=$index</h1>
-                                ");//이까지 붙여넣기(2)➔
-                            }//이까지 복사(1)➔
-                        }//이까지 복사(1)➔
-                    }//이까지 복사(1)➔
-                }//이까지 복사(1)➔
-            }//이까지 복사(1)➔
+            $id=array_search($_POST['h'],$settingheight);
+            
             if($_POST['h']<=$_POST['w']){
                 $R=$_POST['h']*0.5;
             }else{
@@ -224,6 +196,9 @@
         if(k==81|k== 221){
             location.reload();
         }
+        if(k==13){
+            focus.click();
+        }
     }
 </script>
 <body onkeydown="keydown();">
@@ -276,6 +251,7 @@ if(!($id==0|$id==3)){
     $showing_name=array("game", "MyPage",   "Example",  "CCC_v3",   "CCC_v2", "CCC_v1",   "GUCCI",    "Milet", "", "", "", "", "", "", "", "" );  
     $folder_name=array( "game", "myPage",   "example",  "CCC_v3",   "CCC_v2", "CCC_v1",   "",         ""     , "", "", "", "", "", "", "", "" );
 
+    $_SESSION['tabindex'] = 0;
     function makebox2($sn,$fn,$opacity){
         if($opacity=="opacity75"){
             $onclick="alert('연구중입니다!');";
@@ -285,7 +261,7 @@ if(!($id==0|$id==3)){
             $onclick="";
         }
             ?>
-        <div class="Box2 <?=$opacity?>"onclick="<?=$onclick?>">
+        <div tabindex = "<?=$_SESSION['tabindex']++?>" class="Box2 <?=$opacity?>"onclick="<?=$onclick?>">
             <div class="text">
                 <?=$sn?>
             </div>

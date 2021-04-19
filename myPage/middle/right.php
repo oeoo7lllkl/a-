@@ -53,6 +53,46 @@
                                 <script>parent.location.reload();</script>    
                             <?php
                     }
+                    if(!isset($_SESSION['checkbox'])){
+                        $_SESSION['checkbox']=array(
+                            'naver'=>"",
+                            'google'=>"",
+                            'github'=>"",
+                            'vscode'=>"",
+                            'edge'=>""
+                        );
+                    }
+                    else if($_POST['name']=='check_naver'){
+                        if($_SESSION['checkbox']['naver']==""){
+                            $_SESSION['checkbox']['naver']="checked";
+                        }else{
+                            $_SESSION['checkbox']['naver']="";
+                        }
+                    }else if($_POST['name']=='check_google'){
+                        if($_SESSION['checkbox']['google']==""){
+                            $_SESSION['checkbox']['google']="checked";
+                        }else{
+                            $_SESSION['checkbox']['google']="";
+                        }
+                    }else if($_POST['name']=='check_github'){
+                        if($_SESSION['checkbox']['github']==""){
+                            $_SESSION['checkbox']['github']="checked";
+                        }else{
+                            $_SESSION['checkbox']['github']="";
+                        }
+                    }else if($_POST['name']=='check_vscode'){
+                        if($_SESSION['checkbox']['vscode']==""){
+                            $_SESSION['checkbox']['vscode']="checked";
+                        }else{
+                            $_SESSION['checkbox']['vscode']="";
+                        }
+                    }else if($_POST['name']=='check_edge'){
+                        if($_SESSION['checkbox']['edge']==""){
+                            $_SESSION['checkbox']['edge']="checked";
+                        }else{
+                            $_SESSION['checkbox']['edge']="";
+                        }
+                    }
                 }
             ?>
         <style>
