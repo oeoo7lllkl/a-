@@ -191,7 +191,7 @@
         .destroy{
             margin:0 auto;
             color:red;
-            width:<?=$r*0.4?>;
+            width:<?=$r*0.4/100*7?>%;
             <?php $B=0.02;?>
             border-top:<?=$r*$B?>px solid rgb(100,0,0);
             border-bottom :<?=$r*$B?>px solid rgb(100,0,0);
@@ -204,6 +204,9 @@
             <?php if($id==1){?>
                 margin-left:<?=$r*0.753?>;
             <?php }?>
+            position:absolute;
+            left:<?=50-$r*0.4/100*7/2?>%;
+            bottom:10;
         }
         .destroy:hover{
             background:rgb(200,0,0);
@@ -214,40 +217,128 @@
 
 <!-- @@@@@@@@@@@@@@@@@@@@@@ 본문 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 <head><title>pages</title></head>
-<body>
+<script>
+    function keydown(){
+        k=event.keyCode;
+        // alert(k);
+        if(k==81|k== 221){
+            location.reload();
+        }
+    }
+</script>
+<body onkeydown="keydown();">
     <p class="air"></p>
 
+<?php
+if(!($id==0|$id==3)){
+    $showing_name=array("MyPage",   "Example",  "CCC_v3",   "",   "CCC_v2", "CCC_v1",   "GUCCI",    "Milet" );  
+    $folder_name=array( "myPage",   "example",  "CCC_v3",   "",   "CCC_v2", "CCC_v1",   "",         ""      );
+        ?>
     <rows>
-        <div class="row">
-            <?=makebox("MyPage","myPage")?>
-            <div class="between"></div>
-            <?=makebox("Example","example")?>
-        </div>
+            <?php
+                for($i=0;$i<2*floor(count($showing_name)/2+1);$i++){
+                    if($i/2-floor($i/2)==0){
 
-        <div class="row">
-            <?=makebox("CCC_v3","CCC_v3")?>
-            <div class="between"></div>
-            <?=makebox("","")?>
-        </div>
-
-        <div class="row">
-            <?=makebox("CCC_v2","CCC_v2")?>
-            <div class="between"></div>
-            <?=makebox("CCC_v1","CCC_v1")?>
-        </div>
-
-        <div class="row">
-            <?=makebox("GUCCI","")?>
-            <div class="between"></div>
-            <?=makebox("Milet","")?>
-        </div>
-
+                        if($i>=count($showing_name)){
+                            ?>
         <div class="row">
             <?=makebox("","")?>
             <div class="between"></div>
+                            <?php
+                        }else{
+                            ?>
+        <div class="row">
+            <?=makebox("$showing_name[$i]","$folder_name[$i]")?>
+            <div class="between"></div>
+                            <?php
+                        }
+
+                    }else{
+                        
+                        if($i>=count($showing_name)){
+                            ?>
             <?=makebox("","")?>
         </div>
+                            <?php
+                        }else{
+                            ?>
+            <?=makebox("$showing_name[$i]","$folder_name[$i]")?>
+        </div>
+                            <?php
+                        }
+
+                    }
+                }
+            ?>
     </rows>
+        <?php
+}else{
+    $showing_name=array("game", "MyPage",   "Example",  "CCC_v3",   "CCC_v2", "CCC_v1",   "GUCCI",    "Milet", "", "", "", "", "", "", "", "" );  
+    $folder_name=array( "game", "myPage",   "example",  "CCC_v3",   "CCC_v2", "CCC_v1",   "",         ""     , "", "", "", "", "", "", "", "" );
+
+    function makebox2($sn,$fn,$opacity){
+        if($opacity=="opacity75"){
+            $onclick="alert('연구중입니다!');";
+        }else if($opacity=="opacity100"){
+            $onclick="location.href='$fn';";
+        }else{
+            $onclick="";
+        }
+            ?>
+        <div class="Box2 <?=$opacity?>"onclick="<?=$onclick?>">
+            <div class="text">
+                <?=$sn?>
+            </div>
+        </div>
+            <?php
+    }
+    ?>
+    <style>
+        .Box2{
+            background:white;
+            width:199;
+            height:199;
+            margin:5;
+            display:flex;
+            align-items:center;
+            float:left;
+            cursor:hand;
+        }
+        .box2:hover{
+            opacity:50%;
+        }
+        .text{
+            width:100%;
+            font-size:30;
+            text-align:center;
+        }
+        .opacity50{
+            opacity:50%;
+        }
+        .opacity75{
+            opacity:75%;
+        }
+        .opacity100{
+            opacity:100%;
+        }
+    </style>
+    <?php
+    for($i=0;$i<count($showing_name);$i++){
+        if($showing_name[$i]==""&$folder_name[$i]==""){
+            $opacity="opacity50";
+        }else if($folder_name[$i]==""){
+            $opacity="opacity75";
+        }else{
+            $opacity="opacity100";
+        } 
+            ?>
+    <?=makebox2("$showing_name[$i]","$folder_name[$i]",$opacity)?>
+            <?php
+    }?>
+    <?php
+    
+}
+?>
 
     <p class="air">  
         <form action="." hidden method="post">

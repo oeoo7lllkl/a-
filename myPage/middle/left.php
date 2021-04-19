@@ -1,7 +1,7 @@
 <html>
     <head>
             <?php
-                include "../css.php";
+                include "../base.php";
             ?>
         <style>
         </style>

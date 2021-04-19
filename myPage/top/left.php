@@ -1,6 +1,6 @@
 <html>
         <?php
-            include "../css.php";
+            include "../base.php";
             $name=
             "top_left";
             $other_name=

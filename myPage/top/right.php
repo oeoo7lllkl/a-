@@ -1,23 +1,44 @@
 <html>
         <?php
-            include "../css.php";
+            include "../base.php";
         ?>
     <head>
         <style>
             .title{
                 cursor:hand;
                 height:100%;
+                text-align:center;
+            }
+            .title:hover{
                 background:black;
                 color:white;
             }
-            .title:hover{
-                background:white;
-                color:black;
-            }
         </style>
     </head>
+    <form action=""id='form'method='post'>
+        <input type="hidden"id='id'name='name'>
+    </form>
+    <!-- url -->
+        <script>
+            function main_url(){
+                id.value="session:article_url=main_url";
+                form.submit();
+            }
+        </script>
+            <?php
+                if(isset($_POST['name'])){
+                    if($_POST['name']=='session:article_url=main_url'){
+                        $_SESSION['article_url']=$main_url;
+                            ?>
+                                <script>parent.location.reload();</script>
+                            <?php
+                    }
+                }
+            ?>
     <body onfocus="parent.middle_right.focus();">
-        <h1 class="title">MY PAGE</h1>
+        <h1 class="title" onclick='
+        main_url();
+        '>MY PAGE</h1>
     </body>
 </html>
 <!-- <html>
