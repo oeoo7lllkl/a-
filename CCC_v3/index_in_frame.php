@@ -4,7 +4,7 @@
         <input type="hidden"id='value'name='value'>
         <input type="hidden"id='value2'name='value2'>
     </form>
-<!-- ---------------------------------------------------------------- -->
+<!-- -- -->
 
 <!-- ==================== php ==================== -->
     <?php
@@ -27,6 +27,10 @@
             $_SESSION['s17']=100;//기기처음 맞출때 사람 크기 천장에 맞추기 위함
             $_SESSION['s17']=95;//?=skin(100/255*150
         }
+    /* // 사람 크기 설정 /////// */
+        $man_width=$_SESSION['s8']/100*270/100*120*$_SESSION['s17']/100;
+        $man_height=$man_width/2*5;
+        // =====================
     // 폼이 포스트 제출 됬을 때
         if(isset($_POST['num'])){
             // ----- [ num 1 ] ---------------------------------------------------------------------------------
@@ -151,7 +155,12 @@
 
 
                     die("화면<br>- 넓이: $p1<br>- 높이: $p2");
-                }              
+                }            
+                ?>
+                    <script>
+                        top.location.reload();
+                    </script>
+                <?php  
             }
             // ------------------------------------------------------------------------------------------------
             // 옵션 클릭 !!2
@@ -213,6 +222,70 @@
             }
             
             // ------------------------------------------------------------------------------------------------
+            // 좌 클릭
+            if(!isset($_SESSION['move_right'])) {
+                $_SESSION['move_right']=0;
+                $_SESSION['move_speed']=30;
+            }
+            if($_POST['num']=="move:left"){
+                $_SESSION['move_right']-=$_SESSION['move_speed'];
+
+                if($_SESSION['move_right']<=-$_SESSION['s6']/2+$man_width/2){
+                    $_SESSION['move_right']=$_SESSION['s6']/2-$man_width/2;
+                }
+                //----------------------------------
+            }
+            // 
+            // ------------------------------------------------------------------------------------------------
+            // 우 클릭 
+            if($_POST['num']=="move:right"){
+                $_SESSION['move_right']+=$_SESSION['move_speed'];
+
+                if($_SESSION['move_right']>$_SESSION['s6']/2-$man_width/2){
+                    $_SESSION['move_right']=-$_SESSION['s6']/2+$man_width/2;
+                }
+                //----------------------------------
+            }
+            
+            // ------------------------------------------------------------------------------------------------
+            // 상 클릭
+            if(!isset($_SESSION['move_up'])) {
+                $_SESSION['move_up']=0;
+                $_SESSION['move_speed']=30;
+            }
+            if($_POST['num']=="move_up"){
+                $_SESSION['move_up']+=$_SESSION['move_speed'];
+
+                if($_SESSION['s-1']!=1){//맥북아닐때
+                    if($_SESSION['move_up']>$_SESSION['s7']/2+$man_height/2){
+                        $_SESSION['move_up']=0;
+                    }
+                }else{//맥북일때
+                    if($_SESSION['move_up']>$_SESSION['s7']/2){
+                        $_SESSION['move_up']=-$_SESSION['s7']/2;
+                    }
+                }
+                //----------------------------------
+            }
+            // ------------------------------------------------------------------------------------------------
+            // 하 클릭 
+            if($_POST['num']=="move_down"){
+                $_SESSION['move_up']-=$_SESSION['move_speed'];
+                
+                if($_SESSION['s-1']!=1){//맥북아닐때
+                    if($_SESSION['move_up']<=0){
+                        $_SESSION['move_up']=$_SESSION['s7']/2+$man_height/2;
+                    }
+                }else{//맥북일때
+                    if($_SESSION['move_up']<=-$_SESSION['s7']/2){
+                        $_SESSION['move_up']=$_SESSION['s7']/2;
+                    }
+                }
+                //----------------------------------
+            }
+            
+            // ------------------------------------------------------------------------------------------------
+          
         }
     // 기기 화면 높 넓이 안구해졌을때  
         if(!isset($_SESSION['s-1'])){
@@ -284,125 +357,161 @@
             <?php
         }
          
-    //마이에스큐엘 코넥트 시작
-        $passwd='11513122';
-        if($_SESSION['s-1']!=0)$passwd='root';
-        $conn=mysqli_connect('localhost','root',$passwd,'o');
-    //불러오기안했다면 저장된거 불러오기
-        if(!isset($_SESSION['load_database'])){
-            $sql="select * from saved";
-            $result=mysqli_query($conn,$sql);   
-            while($row=mysqli_fetch_array($result)){
-                $_SESSION[$row['session_name']]=$row['value'];
-            }
-            $_SESSION['load_database']=1;
-        }
+        include "MS.php";
     
     ?>
-<!-- ---------------------------------------------------------------- -->
+<!-- -- -->
 
 <!-- ==================== script : 키 반응 ==================== -->
 
     <script>
     function keydown(){
-    k=event.keyCode;
-        // 키 코드 값 알아내기 --------------------
+        k=event.keyCode;
+            // 키 코드 값 알아내기 --------------------
 
         // alert(k);
 
-        //-----------------------------
-    // 쓸데없는
+            //-----------------------------
+        // 쓸데없는
+            // --------------------------------------------------------------------------------------------
+            // 세션 재시작 R 키 // post num = 1
+                if(k==82){
+                    num.value=1;
+                    form_if.submit();
+                }
+            // --------------------------------------------------------------------------------------------
+            // 페이지 리로드 [z][q][/] // post num = X
+                if(k==90|k==81|k==191){
+                    location.href="";
+                    // num.value=t;
+                    // form_if.submit();
+                }
+            // --------------------------------------------------------------------------------------------
+            // S 키 // post num = 2
+                if(k==83){
+                // 전부 손댈 필요없음 ===================
+                    num.value=2;
+                    form_if.submit();
+                }
+                // 차례로 추가만 하면됨 ==================
         // --------------------------------------------------------------------------------------------
-        // 세션 재시작 R 키 // post num = 1
-            if(k==82){
-                num.value=1;
-                form_if.submit();
-            }
-        // --------------------------------------------------------------------------------------------
-        // 페이지 리로드 [z][q][/] // post num = X
-            if(k==90|k==81|k==191){
-                location.href="";
-                // num.value=t;
-                // form_if.submit();
-            }
-        // --------------------------------------------------------------------------------------------
-        // S 키 // post num = 2
-            if(k==83){
+        // - 키 // post num = 8
+            if(k==109|k==189){
             // 전부 손댈 필요없음 ===================
-                num.value=2;
+                num.value=8;
                 form_if.submit();
             }
             // 차례로 추가만 하면됨 ==================
-    // --------------------------------------------------------------------------------------------
-    // - 키 // post num = 8
-        if(k==109|k==189){
-        // 전부 손댈 필요없음 ===================
-            num.value=8;
-            form_if.submit();
-        }
-        // 차례로 추가만 하면됨 ==================
-    // --------------------------------------------------------------------------------------------
-    // + 키 // post num = 9
-            if(k==107|k==187){
+        // --------------------------------------------------------------------------------------------
+        // + 키 // post num = 9
+                if(k==107|k==187){
+                // 전부 손댈 필요없음 ===================
+                    num.value=9;
+                    form_if.submit();
+                }
+                // 차례로 추가만 하면됨 ==================
+        // --------------------------------------------------------------------------------------------
+        // M 키
+            if(k==77){
             // 전부 손댈 필요없음 ===================
-                num.value=9;
-                form_if.submit();
+                hidden_menu_form.submit();
+                die();
             }
             // 차례로 추가만 하면됨 ==================
-    // --------------------------------------------------------------------------------------------
-    // M 키
-        if(k==77){
-        // 전부 손댈 필요없음 ===================
-            hidden_menu_form.submit();
-            die();
-        }
-        // 차례로 추가만 하면됨 ==================
+        // --------------------------------------------------------------------------------------------
+        // 좌 키
+        if(k==37){
+            // 전부 손댈 필요없음 ===================
+            // 
+                num.value="move:left";
+                form_if.submit();
+                die();
+                // <form action=""method='post'id='form_if'>
+                //     <input type="hidden"id='num'name='num'>
+                //     <input type="hidden"id='value'name='value'>
+                //     <input type="hidden"id='value2'name='value2'>
+                // </form>
+            }
+            // 차례로 추가만 하면됨 ==================
+        // --------------------------------------------------------------------------------------------
+        // 우 키
+        if(k==39){
+            // 전부 손댈 필요없음 ===================
+                num.value="move:right";
+                form_if.submit();
+                die();
+            }
+            // 차례로 추가만 하면됨 ==================
+        // --------------------------------------------------------------------------------------------
+        // 상 키
+        if(k==38){
+            // 전부 손댈 필요없음 ===================
+            // 
+                num.value="move_up";
+                form_if.submit();
+                die();
+                // <form action=""method='post'id='form_if'>
+                //     <input type="hidden"id='num'name='num'>
+                //     <input type="hidden"id='value'name='value'>
+                //     <input type="hidden"id='value2'name='value2'>
+                // </form>
+            }
+            // 차례로 추가만 하면됨 ==================
+        // --------------------------------------------------------------------------------------------
+        // 하 키
+        if(k==40){
+            // 전부 손댈 필요없음 ===================
+                num.value="move_down";
+                form_if.submit();
+                die();
+            }
+            // 차례로 추가만 하면됨 ==================
     }
     </script>
-<!-- ---------------------------------------------------------------- -->
-<?php
-function alpha($N){
-    if($N>9){
-        $alpha=array('a','b','c','d','e','f');
-        $N=$alpha[$N-9-1];
-    }
-    return $N;
-}
-function skin($per){
-    if($per<100){
-        $zin=16;
-        $num=round(pow($zin,2)/100*$per);
-        
-        $first_num=floor($num/$zin);
-        $second_num=$num-$first_num*$zin;
-        // die("$first_num");
-    
-        $first_num=alpha($first_num);
-        $second_num=alpha($second_num);
-        $color="background:#ebd6c0".$first_num.$second_num.";";
-    }else{
-        $color="background:#ebd6c0;";
-    }
+<!-- -- -->
+
+<!-- ==================== php ==================== -->
+    <?php
+        function alpha($N){
+            if($N>9){
+                $alpha=array('a','b','c','d','e','f');
+                $N=$alpha[$N-9-1];
+            }
+            return $N;
+        }
+        function skin($per){
+            if($per<100){
+                $zin=16;
+                $num=round(pow($zin,2)/100*$per);
+                
+                $first_num=floor($num/$zin);
+                $second_num=$num-$first_num*$zin;
+                // die("$first_num");
+            
+                $first_num=alpha($first_num);
+                $second_num=alpha($second_num);
+                $color="background:#ebd6c0".$first_num.$second_num.";";
+            }else{
+                $color="background:#ebd6c0;";
+            }
 
 
-    return $color;
-}
-// die(skin(58));
-// die(floor(1/255*100*150));
-// die(skin(1/255*100*150));
-?>
+            return $color;
+        }
+        // die(skin(58));
+        // die(floor(1/255*100*150));
+        // die(skin(1/255*100*150));
+    ?>
+<!-- -- -->
+
 <!-- ==================== style : CSS ==================== -->
     <style>
     /*  */
         body{
-            <?php
-            $body_color=rgb(55);
-            ?>
-            background:red;
             background:<?=rgb(55)?>;
             opacity:100%;
             color:white;
-            font-size:50;
+            font-size:20;
             text-align:center;
         }
         <?php // 화면 높 넓이 ////////////////////////////
@@ -493,108 +602,154 @@ function skin($per){
             height:6%;
         }
     /* 사람 */
-        /* // 사람 크기 설정 /////// */
-            <?php
-            // =====================
-            $man_width=$_SESSION['s8']/100*270/100*120*$_SESSION['s17']/100;
-            $man_height=$man_width/2*5?>
             .man{
                 width:<?=$man_width?>;
                 height:<?=$man_height?>;
-                left:<?=($screen_width-$man_width)/2?>;
-                top:<?=$screen_height-$man_height?>;
+                    <?php
+                        if(!isset($_SESSION['move_right'])){
+                            $_SESSION['move_right']=0;
+                        }
+                    
+                        if(!isset($_SESSION['move_up'])){
+                            $_SESSION['move_up']=0;
+                        }
+                    ?>
+                left:<?=($screen_width-$man_width)/2+$_SESSION['move_right']?>;
+                top:<?=$screen_height-$man_height-$_SESSION['move_up']?>;
                 position:relative;
             }
         /* 머리 목 */
         
-            <?php if(!isset($_SESSION['s5']))$_SESSION['s5']='';?>
-            <?php // 사람키가 100%를 넘으면 다이
-                $_SESSION['s0']=0;
-                function h($R){
-                    if(100<$_SESSION['s0']+=$R){
-                        die('</style>키 전체 비율: '.$_SESSION['s0']);}
-                    return $R;
-                }    ?>
-            <?php // 사람너비가 100%를 넘으면 다이
-                $_SESSION['s1']=0;
-                function w($R){
-                    if(100<$_SESSION['s1']+=$R){
-                        die('</style>너비 전체 비율: '.$_SESSION['s1']);}
-                    return $R;
-                }    ?>
-            
-            <?php 
-            // 
-            $head_longer=1;
-            $head_height_percent=14;// 머리 높이 퍼센트
-            $head_width=25;
-            $head_height=$head_height_percent;
-            ?>
-            <?php
-            $hair_height=35;
-            $face_height=40;
-            $chin_height=100-$hair_height-$face_height;
-            ?>
+                <?php if(!isset($_SESSION['s5']))$_SESSION['s5']='';?>
+                <?php // 사람키가 100%를 넘으면 다이
+                    $_SESSION['s0']=0;
+                    function h($R){
+                        if(100<$_SESSION['s0']+=$R){
+                            die('</style>키 전체 비율: '.$_SESSION['s0']);}
+                        return $R;
+                    }    ?>
+                <?php // 사람너비가 100%를 넘으면 다이
+                    $_SESSION['s1']=0;
+                    function w($R){
+                        if(100<$_SESSION['s1']+=$R){
+                            die('</style>너비 전체 비율: '.$_SESSION['s1']);}
+                        return $R;
+                    }    ?>
+                
+                <?php 
+                // 
+                    $head_longer=1;
+                    $head_height_percent=14;// 머리 높이 퍼센트
+                    $head_width=25;
+                    $head_height=$head_height_percent;
+                ?>
+                <?php
+                    $hair_height_shorter=7;
+                    $hair_height=35-$hair_height_shorter;
+                    $face_height=40+$hair_height_shorter;
+                    $chin_height=100-$hair_height-$face_height;
+                ?>
             .head{
                 width:<?=$head_width?>%;
                 height:<?=h($head_height+$head_longer)?>%;
                 margin:0 auto;
             }
             .hair{
-                background:black;
                 height:<?=$hair_height/((100+$head_longer)/100)?>%;
             }
+            .line_hair_base{
+                background:black;
+                position:relative;
+            }
+                <?php
+                    $height=100;
+                    $max_hair=50;
+                    $part_height=$height/$max_hair;
+                    $part_width=0;
+                    $part_left=50;
+                    // 
+                    // x^2+y^2=r^2
+                    // (h-a)^2+w^2=r^2
+
+                    //  
+                    $r=100;
+                    $a=100;
+                    for($i=0;$i<$max_hair;$i++){
+                        ?>
+            .line_hair<?=$i?>{
+                height:<?=$part_height?>%;
+                    <?php
+                        if($i==$max_hair-1){
+                                ?>
+                height:<?=$part_height+15?>%;
+                border-bottom:1px solid black;
+                                <?php
+                        }
+                    ?>
+                width:<?=sqrt(pow($r,2)-pow($part_height*$i-$a,2))?>%;
+                left:<?=50-sqrt(pow($r,2)-pow($part_height*$i-$a,2))/2?>%;
+            }
+                        <?php
+                        $part_width+=100/$max_hair;
+                    }
+                ?>
             .face{
                 height:<?=$face_height?>%;
 
-                <?=skin(100)?>
-
+                    <?php
+                        if($_SESSION['s13']==1){
+                            ?><?=skin(100)?><?php
+                        }else{
+                            ?><?=skin(100)?><?php
+                        }
+                    ?>
                 margin:0 auto;
             }
-            <?php
-            $chin_top=0;
+                <?php
+                    $chin_top=0;
 
-            $slice_num=100;
-            
-                $add_tick=0.1;
-                $idontknow=0.16;
-            $part_height=$chin_height/$slice_num*$idontknow+$add_tick;
-            $part_top=($hair_height+$face_height)/100*($head_longer+$head_height)-$part_height;
+                    $slice_num=100;
+                    
+                        $add_tick=0.1;
+                        $idontknow=0.16;
+                    $part_height=$chin_height/$slice_num*$idontknow+$add_tick;
+                    $part_top=($hair_height+$face_height)/100*($head_longer+$head_height)-$part_height;
 
-            for($i=0;$i<$slice_num;$i++){
-                $part_width=$head_width*(1-$i/$slice_num);
-                /* 
-                pow(x/$slice_num)+pow(y/100)=1
-                    $i               $width
-                 */
-                $part_top+=$part_height-$add_tick;
-            ?>
+                    for($i=0;$i<$slice_num;$i++){
+                        $part_width=$head_width*(1-$i/$slice_num);
+                        /* 
+                        pow(x/$slice_num)+pow(y/100)=1
+                            $i               $width
+                        */
+                        $part_top+=$part_height-$add_tick;
+                ?>
             .chin<?=$i?>{
                 left:<?=50-$part_width/2?>%;
-                top:<?=$part_top?>%;
+                top:<?=$part_top-$add_tick?>%;
                 
-                height:<?=$part_height?>%;
+                height:<?=$part_height+$add_tick?>%;
                 width:<?=$part_width?>%;
                 
-                <?php
-                if($_SESSION['s15']==1&$_SESSION['s5']==''){
-                    ?>
-                    background:<?=$_SESSION['s11']?>;
                     <?php
-                }else{
+                        if($_SESSION['s15']==1&$_SESSION['s5']==''){
+                            ?>
+                background:<?=$_SESSION['s11']?>;
+                            <?php
+                        }else{
+                            ?>
+                <?=skin(100)?>
+                            <?php
+                        }
                     ?>
-                    <?=skin(100)?>
-                    <?php
-                }
-                ?>
                 position:absolute;
+                z-index:1;
                 margin:0 auto;
             }
-            <?php
-            }
-            ?>
-            <?php $neck_height_percent=10-3.33-1.67;// 목 높이 퍼센트
-                $neck_height=$neck_height_percent;?>
+                <?php
+                    }
+                    $neck_height_percent=10-3.33-1.67;// 목 높이 퍼센트
+                    $neck_height=$neck_height_percent;
+                ?>
             .neck{
                 height:<?=h($neck_height_percent-$head_longer)+0.5?>%;
                 <?php
@@ -609,11 +764,11 @@ function skin($per){
                 $neck_clone_higher=5;
                 ?>
                 top:<?=$head_height-$neck_clone_higher?>%;
-                z-index:-1;
+                z-index:0;
                 left:<?=50-$neck_width/2?>%;
                 position:absolute;
                 height:<?=$neck_height_percent+$neck_clone_higher?>%;
-                <?=skin(70)?>
+                <?=skin(80)?>
                 width:<?=$neck_width?>%;
             }
         /* 상체 */
@@ -644,7 +799,7 @@ function skin($per){
                 $arm_short=4;
                 ?>
                 top:<?=$head_height+$neck_height+$arm_short?>%;
-                <?=skin(90)?>
+                <?=skin(100)?>
                 height:<?=$height_percent_arm-$arm_short?>%;
                 /* top:0; */
                 position:absolute;
@@ -730,7 +885,8 @@ function skin($per){
             //=====================================
             //====================
             //========
-            $part_height=$total_height/$max;
+            $add_tick*=0.05;
+            $part_height=$total_height/$max+$add_tick;
             $part_width=$start_width;
             $top=0;
             $num=1;
@@ -758,7 +914,7 @@ function skin($per){
                     width:<?=$part_width+($num-1)*0.6?>%;
                     height:<?=$part_height?>%;
                     top:<?=$top?>%;
-                    <?php $top+=$part_height;?>
+                    <?php $top+=$part_height-$add_tick;?>
                     left:<?=50-($part_width)/2-($num-1)/2*0.6?>%;
                     
                     <?php 
@@ -774,6 +930,8 @@ function skin($per){
                     ?>
                 }<?php
             }
+            
+            $add_tick/=0.05;
             ?>
             /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
             .leg.right{
@@ -840,7 +998,6 @@ function skin($per){
                     left:<?=$Rr+$body_slim/2?>%;
                 }
                 .shirts .arm{
-                    /* background:green; */
                     <?php // 팔 높 너비
                     $no_slim=5;
                     $shirts_arm_slim=5-$no_slim;
@@ -879,34 +1036,31 @@ function skin($per){
                     height:<?=$shoulder_shirts_height?>%;
                     width:<?=101+$fix_shoulder_width?>%;
                     border:0px;
-                    background:blue;
-                    /* background:transparent; */
                     display:flex;
+                    background:transparent;
                 }
-                <?php
-                $line_shirts_shoulder_max=50;
-                $part_height=100/$line_shirts_shoulder_max;
-                $part_top=-2*$part_height;
-                for($i=0;$i<$line_shirts_shoulder_max;$i++){
-                    $part_width=sqrt(pow(100,2)-pow(100*($line_shirts_shoulder_max-$i)/$line_shirts_shoulder_max,2));
-                    $part_left=100-$part_width;
-                    $part_top+=$part_height;
-                    ?>
-                    /* ` */
-                    .line_shirts_shoulder<?=$i?>{
-                        position:absolute;
-                        width:<?=$part_width?>%;
-                        height:<?=$part_height+$add_tick?>%;
-                        left:<?=$part_left?>%;
-                        top:<?=$part_top-$add_tick?>%;
-                        background:red;
-                    }
-                    .line_shirts_shoulder<?=$i?>.right{
-                        left:0%;
-                    }
                     <?php
-                }
-                ?>
+                    $line_shirts_shoulder_max=50;
+                    $part_height=100/$line_shirts_shoulder_max;
+                    $part_top=-2*$part_height;
+                    for($i=0;$i<$line_shirts_shoulder_max;$i++){
+                        $part_width=sqrt(pow(100,2)-pow(100*($line_shirts_shoulder_max-$i)/$line_shirts_shoulder_max,2));
+                        $part_left=100-$part_width;
+                        $part_top+=$part_height;
+                        ?>
+                        .line_shirts_shoulder<?=$i?>{
+                            position:absolute;
+                            width:<?=$part_width?>%;
+                            height:<?=$part_height+$add_tick?>%;
+                            left:<?=$part_left?>%;
+                            top:<?=$part_top-$add_tick?>%;
+                        }
+                        .line_shirts_shoulder<?=$i?>.right{
+                            left:0%;
+                        }
+                        <?php
+                    }
+                    ?>
                 .shoulder_inside{
                     <?php
                     $shoulder_inside_width=60;
@@ -914,13 +1068,12 @@ function skin($per){
                     width:<?=$shoulder_inside_width?>%;
                     height:100%;
                     position:relative;
-                    background:red;
                 }
                 .shoulder_outside{
                     width:<?=100-$shoulder_inside_width?>%;
                     height:100%;
                     position:relative;
-                    background:green;
+                    background:transparent;
                 }
                 .shoulder_shirts.right{
                     left:-1%;
@@ -945,8 +1098,6 @@ function skin($per){
                     $num=1;
                     while($num<$max+1){?>
                         .shirts_arm_line_left<?=$num++?>{
-                            /* background:white; */
-                            /* background:transparent; */
                             margin:0 auto;
                             /* border:<?=$zipper_width*$_SESSION['s17']/100?>px solid <?=$zipper_color?>; */
                             border-top:0px;
@@ -1153,16 +1304,22 @@ function skin($per){
                 }
             /* 모자 */
                 .hat{
-                    <?php if(!isset($_SESSION['s10']))$_SESSION['s10']='white';?>
-                    background:<?=$_SESSION['s10']?>;
                     <?php $hat_height=4.5;?>
                     position:absolute;
                     width:<?=$head_width?>%;
                     height:<?=$hat_height?>%;
-                    border-bottom:<?=$_SESSION['s17']/100?>px solid black;
                     top:0;
                     left:<?=50-$head_width/2?>%;
                     z-index:1;
+                }
+                .line_hat_base{
+                    position:relative;
+                        <?php 
+                            if(!isset($_SESSION['s10'])){
+                                $_SESSION['s10']='white';
+                            }   
+                        ?>
+                    background:<?=$_SESSION['s10']?>;
                     <?=$_SESSION['s5']?>
                     <?php 
                     if($_SESSION['s13']==0){
@@ -1172,6 +1329,39 @@ function skin($per){
                         <?php
                     }?>
                 }
+                    <?php
+                        $height=100;
+                        $max_hair=50;
+                        $part_height=$height/$max_hair;
+                        $part_width=0;
+                        $part_left=50;
+                        // 
+                        // x^2+y^2=r^2
+                        // (h-a)^2+w^2=r^2
+
+                        //  
+                        $r=100;
+                        $a=100;
+                        for($i=0;$i<$max_hair;$i++){
+                            ?>
+                .line_hat<?=$i?>{
+                    height:<?=$part_height?>%;
+                        <?php
+                            if($i==$max_hair-1){
+                                    ?>
+                    height:<?=$part_height+5?>%;
+                    border-bottom:1px solid black;
+                                    <?php
+                            }
+                        ?>
+                    width:<?=sqrt(pow($r,2)-pow($part_height*$i-$a,2))?>%;
+                    left:<?=50-sqrt(pow($r,2)-pow($part_height*$i-$a,2))/2?>%;
+                }
+                            <?php
+                            $part_width+=100/$max_hair;
+                        }
+                    ?>
+                
             /* 마스크 */
                 .mask{
                     <?php if(!isset($_SESSION['s11']))$_SESSION['s11']='white';?>
@@ -1179,18 +1369,32 @@ function skin($per){
                     <?php $mask_height=5.5;?>
                     position:absolute;
                     width:<?=$head_width?>%;
-                    height:<?=($face_height-$chin_height+5)/100*$head_height?>%;
-                    top:<?=$head_height-$mask_height?>%;
+                        <?php
+                            $a=0;
+                            $a=10;
+                            if($_SESSION['s-1']!=0){
+                                ?>
+                    height:2.8%;
+                                <?php
+                            }else{
+                                ?>
+                    height:<?=($face_heigh+50-$chin_height+5-$a)/100*$head_height?>%;
+                                <?php
+                            }
+                        ?>
+                    top:<?=$head_height-$mask_height-($a)/100*$head_height/100*$head_height?>%;
                     left:<?=50-$head_width/2?>%;
                     z-index:1;
                     <?=$_SESSION['s5']?>
-                    <?php 
-                    if($_SESSION['s15']==0){
+                        <?php 
+                            if($_SESSION['s15']==0){
                         ?>
-                        background:transparent;
-                        border-color:transparent;
+                    background:transparent;
+                    border-color:transparent;
                         <?php
-                    }?>
+                            }
+                        ?>
+                /* background:red; */
                 }
             /* 자켓 */  
                 .jacket *{
@@ -1313,7 +1517,6 @@ function skin($per){
                         ?>
                         width:<?=$shoulder_inside_width?>%;
                         height:105%;
-                        /* background:red; */
                         position:relative;
                         border:0;
                     }
@@ -1324,7 +1527,6 @@ function skin($per){
                         background:<?=rgb(55)?>;
                     }
                 .jacket_shoulder_under{
-                    /* background:red; */
                     height:<?=100?>%;
                     width:100%;
                 }
@@ -1537,7 +1739,7 @@ function skin($per){
                     height:<?=$glasses_height=23*$head_height/100?>%;
                     position:absolute;
                     left:<?=50-$head_width/2?>%;
-                    top:<?=($hair_height+5)*$head_height/100?>%;
+                    top:<?=($hair_height+5+$hair_height_shorter)*$head_height/100?>%;
                     z-index:2;
                     display:flex;
                     <?=$_SESSION['s5']?>
@@ -1590,7 +1792,7 @@ function skin($per){
                     <?=$_SESSION['s5']?>
                 }
     </style>
-<!-- ---------------------------------------------------------------- -->
+<!-- -- -->
 
 <!-- ==================== My style ==================== -->
     <form action=""method='post'id='hidden_menu_form'>
@@ -1600,22 +1802,6 @@ function skin($per){
     <input type="hidden"id='name_id'name='name'>
     </form>
     <?php
-    function update($conn,$session_name){
-        $sql="
-        update saved set
-        value='".$_SESSION[$session_name]."' where session_name='".$session_name."'
-        ";
-        $result=mysqli_query($conn,$sql);
-    }
-    if(isset($_POST['name'])){
-        if($_POST['name']=='저장'){
-            $num=array(10,11,12,13,14,15,4,
-                        9,22,23,24,25,21,3);
-            for($i=0;$i<count($num);$i++){
-                update($conn,'s'.$num[$i]);
-            }
-        }
-    }
     
     if(!isset($_SESSION['hidden_menu'])){
         $_SESSION['hidden_menu']='display:none;';
@@ -1642,64 +1828,31 @@ function skin($per){
         <?=$_SESSION['hidden_menu']?>
     }
     .hidden_menu{
-        <?=$_SESSION['hidden_menu']?>
-        position:absolute;
-        z-index:5;
-        background:<?=rgb(50)?>;
-        <?php
-        $device_width=$_SESSION['device_width'];
-        $device_height=$_SESSION['device_height'];
+            <?=$_SESSION['hidden_menu']?>
+            position:absolute;
+            z-index:5;
+            background:<?=rgb(50)?>;
+                <?php
+                    $device_width=$_SESSION['device_width'];
+                    $device_height=$_SESSION['device_height'];
 
-        $hidden_menu_width=60;
-        $hidden_menu_height=8;
+        $hidden_menu_width=40;
+        $hidden_menu_height=30;
         $menu_count=4;
-                
-        if($device_width==393&$device_height==873){?>
-            top:<?=50-$hidden_menu_height*$menu_count/2?>%;
+                    
+                ?>
+            height:<?=$hidden_menu_height?>%;
+            top:<?=50-$hidden_menu_height/2?>%;
             left:<?=50-$hidden_menu_width/2?>%;
-        <?php 
-            $hidden_menu_width*=$display_width/100;
-            $hidden_menu_height*=$display_height/100;
-        }else if($device_width==1440&$device_height==900){
-            $hidden_menu_width*=$display_width/100;
-            $hidden_menu_height*=$display_height/100;
-            ?>
-            top:<?=$device_height/2-$hidden_menu_height*$menu_count?>;
-            left:<?=$device_width/2-$hidden_menu_width/2?>;
-            <?php
-        }
-        //윈도우     
-        else if($device_width==1920&$device_height==1080){
-            $hidden_menu_width*=$display_width/100;
-            $hidden_menu_height*=$display_height/100;
-            ?>
-            top:<?=$device_height/2-$hidden_menu_height*$menu_count?>;
-            left:<?=$device_width/2-$hidden_menu_width/2?>;
-            left:<?=30?>%;
-            <?php
-        }else{
-            $hidden_menu_width*=$display_width/100;
-            $hidden_menu_height*=$display_height/100;
-            ?>
-            top:<?=$device_height/2-$hidden_menu_height*$menu_count/2?>;
-            left:<?=$device_width/2-$hidden_menu_width/2?>;
-            <?php
-        }
-        //         die("
-        // }</style>
-        //     device_width: ".$device_width.', device_height: '.$device_height
-        //     );
-        ?>
-        width:<?=$hidden_menu_width?>;
+            width:<?=$hidden_menu_width?>%;
     }
     .hidden_menu >.button-horizon{
-        /* background:red; */
-        height:<?=$hidden_menu_height?>;
+        height:<?=100/$menu_count?>%;
     }
     </style>
 
 
-<!-- ---------------------------------------------------------------- -->
+<!-- -- -->
 
 <!-- ==================== body ==================== -->
     <title>CCC</title>
@@ -1712,7 +1865,7 @@ function skin($per){
                 <div class="hidden_menu"id="hidden_menu">
                     <?php
                     f4("name_id.value='저장';form_id.submit();","저장");
-                    f4("location.href='..';",'홈');
+                    f4("top.location.href='..';",'홈');
                     f4("num.value=1;form_if.submit();",'재시작');
                     f4("hidden_menu_form.submit();",'닫기');
                     ?>
@@ -1733,259 +1886,281 @@ function skin($per){
             <!-- ------------- -->
             <!-- ------------- -->
             <!-- ------------- -->
-            <!-- 메뉴 사람나오는곳 메뉴 -->
-        <div class="top">
-        <!-- 왼메뉴 -->
-                <div class="menu">
-                    <div class="flex-centered">
-                    <!-- 왼메뉴 만들기 -->
-                        <?php
-                        $before_name=0;
-                        $t=1;
-                        $sql="select * from clothes where id=$t";
+        <!-- 메뉴 사람나오는곳 메뉴 -->
+                    <?php
+                        // var_dump($_SESSION['clothes']['cloth']);
 
-                        $result=mysqli_query($conn,$sql);
-                        while($row=mysqli_fetch_array($result)){
-                            if($before_name!=$row['cloth']){
-                                f2($row['cloth'],$row['text'],2);
-                            }
-                            $before_name=$row['cloth'];
-                            $t++;
-                            $sql="select * from clothes where id=$t";
-                            $result=mysqli_query($conn,$sql);
-                        }
-                        ?>
-                    </div>
-                </div>
-            
-                <!-- - -->
-                <!-- - -->
-                <!-- - -->
-        <!-- 사람나오는 -->
-            <div class="screen">
-                <div class="man">
-                <!--옷-->
-                    <div class="glasses">
-                    <div class="glasses_ear"></div>
-                    <div class="glass"></div>
-                    <div class="glasses_nose"></div>
-                    <div class="glass"></div>
-                    <div class="glasses_ear"></div>
-                    </div>
-                    <div class="shirts">
-                        <div class="body"></div>
-                        <div class="arm left">
-                            <div class="shoulder_shirts">
-                                <div class="shoulder_outside">
+                        // die("count: ".count($_SESSION['clothes']['id'])."");
+                    ?>
+                <div class="top">
+                <!-- 왼메뉴 -->
+                        <div class="menu">
+                            <div class="flex-centered">
+                            <!-- 왼메뉴 만들기 -->
                                 <?php
-                                // `
-                                for($i=0;$i<$line_shirts_shoulder_max;$i++){
-                                    ?>
-                                    <div class="line_shirts_shoulder<?=$i?>"></div>
-                                    <?php
-                                }
-                                ?>
-                                </div>
-                                <div class="shoulder_inside"></div>
-                            </div>
-                            <?php $num=1; while($num<$max+1){?>
-                            <div class="shirts_arm_line_left<?=$num++?>"></div>
-                            <?php }?>
-                        </div>
-                        <div class="arm right">
-                            <div class="shoulder_shirts right">
-                                <div class="shoulder_inside"></div>
-                                <div class="shoulder_outside">
-                                <?php
-                                for($i=0;$i<$line_shirts_shoulder_max;$i++){
-                                    ?>
-                                    <div class="line_shirts_shoulder<?=$i?> right"></div>
-                                    <?php
-                                }
-                                ?>
-                                </div>
-                            </div>
-                            <?php $num=1; while($num<$max+1){?>
-                            <div class="shirts_arm_line_right<?=$num++?>"></div>
-                            <?php }?>
-                        </div>
-                    </div>
-                    <div class="pants">
-                        <div class="upper"></div>
-                        <div class="leg left">
-                            <?php $num=1; while($num<$max+1){?>
-                                <div class="line_pant<?=$num++?>"></div>
-                            <?php }?>
-                        </div>
-                        <div class="leg middle"></div>
-                        <div class="leg right">
-                            <?php $num=1; while($num<$max+1){?>
-                                <div class="line_pant<?=$num++?> right"></div>
-                            <?php }?>
-                        </div>
-                    </div>
-                    <div class="hat"></div>
-                    <div class="mask"></div>
-                    <div class="jacket">
-                        <div class="body">  
-                            <div class="zipper"></div>
-                            <?php $num=1; while($num<$max+1){?>
-                            <div class="jacket_open<?=$num++?>"></div>
-                            <?php }?>
-                        </div>
-                        <div class="arm left">
-                            <div class="shoulder_jacket">
-                                <div class="jacket_shoulder_under"></div>
-                                <div class="jacket_shoulder_over">
-                                    <div class="jacket_shoulder_outside">
-                                    <?php
-                                    for($i=0;$i<$line_jacket_shoulder_max;$i++){
-                                        ?>
-                                        <div class="line_jacket_shoulder<?=$i?>"></div>
-                                        <?php
+                                    $before_name=0;
+                                    
+                                    for($t=0;$t<count($_SESSION['clothes']['id']);$t++){
+                                        if($before_name!=$_SESSION['clothes']['cloth'][$t]){
+                                            f2($_SESSION['clothes']['cloth'][$t],$_SESSION['clothes']['text'][$t],2);
+                                            $before_name=$_SESSION['clothes']['cloth'][$t];
+                                        }
                                     }
-                                    ?>
-                                    </div>
-                                    <div class="jacket_shoulder_inside"></div>
-                                </div>
+                                ?>
                             </div>
-                            <?php $num=1; while($num<$max+1){?>
-                            <div class="jacket_arm_line_left<?=$num++?>"></div>
-                            <?php }?>
                         </div>
-                        <div class="arm right">
-                            <div class="shoulder_jacket right">
-                                <div class="jacket_shoulder_under"></div>
-                                <div class="jacket_shoulder_over">
-                                    <div class="jacket_shoulder_inside"></div>
-                                    <div class="jacket_shoulder_outside">
+                    
+                        <!-- - -->
+                        <!-- - -->
+                        <!-- - -->
+                <!-- 사람나오는 -->
+                    <div class="screen">
+                        <div class="man">
+                        <!--옷-->
+                            <div class="glasses">
+                            <div class="glasses_ear"></div>
+                            <div class="glass"></div>
+                            <div class="glasses_nose"></div>
+                            <div class="glass"></div>
+                            <div class="glasses_ear"></div>
+                            </div>
+                            <div class="shirts">
+                                <div class="body"></div>
+                                <div class="arm left">
+                                    <div class="shoulder_shirts">
+                                        <div class="shoulder_outside">
                                         <?php
-                                        for($i=0;$i<$line_jacket_shoulder_max;$i++){
+                                        for($i=0;$i<$line_shirts_shoulder_max;$i++){
                                             ?>
-                                            <div class="line_jacket_shoulder<?=$i?> right"></div>
+                                            <div class="line_shirts_shoulder<?=$i?>"></div>
                                             <?php
                                         }
                                         ?>
+                                        </div>
+                                        <div class="shoulder_inside"></div>
+                                    </div>
+                                    <?php $num=1; while($num<$max+1){?>
+                                    <div class="shirts_arm_line_left<?=$num++?>"></div>
+                                    <?php }?>
+                                </div>
+                                <div class="arm right">
+                                    <div class="shoulder_shirts right">
+                                        <div class="shoulder_inside"></div>
+                                        <div class="shoulder_outside">
+                                        <?php
+                                        for($i=0;$i<$line_shirts_shoulder_max;$i++){
+                                            ?>
+                                            <div class="line_shirts_shoulder<?=$i?> right"></div>
+                                            <?php
+                                        }
+                                        ?>
+                                        </div>
+                                    </div>
+                                    <?php $num=1; while($num<$max+1){?>
+                                    <div class="shirts_arm_line_right<?=$num++?>"></div>
+                                    <?php }?>
+                                </div>
+                            </div>
+                            <div class="pants">
+                                <div class="upper"></div>
+                                <div class="leg left">
+                                    <?php $num=1; while($num<$max+1){?>
+                                        <div class="line_pant<?=$num++?>"></div>
+                                    <?php }?>
+                                </div>
+                                <div class="leg middle"></div>
+                                <div class="leg right">
+                                    <?php $num=1; while($num<$max+1){?>
+                                        <div class="line_pant<?=$num++?> right"></div>
+                                    <?php }?>
+                                </div>
+                            </div>
+                            <div class="hat">
+                                    <?php
+                                        for($i=0;$i<$max_hair;$i++){
+                                            ?>
+                                            <div class="line_hat_base line_hat<?=$i?>"></div>
+                                            <?php
+                                        }
+                                    ?>
+                            </div>
+                            <div class="mask"></div>
+                            <div class="jacket">
+                                <div class="body">  
+                                    <div class="zipper"></div>
+                                    <?php $num=1; while($num<$max+1){?>
+                                    <div class="jacket_open<?=$num++?>"></div>
+                                    <?php }?>
+                                </div>
+                                <div class="arm left">
+                                    <div class="shoulder_jacket">
+                                        <div class="jacket_shoulder_under"></div>
+                                        <div class="jacket_shoulder_over">
+                                            <div class="jacket_shoulder_outside">
+                                            <?php
+                                            for($i=0;$i<$line_jacket_shoulder_max;$i++){
+                                                ?>
+                                                <div class="line_jacket_shoulder<?=$i?>"></div>
+                                                <?php
+                                            }
+                                            ?>
+                                            </div>
+                                            <div class="jacket_shoulder_inside"></div>
+                                        </div>
+                                    </div>
+                                    <?php $num=1; while($num<$max+1){?>
+                                    <div class="jacket_arm_line_left<?=$num++?>"></div>
+                                    <?php }?>
+                                </div>
+                                <div class="arm right">
+                                    <div class="shoulder_jacket right">
+                                        <div class="jacket_shoulder_under"></div>
+                                        <div class="jacket_shoulder_over">
+                                            <div class="jacket_shoulder_inside"></div>
+                                            <div class="jacket_shoulder_outside">
+                                                <?php
+                                                for($i=0;$i<$line_jacket_shoulder_max;$i++){
+                                                    ?>
+                                                    <div class="line_jacket_shoulder<?=$i?> right"></div>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php $num=1; while($num<$max+1){?>
+                                    <div class="jacket_arm_line_right<?=$num++?>"></div>
+                                    <?php }?>
+                                </div>
+                            </div>
+                        <!-- - -->
+                        <!-- - -->
+                        <!--사람자체-->
+                            <div class="head">
+                                <div class="hair">
+                                        <?php
+                                            for($i=0;$i<$max_hair;$i++){
+                                                ?>
+                                                <div class="line_hair_base line_hair<?=$i?>"></div>
+                                                <?php
+                                            }
+                                        ?>
+                                </div>
+                                <div class="face"></div>
+                                <?php
+                                for($i=0;$i<$slice_num;$i++){
+                                    ?>
+                                    <div class="chin<?=$i?>"></div>
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                            <div class="neck_clone"></div>
+                            <div class="neck"></div>
+                            <div class='display-flex'>
+                                <div class="arm left">
+                                    <div class="hand"></div>
+                                </div>
+                                <div class="upper-body"></div>
+                                <div class="arm right">
+                                    <div class="hand"></div>
+                                </div>
+                            </div>
+                            <div class="lower-body">
+                                <div class="hip"></div>
+                                <div class="legs display-flex">
+                                    
+                                    <div class="leg">
+                                        <?php $num=1; while($num<$max+1){?>
+                                            <div class="line_leg<?=$num++?>"></div>
+                                        <?php }?>
+                                        <div class="foot">
+                                            <div class="shoe"></div>
+                                        </div>
+                                    </div>    
+                                    <div class="leg right">
+                                        <?php $num=1; while($num<$max+1){?>
+                                            <div class="line_leg<?=$num++?>"></div>
+                                        <?php }?>
+                                        <div class="foot right">
+                                            <div class="shoe"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <?php $num=1; while($num<$max+1){?>
-                            <div class="jacket_arm_line_right<?=$num++?>"></div>
-                            <?php }?>
                         </div>
                     </div>
-                <!-- - -->
-                <!-- - -->
-                <!--사람자체-->
-                    <div class="head">
-                        <div class="hair"></div>
-                        <div class="face"></div>
-                        <?php
-                        for($i=0;$i<$slice_num;$i++){
+                    <!-- - -->
+                    <!-- - -->
+                    <!-- - -->
+                <!-- 오른메뉴 -->
+                    <div class="menu">
+                        <div class="flex-centered">
+                        <!-- // 오른메뉴 만들기 -->
+                            <?php 
+                                if($_SESSION['s2']=='hat'&$_SESSION['s13']==0
+                                |$_SESSION['s2']=='mask'&$_SESSION['s15']==0
+                                |$_SESSION['s2']=='jacket'&$_SESSION['s14']==0
+                                ){}
+                                else{
+                                    if($_SESSION['s2']=='shirts')$session_num=3;
+                                    else if($_SESSION['s2']=='pants')$session_num=4;
+                                    else if($_SESSION['s2']=='shoes')$session_num=9;
+                                    else if($_SESSION['s2']=='hat')$session_num=10;
+                                    else if($_SESSION['s2']=='mask')$session_num=11;
+                                    else if($_SESSION['s2']=='jacket')$session_num=12;
+
+                                $color='red';
+                                for($i=0;$i<count($_SESSION['clothes']['cloth']);$i++){
+                                    if($_SESSION['clothes']['cloth'][$i]==$_SESSION['s2']){
+                                        if(substr($_SESSION['clothes']['value'][$i],0,1)=='#'){
+                                            $index=array_search(
+                                                $_SESSION['clothes']['value'][$i],
+                                                $_SESSION['_colors']['name']
+                                            );
+                                            
+                                            $color=$_SESSION['_colors']['value'][$index];
+                                        }else{
+                                            $color=$_SESSION['clothes']['value'][$i];
+                                        }
+                                        if($_SESSION['s-1']==0)
+                                            f1($color,$_SESSION['clothes']['colorName'][$i],$session_num);
+                                        else
+                                            f1($color,$_SESSION['clothes']['colorName'][$i],$session_num);
+                                    }
+                                }
+                            }
                             ?>
-                            <div class="chin<?=$i?>"></div>
-                            <?php
-                        }
-                        ?>
-                    </div>
-                    <div class="neck_clone"></div>
-                    <div class="neck"></div>
-                    <div class='display-flex'>
-                        <div class="arm left">
-                            <div class="hand"></div>
-                        </div>
-                        <div class="upper-body"></div>
-                        <div class="arm right">
-                            <div class="hand"></div>
-                        </div>
-                    </div>
-                    <div class="lower-body">
-                        <div class="hip"></div>
-                        <div class="legs display-flex">
-                            
-                            <div class="leg">
-                                <?php $num=1; while($num<$max+1){?>
-                                    <div class="line_leg<?=$num++?>"></div>
-                                <?php }?>
-                                <div class="foot">
-                                    <div class="shoe"></div>
-                                </div>
-                            </div>    
-                            <div class="leg right">
-                                <?php $num=1; while($num<$max+1){?>
-                                    <div class="line_leg<?=$num++?>"></div>
-                                <?php }?>
-                                <div class="foot right">
-                                    <div class="shoe"></div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- - -->
-            <!-- - -->
-            <!-- - -->
-        <!-- 오른메뉴 -->
-        <div class="menu">
-            <div class="flex-centered">
-            <!-- // 오른메뉴 만들기 -->
-                <?php 
-                if($_SESSION['s2']=='hat'&$_SESSION['s13']==0
-                |$_SESSION['s2']=='mask'&$_SESSION['s15']==0
-                |$_SESSION['s2']=='jacket'&$_SESSION['s14']==0
-                ){}
-                else{
-                    $sql="select * from clothes where cloth='".$_SESSION['s2']."'";
-                    $result=mysqli_query($conn,$sql);
-                    $color='red';
-                    while($row=mysqli_fetch_array($result)){
-                        if(substr($row['value'],0,1)=='#'){
-                            $sql="select value from _colors where name='".$row['value']."'";
-                            $result2=mysqli_query($conn,$sql);
-                            $row2=mysqli_fetch_array($result2);
-                            $color=$row2['value'];
-                        }else{
-                            $color=$row['value'];
-                        }
-                        if($_SESSION['s2']=='shirts')$session_num=3;
-                        else if($_SESSION['s2']=='pants')$session_num=4;
-                        else if($_SESSION['s2']=='shoes')$session_num=9;
-                        else if($_SESSION['s2']=='hat')$session_num=10;
-                        else if($_SESSION['s2']=='mask')$session_num=11;
-                        else if($_SESSION['s2']=='jacket')$session_num=12;
-                        if($_SESSION['s-1']==0)
-                            f1($color,$row['colorName'],$session_num);
-                        else
-                            f1($color,$row['colorName'],$session_num);
-                    }
-                }
-                ?>
-            </div>
-        </div>
-        </div>
-        <!-- ------------- -->
-        <!-- ------------- -->
-        <!-- ------------- -->
+                <!-- ------------- -->
+                <!-- ------------- -->
+                <!-- ------------- -->
         <!-- 옵션메뉴 -->
             <div class="bottom">
 
             <div class="menu-horizon">
 
-            <?php
-            $sql="select * from options";
-            $result=mysqli_query($conn,$sql);
-            while($row=mysqli_fetch_array($result)){
-                if($_SESSION['s14']==0&($row['session_num']==22|
-                $row['session_num']==25)){}else{
-                    f3($row['session_num'],$row['value'],$row['text']);
-                }
-            }
-            ?>   
+                <?php
+                    for($i=0;$i<count($_SESSION['options']['id']);$i++){
+                        if($_SESSION['s14']==0&($_SESSION['options']['session_num'][$i]==22|
+                        $_SESSION['options']['session_num'][$i]==25)){
+
+                        }
+                        else{
+                            f3(
+                                $_SESSION['options']['session_num'][$i],
+                                $_SESSION['options']['value'][$i],
+                                $_SESSION['options']['text'][$i]
+                            );
+                        }
+                    }
+                ?>   
 
             </div>
 
             </div>
         </div>
     </body>
-<!-- ---------------------------------------------------------------- -->
+<!-- ----->

@@ -117,6 +117,9 @@
             margin:0 auto;
             background:black;
             /* background:blue; */
+            <?php
+            $r*=0.97;
+            ?>
             width:<?=$r*2?>;
         }
         .air{
@@ -216,27 +219,27 @@
 
     <rows>
         <div class="row">
-            <?=makebox("CCC_v3","CCC_v3")?>
-            <div class="between"></div>
-            <?=makebox("","")?>
-        </div>
-
-        <div class="row">
             <?=makebox("MyPage","myPage")?>
             <div class="between"></div>
             <?=makebox("Example","example")?>
         </div>
 
         <div class="row">
-            <?=makebox("GUCCI","")?>
+            <?=makebox("CCC_v3","CCC_v3")?>
             <div class="between"></div>
-            <?=makebox("Milet","")?>
+            <?=makebox("","")?>
         </div>
 
         <div class="row">
             <?=makebox("CCC_v2","CCC_v2")?>
             <div class="between"></div>
             <?=makebox("CCC_v1","CCC_v1")?>
+        </div>
+
+        <div class="row">
+            <?=makebox("GUCCI","")?>
+            <div class="between"></div>
+            <?=makebox("Milet","")?>
         </div>
 
         <div class="row">
