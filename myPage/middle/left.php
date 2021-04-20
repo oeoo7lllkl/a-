@@ -6,8 +6,7 @@
         <style>
         </style>
     </head>
-    <body onfocus="parent.middle_right.focus();">
-        
+    <body onfocus="parent.middle_right.focus();" onclick="parent.middle_right.focus();">
     </body>
 </html>
 

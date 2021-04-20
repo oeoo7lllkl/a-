@@ -162,25 +162,11 @@
             opacity:30%;
         }
 
-        .destroy{
-            margin:0 auto;
-            color:red;
-            width:<?=$r*0.4/100*7?>%;
-            <?php $B=0.02;?>
-            border-top:<?=$r*$B?>px solid rgb(100,0,0);
-            border-bottom :<?=$r*$B?>px solid rgb(100,0,0);
-            text-align:center;
-            <?php $F=1.1;if($id==1)$F=1.3;if($id==2)$F=1.3;?>
-            font-size:<?=$r*0.05*$F?>;
-            background:rgb(100,0,0);
-            cursor:pointer;
-            position:relative;
-            top:0;
+        .center.click.opa2.destroy{
+            background:red;
         }
         .destroy:hover{
-            background:rgb(200,0,0);
-            border-color:rgb(200,0,0);
-            color:rgb(200,0,0);
+            
         }
     </style>
 
@@ -229,7 +215,13 @@ if(!($id==0|$id==3)){
                         
                         if($i>=count($showing_name)){
                             ?>
-            <?=makebox("","")?>
+                            <div class="box">
+                                <div class="center click opa2 destroy"onclick="destroy.click();">
+                                    <div class="text">
+                                        세션 종료
+                                    </div>
+                                </div>
+                            </div>
         </div>
                             <?php
                         }else{
@@ -299,10 +291,10 @@ if(!($id==0|$id==3)){
             top:<?=-$body_width*3/5/2?>;
             position:absolute;
             padding-top:28.5%;
-            opacity:50%;
+            /* opacity:95%; */
         }
         .box2:hover{
-            opacity:40%;
+            opacity:100%;
         }
         .text{
             width:100%;
@@ -310,19 +302,23 @@ if(!($id==0|$id==3)){
             text-align:center;
         }
         .opacity50{
-            opacity:40%;
+            opacity:30%;
         }
         .opacity75{
             cursor:hand;
-            opacity:65%;
+            opacity:50%;
         }
         .opacity100{
             cursor:hand;
-            opacity:90%;
+            opacity:70%;
         }
         .destroy2{
             background:red;
-            top:-47%;
+            opacity:30%;
+            cursor:hand;
+        }
+        .destroy2:hover{
+            opacity:90%;
         }
     </style>
     <div class="boxes">
