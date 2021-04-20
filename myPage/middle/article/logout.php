@@ -7,13 +7,14 @@
         margin-bottom:10;
         cursor:hand;
         font-size:40;
-        margin-left:20;
+        margin-right:20;
     }
         p:hover{
             opacity:50%;
         }
     .row{
         padding:2;
+        padding-left:20;
         border:0.1px solid red;
         border-top:0;
         padding-bottom:170;
@@ -54,32 +55,51 @@
     .checkbox{
         width:30;
         height:30;
+        margin-left:13%;
     }
+        .checkbox_border{
+            background:red;
+            width:30;
+            position:relative;
+            left:-3%;
+            margin:0 auto;
+            /* margin-right:20; */
+        }
 </style>
 <div class="row click">
     <div class="title">click</div>
     <div class="box">
         <p class="naver" onclick='window.open("https:naver.com", "", "toolbar=no, menubar=no, scrollbars=no, resizable=yes")'>naver</p>    
-        <input <?=$_SESSION['checkbox']['naver'];?> class="checkbox" onclick="id.value='check_naver';form.submit();" type="checkbox">
+        <div class="checkbox_border">
+            <input <?=$_SESSION['checkbox']['naver'];?> class="checkbox" onclick="id.value='check_naver';form.submit();" type="checkbox">
+        </div>
     </div>
     <div class="box">
-        <p class="google" onclick='window.open("https:google.com", "", "toolbar=no, menubar=no, scrollbars=no, resizable=yes")'>google</p>    
+        <p class="google" onclick='window.open("https:google.com", "", "toolbar=no, menubar=no, scrollbars=no, resizable=yes")'>google</p>  
+        <div class="checkbox_border">  
         <input <?=$_SESSION['checkbox']['google'];?> class="checkbox" onclick="id.value='check_google';form.submit();" type="checkbox">
+        </div>
     </div>
     <div class="box">
         <p class="github" onclick='window.open("https:github.com", "", "toolbar=no, menubar=no, scrollbars=no, resizable=yes")'>github</p>    
+        <div class="checkbox_border">
         <input <?=$_SESSION['checkbox']['github'];?> class="checkbox" onclick="id.value='check_github';form.submit();" type="checkbox">
+        </div>
     </div>
 </div>
 <div class="row self">
     <div class="title">self</div>
     <div class="box">
         <p class="vscode" onclick="ru2n();">vscode</p>    
+        <div class="checkbox_border">
         <input <?=$_SESSION['checkbox']['vscode'];?> class="checkbox" onclick="id.value='check_vscode';form.submit();" type="checkbox">
+        </div>
     </div>
     <div class="box">
         <p class="edge" onclick="ru2n();">edge</p>    
+        <div class="checkbox_border">
         <input <?=$_SESSION['checkbox']['edge'];?> class="checkbox" onclick="id.value='check_edge';form.submit();" type="checkbox">
+        </div>
     </div>
 </div>
 <h1 style="color:red;text-align:center;">

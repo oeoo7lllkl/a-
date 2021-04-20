@@ -84,6 +84,7 @@
     <style>
         *{
             margin:0;
+            padding:0;
         }
         body{
             margin:0 auto;
@@ -91,14 +92,15 @@
             /* background:blue; */
             <?php
             $r*=0.97;
+            $body_width=$r*2;
             ?>
-            width:<?=$r*2?>;
+            width:<?=$body_width?>;
         }
         .air{
             /*###########################*/
             /* background:blue; */
+            /* height:10; */
             /*###########################*/
-            height:<?=$r*0.073?>;
             width:<?=$r*2?>;
             margin:0 auto;
         }
@@ -172,13 +174,8 @@
             font-size:<?=$r*0.05*$F?>;
             background:rgb(100,0,0);
             cursor:pointer;
-            margin-bottom:<?=$r*0.1?>;
-            <?php if($id==1){?>
-                margin-left:<?=$r*0.753?>;
-            <?php }?>
-            position:absolute;
-            left:<?=50-$r*0.4/100*7/2?>%;
-            bottom:10;
+            position:relative;
+            top:0;
         }
         .destroy:hover{
             background:rgb(200,0,0);
@@ -193,7 +190,7 @@
     function keydown(){
         k=event.keyCode;
         // alert(k);
-        if(k==81|k== 221){
+        if(k==81|k== 221|k== 191|k== 90){
             location.reload();
         }
         if(k==13){
@@ -202,7 +199,7 @@
     }
 </script>
 <body onkeydown="keydown();">
-    <p class="air"></p>
+    <p class="air top"></p>
 
 <?php
 if(!($id==0|$id==3)){
@@ -248,8 +245,8 @@ if(!($id==0|$id==3)){
     </rows>
         <?php
 }else{
-    $showing_name=array("game", "MyPage",   "Example",  "CCC_v3",   "CCC_v2", "CCC_v1",   "GUCCI",    "Milet", "", "", "", "", "", "", "", "" );  
-    $folder_name=array( "game", "myPage",   "example",  "CCC_v3",   "CCC_v2", "CCC_v1",   "",         ""     , "", "", "", "", "", "", "", "" );
+    $showing_name=array("game", "MyPage",   "Example",  "CCC_v3",   "CCC_v2", "CCC_v1",   "GUCCI",    "Milet", "", "", "", "", "", "" );  
+    $folder_name=array( "game", "myPage",   "example",  "CCC_v3",   "CCC_v2", "CCC_v1",   "",         ""     , "", "", "", "", "", "" );
 
     $_SESSION['tabindex'] = 0;
     function makebox2($sn,$fn,$opacity){
@@ -272,16 +269,40 @@ if(!($id==0|$id==3)){
     <style>
         .Box2{
             background:white;
-            width:199;
-            height:199;
-            margin:5;
+            width:<?=$body_width/5*0.98?>;
+            height:<?=$body_width/5*0.98?>;
+            margin:<?=$body_width/5*0.01?>;
             display:flex;
             align-items:center;
             float:left;
-            cursor:hand;
+        }
+        /* .air.top{
+    background:red;
+    <?php $air_height=18?>
+    <?php $air_height=49.99?>
+            height:<?=$air_height?>%;
+    position:absolute;
+    top:0;
+    margin:0;
+        } */
+    /* .air.bottom{
+    background:blue;
+            height:<?=$air_height?>%;
+    position:absolute;
+    z-index:-1;
+    bottom:0;
+    } */
+        .boxes{
+            /* background:green; */
+            width:<?=$body_width?>;
+            height:<?=$body_width*3/5?>;
+            top:<?=-$body_width*3/5/2?>;
+            position:absolute;
+            padding-top:28.5%;
+            opacity:50%;
         }
         .box2:hover{
-            opacity:50%;
+            opacity:40%;
         }
         .text{
             width:100%;
@@ -289,38 +310,47 @@ if(!($id==0|$id==3)){
             text-align:center;
         }
         .opacity50{
-            opacity:50%;
+            opacity:40%;
         }
         .opacity75{
-            opacity:75%;
+            cursor:hand;
+            opacity:65%;
         }
         .opacity100{
-            opacity:100%;
+            cursor:hand;
+            opacity:90%;
+        }
+        .destroy2{
+            background:red;
+            top:-47%;
         }
     </style>
-    <?php
-    for($i=0;$i<count($showing_name);$i++){
-        if($showing_name[$i]==""&$folder_name[$i]==""){
-            $opacity="opacity50";
-        }else if($folder_name[$i]==""){
-            $opacity="opacity75";
-        }else{
-            $opacity="opacity100";
-        } 
-            ?>
-    <?=makebox2("$showing_name[$i]","$folder_name[$i]",$opacity)?>
+    <div class="boxes">
+        <?php
+        for($i=0;$i<count($showing_name);$i++){
+            if($showing_name[$i]==""&$folder_name[$i]==""){
+                $opacity="opacity50";
+            }else if($folder_name[$i]==""){
+                $opacity="opacity75";
+            }else{
+                $opacity="opacity100";
+            } 
+                ?>
+        <?=makebox2("$showing_name[$i]","$folder_name[$i]",$opacity)?>
+                <?php
+            }?>
             <?php
-    }?>
-    <?php
-    
-}
-?>
+        }
+        ?>
+        <div class="box2 destroy2"onclick="destroy.click();">
+            <div class="text">
+                세션 종료
+            </div>
+        </div>
+    </div>
 
-    <p class="air">  
         <form action="." hidden method="post">
             <input type="hidden" name="destroy" value="1">
             <input id="destroy" type="submit">
         </form>  
-        <div class="destroy" onclick="destroy.click();">세션 종료</div>
-    </p>
 </body>
