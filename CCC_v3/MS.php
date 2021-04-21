@@ -140,19 +140,5 @@
             ";
             $result=mysqli_query($conn,$sql);
         }
-        if(isset($_POST['name'])){
-            if($_POST['name']=='저장'){
-                $num=array(10,11,12,13,14,15,4,
-                            9,22,23,24,25,21,3);
-                //마이에스큐엘 코넥트 시작
-                    $passwd='11513122';
-                    if($_SESSION['s-1']!=0)$passwd='root';
-                    $conn=mysqli_connect('localhost','root',$passwd,'o');
-                //
-                for($i=0;$i<count($num);$i++){
-                    update($conn,'s'.$num[$i]);
-                }
-            }
-        }
     //
 ?>

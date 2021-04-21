@@ -965,7 +965,7 @@
                     $shirts_color=$_SESSION['s3'];
                     background:<?=$_SESSION['s3']?>;
                     position:absolute;
-                    z-index:2;
+                    z-index:5;
                     <?=$_SESSION['s5']?>
                 }
                 .shirts .body{
@@ -1018,6 +1018,7 @@
                     top:<?=$R?>%;
                     left:<?=$Rr+$shirts_arm_slim/2+$body_slim-$no_slim/2?>%;
                     background:transparent;
+        /* background:blue; */
                     border:0;
                 }
                 .shoulder_shirts{
@@ -1032,9 +1033,15 @@
                         $shoulder_shirts_height=63;
                     }
                     $fix_shoulder_width=0;
+                    $shirts_shoulder_width=$arm_width;
                     ?>
-                    height:<?=$shoulder_shirts_height?>%;
-                    width:<?=101+$fix_shoulder_width?>%;
+                left:<?=50-$upper_body_width/2-$arm_width+
+            2.4
+                    ?>%;
+            z-index:5;
+                    height:<?=$shoulder_shirts_height*$shirts_arm_height/100?>%;
+                    top:<?=$head_height+$neck_height?>%;
+                    width:<?=$shirts_shoulder_width?>%;
                     border:0px;
                     display:flex;
                     background:transparent;
@@ -1076,7 +1083,9 @@
                     background:transparent;
                 }
                 .shoulder_shirts.right{
-                    left:-1%;
+                left:<?=50+$upper_body_width/2-
+            2.4
+                ?>%;
                 }
                 /* .shirts_arm_line_left<?=$num++?>{ */
                     /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
@@ -1402,7 +1411,7 @@
                     <?php if(!isset($_SESSION['s12'])){$_SESSION['s12']='white';}?>
                     background:<?=$_SESSION['s12']?>;
                     position:absolute;
-                    z-index:3;
+        z-index:5;
                     <?=$_SESSION['s5']?>
                     <?php 
                     if($_SESSION['s14']==0){
@@ -1733,6 +1742,15 @@
                     }
                     ?>
                 }
+                .black .jacket_body{
+                    position:absolute;
+                    z-index:1000;
+                    background:red;
+                    width:100%;
+                    top:50%;
+                    left:50%;
+                    heigth:100%;
+                }
             /* 안경 */
                 .glasses{
                     width:<?=$head_width?>%;
@@ -1813,6 +1831,23 @@
             $_SESSION['hidden_menu']="";
         }
     }
+    if(isset($_POST['name'])){
+        if($_POST['name']=='저장'){
+            $num=array(10,11,12,13,14,15,4,
+                        9,22,23,24,25,21,3);
+            //마이에스큐엘 코넥트 시작
+                $passwd='11513122';
+                if($_SESSION['s-1']!=0)$passwd='root';
+                $conn=mysqli_connect('localhost','root',$passwd,'o');
+            //
+            for($i=0;$i<count($num);$i++){
+                update($conn,'s'.$num[$i]);
+            }
+            if($_SESSION['hidden_menu']==""){
+                $_SESSION['hidden_menu']="display:none;";
+            }
+        }
+    }
 
     ?>
     <style>
@@ -1824,13 +1859,13 @@
         top:0;
         left:0;
         opacity:80%;
-        z-index:4;
+        z-index:6;
         <?=$_SESSION['hidden_menu']?>
     }
     .hidden_menu{
             <?=$_SESSION['hidden_menu']?>
             position:absolute;
-            z-index:5;
+            z-index:6;
             background:<?=rgb(50)?>;
                 <?php
                     $device_width=$_SESSION['device_width'];
@@ -1865,8 +1900,8 @@
                 <div class="hidden_menu"id="hidden_menu">
                     <?php
                     f4("name_id.value='저장';form_id.submit();","저장");
-                    f4("top.location.href='..';",'홈');
-                    f4("num.value=1;form_if.submit();",'재시작');
+                    f4("hidden_menu_form.submit();top.location.href='..';",'홈');
+                    f4("hidden_menu_form.submit();num.value=1;form_if.submit();",'재시작');
                     f4("hidden_menu_form.submit();",'닫기');
                     ?>
                 </div>
@@ -1915,6 +1950,11 @@
                         <!-- - -->
                 <!-- 사람나오는 -->
                     <div class="screen">
+                        <!--옷명암-->
+                            <div class="black">
+                                <div class="jacket_body"></div>
+                                <div class="jacket_body right"></div>
+                            </div>
                         <div class="man">
                         <!--옷-->
                             <div class="glasses">
@@ -1926,7 +1966,6 @@
                             </div>
                             <div class="shirts">
                                 <div class="body"></div>
-                                <div class="arm left">
                                     <div class="shoulder_shirts">
                                         <div class="shoulder_outside">
                                         <?php
@@ -1939,11 +1978,11 @@
                                         </div>
                                         <div class="shoulder_inside"></div>
                                     </div>
+                                <div class="arm left">
                                     <?php $num=1; while($num<$max+1){?>
                                     <div class="shirts_arm_line_left<?=$num++?>"></div>
                                     <?php }?>
                                 </div>
-                                <div class="arm right">
                                     <div class="shoulder_shirts right">
                                         <div class="shoulder_inside"></div>
                                         <div class="shoulder_outside">
@@ -1956,6 +1995,7 @@
                                         ?>
                                         </div>
                                     </div>
+                                <div class="arm right">
                                     <?php $num=1; while($num<$max+1){?>
                                     <div class="shirts_arm_line_right<?=$num++?>"></div>
                                     <?php }?>
@@ -1985,52 +2025,54 @@
                                     ?>
                             </div>
                             <div class="mask"></div>
-                            <div class="jacket">
-                                <div class="body">  
-                                    <div class="zipper"></div>
-                                    <?php $num=1; while($num<$max+1){?>
-                                    <div class="jacket_open<?=$num++?>"></div>
-                                    <?php }?>
-                                </div>
-                                <div class="arm left">
-                                    <div class="shoulder_jacket">
-                                        <div class="jacket_shoulder_under"></div>
-                                        <div class="jacket_shoulder_over">
-                                            <div class="jacket_shoulder_outside">
-                                            <?php
-                                            for($i=0;$i<$line_jacket_shoulder_max;$i++){
-                                                ?>
-                                                <div class="line_jacket_shoulder<?=$i?>"></div>
-                                                <?php
-                                            }
-                                            ?>
-                                            </div>
-                                            <div class="jacket_shoulder_inside"></div>
-                                        </div>
+                            <div class="jacket_over">
+                                <div class="jacket">
+                                    <div class="body">  
+                                        <div class="zipper"></div>
+                                        <?php $num=1; while($num<$max+1){?>
+                                        <div class="jacket_open<?=$num++?>"></div>
+                                        <?php }?>
                                     </div>
-                                    <?php $num=1; while($num<$max+1){?>
-                                    <div class="jacket_arm_line_left<?=$num++?>"></div>
-                                    <?php }?>
-                                </div>
-                                <div class="arm right">
-                                    <div class="shoulder_jacket right">
-                                        <div class="jacket_shoulder_under"></div>
-                                        <div class="jacket_shoulder_over">
-                                            <div class="jacket_shoulder_inside"></div>
-                                            <div class="jacket_shoulder_outside">
+                                    <div class="arm left">
+                                        <div class="shoulder_jacket">
+                                            <div class="jacket_shoulder_under"></div>
+                                            <div class="jacket_shoulder_over">
+                                                <div class="jacket_shoulder_outside">
                                                 <?php
                                                 for($i=0;$i<$line_jacket_shoulder_max;$i++){
                                                     ?>
-                                                    <div class="line_jacket_shoulder<?=$i?> right"></div>
+                                                    <div class="line_jacket_shoulder<?=$i?>"></div>
                                                     <?php
                                                 }
                                                 ?>
+                                                </div>
+                                                <div class="jacket_shoulder_inside"></div>
                                             </div>
                                         </div>
+                                        <?php $num=1; while($num<$max+1){?>
+                                        <div class="jacket_arm_line_left<?=$num++?>"></div>
+                                        <?php }?>
                                     </div>
-                                    <?php $num=1; while($num<$max+1){?>
-                                    <div class="jacket_arm_line_right<?=$num++?>"></div>
-                                    <?php }?>
+                                    <div class="arm right">
+                                        <div class="shoulder_jacket right">
+                                            <div class="jacket_shoulder_under"></div>
+                                            <div class="jacket_shoulder_over">
+                                                <div class="jacket_shoulder_inside"></div>
+                                                <div class="jacket_shoulder_outside">
+                                                    <?php
+                                                    for($i=0;$i<$line_jacket_shoulder_max;$i++){
+                                                        ?>
+                                                        <div class="line_jacket_shoulder<?=$i?> right"></div>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php $num=1; while($num<$max+1){?>
+                                        <div class="jacket_arm_line_right<?=$num++?>"></div>
+                                        <?php }?>
+                                    </div>
                                 </div>
                             </div>
                         <!-- - -->

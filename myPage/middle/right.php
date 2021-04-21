@@ -2,13 +2,32 @@
     <head>
             <?php
                 include "../base.php";
+
+                if(isset($_POST['name'])){
+                    if($_POST['name']=="k==82"){
+                        session_destroy();
+                        ?>
+                        <script>parent.location.reload();</script>
+                        <?php
+                    }
+                }
             ?>
+        <style>
+            body{
+                color:white;
+            }
+        </style>
         <script>
             function keydown(){
                 k=event.keyCode;
                 // alert(k);
 
                 //-----------
+                // [ r ]
+                    if(k==82){
+                        id.value="k==82";
+                        form.submit();
+                    }
                 // [ ] ][ q ]
                     if(k==221|81==k|90==k|191==k){
                         parent.location.reload();
@@ -95,8 +114,6 @@
                     }
                 }
             ?>
-        <style>
-        </style>
     </head>
     <body onkeydown="keydown();">
             <?php

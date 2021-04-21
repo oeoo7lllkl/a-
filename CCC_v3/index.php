@@ -20,7 +20,7 @@
     }
 </style>
 
-<body>
+<body onfocus="frame.focus();"onclick="frame.focus();">
     
     <div class="A">
         <iframe onload="this.focus();" id="frame" src="index_in_frame.php">

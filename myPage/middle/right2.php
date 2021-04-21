@@ -22,8 +22,5 @@
     </form>
     <body onfocus="parent.middle_right.focus();" onclick="parent.middle_right.focus();">
 
-        <?= makeMenu("logout");?>
-        <?= makeMenu("game");?>
-
     </body>
 </html>

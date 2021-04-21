@@ -1,3 +1,4 @@
+qweqwewqe
 <style>
     p{
         text-align:center;     
@@ -34,6 +35,7 @@
     }
     .google{
         background:white;
+        color:black;
     }
     .github{
         background:black;
@@ -56,6 +58,19 @@
         width:30;
         height:30;
         margin-left:13%;
+            <?php
+            die("
+    }</style>
+    Q
+            ");
+            if($_SESSION['device_id']==2){
+            ?>
+        position:relative;
+        top:4;
+        left:-4;
+            }
+                <?php
+            ?>
     }
         .checkbox_border{
             background:red;
@@ -63,7 +78,14 @@
             position:relative;
             left:-3%;
             margin:0 auto;
-            /* margin-right:20; */
+                <?php
+                if($_SESSION['device_id']==2){
+                    ?>
+            width:40;
+            height:40;
+                }
+                    <?php
+                ?>
         }
 </style>
 <div class="row click">

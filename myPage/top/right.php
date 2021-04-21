@@ -10,8 +10,7 @@
                 text-align:center;
             }
             .title:hover{
-                background:black;
-                color:white;
+                opacity:60%;
             }
         </style>
     </head>
