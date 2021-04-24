@@ -1,23 +1,30 @@
 <html>
-        <?php
-            include "base.php";
-        ?>
-    <title>MY PAGE</title>
-    <script>
-        function parent(){
-            alert("parent");
-        }
-    </script>
-    <frameset rows="50,*"border="0">
-        <frameset cols="100,*,100">
-            <frame src="top/left.php"name="top_left">
-            <frame src="top/right.php"name="top_right">
-            <frame src="top/right2.php"name="top_right2">
-        </frameset>
-        <frameset cols="100,*,100">
-            <frame src="middle/left.php"name="middle_left">
-            <frame src="middle/right.php"name="middle_right"onload="this.focus();">
-            <frame src="middle/right2.php"name="middle_right2">
-        </frameset>
-    </frameset>
+    <head>
+        <title>MY PAGE</title>
+
+
+            <?php
+                include "base.php";
+        
+                include "form.php";
+                include "PHPonSCRIPT.php";
+                include "script.php";
+                include "PHPunderSCRIPT.php";
+        
+                include "css.php";
+            ?>
+        
+    </head>
+    <body onkeypress="keyPress();">
+        <header id="header"onclick="form_id.value='header_click';form.submit();">MY PAGE</header>
+        <!-- 위치 보는 도구 -->
+        <div class="ruler"></div>
+
+        <article>
+            <?php
+                                                                                                // die($_SESSION['article']);
+            include "article/{$_SESSION['article']}.php";
+            ?>
+        </article>
+    </body>
 </html>

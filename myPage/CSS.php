@@ -1,0 +1,103 @@
+<style>
+.ruler{
+    width:100;height:100;position:absolute;background:black;
+    margin-left:50%;
+    display:none;
+}
+/*  */
+    *{
+        margin:0;
+    }
+    header{
+        text-align:center;
+        font-size:30;
+        cursor:hand;
+    }
+    header:hover{
+        opacity:50%;
+    }
+    .background{
+        padding-left:50%;
+    }
+    .app:hover{
+        opacity:50%;
+    }
+    .text{
+        text-align:center;
+        width:100%;
+    }
+body{
+        background:white;color:black;
+    background:black;color:white;
+}
+article{
+    <?php
+    $article_padding=100;
+    ?>
+    padding:<?=$article_padding?>;
+}
+.app{
+    /*  */
+        background:white;
+        color:black;
+        float:left;
+        position:relative;
+        display:flex;
+        align-items:center;
+        cursor:hand;
+    <?php
+    $app_domain=110;
+    $app_width=100;
+    $app_margin=($app_domain-$app_width)/2;
+    ?>
+    width:<?=$app_width?>;
+    height:<?=$app_width?>;
+    margin:<?=$app_margin?>;
+    left:-<?=$app_domain*count($app_name)/2?>;
+}
+/* article */
+    /* menu */
+        .menu{
+            margin:0 auto;
+            width:200;
+            text-align:center;
+            padding:20;
+            font-size:30;
+            cursor:hand;
+        }
+        .menu:hover{
+            opacity:50%;
+        }
+    /* logout */
+        .window_open{
+            padding:50;   
+            text-align:center;
+            cursor:hand;
+        }
+        .window_open:hover{
+            opacity:50%;
+        }
+        .window_open.clicked{
+            opacity:30%;
+        }
+        .window_open.vscode{
+            background:skyblue;
+            color:white;
+        }
+        .window_open.github{
+            background:black;
+            color:white;
+        }
+        .window_open.edge{
+            background:darkblue;
+            color:white;
+        }
+        .window_open.google{
+            background:white;
+            color:black;
+        }
+        .window_open.naver{
+            background:darkgreen;
+            color:white;
+        }
+</style>
