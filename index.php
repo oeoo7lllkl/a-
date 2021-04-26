@@ -182,145 +182,112 @@
         if(k==13){
             focus.click();
         }
+        <?php
+        // ################################################################################
+        // ################################################################################
+            $showing_name=array("game", "MyPage",   "Example",  "CCC_v3",   "CCC_v2", "CCC_v1",   "GUCCI",    "Milet", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" );  
+            $folder_name=array( "game", "MP",   "example",  "CCC_v3",   "CCC_v2", "CCC_v1",   "",         ""     , "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" );
+        // ################################################################################
+        // ################################################################################
+        for($i=0;$i< count($folder_name);$i++){
+            if($i>7){
+                ?>
+                
+                <?php
+            }else{
+                ?>
+                if(k==49+<?=$i?>){
+                    box<?=$i?>.click();
+                }
+                <?php
+            }
+        }
+        ?>
     }
 </script>
-<body onkeydown="keydown();">
-    <p class="air top"></p>
+    <?php
 
-<?php
-if(!($id==0|$id==3)){
-    $showing_name=array("MyPage",   "Example",  "CCC_v3",   "",   "CCC_v2", "CCC_v1",   "GUCCI",    "Milet" );  
-    $folder_name=array( "myPage",   "example",  "CCC_v3",   "",   "CCC_v2", "CCC_v1",   "",         ""      );
-        ?>
-    <rows>
-            <?php
-                for($i=0;$i<2*floor(count($showing_name)/2+1);$i++){
-                    if($i/2-floor($i/2)==0){
-
-                        if($i>=count($showing_name)){
-                            ?>
-        <div class="row">
-            <?=makebox("","")?>
-            <div class="between"></div>
-                            <?php
-                        }else{
-                            ?>
-        <div class="row">
-            <?=makebox("$showing_name[$i]","$folder_name[$i]")?>
-            <div class="between"></div>
-                            <?php
-                        }
-
-                    }else{
-                        
-                        if($i>=count($showing_name)){
-                            ?>
-                            <div class="box">
-                                <div class="center click opa2 destroy"onclick="destroy.click();">
-                                    <div class="text">
-                                        세션 종료
-                                    </div>
-                                </div>
-                            </div>
-        </div>
-                            <?php
-                        }else{
-                            ?>
-            <?=makebox("$showing_name[$i]","$folder_name[$i]")?>
-        </div>
-                            <?php
-                        }
-
-                    }
-                }
-            ?>
-    </rows>
-        <?php
-}else{
-    $showing_name=array("game", "MyPage",   "Example",  "CCC_v3",   "CCC_v2", "CCC_v1",   "GUCCI",    "Milet", "", "", "", "", "", "" );  
-    $folder_name=array( "game", "myPage",   "example",  "CCC_v3",   "CCC_v2", "CCC_v1",   "",         ""     , "", "", "", "", "", "" );
-
-    $_SESSION['tabindex'] = 0;
-    function makebox2($sn,$fn,$opacity){
-        if($opacity=="opacity75"){
-            $onclick="alert('연구중입니다!');";
-        }else if($opacity=="opacity100"){
-            $onclick="location.href='$fn';";
-        }else{
-            $onclick="";
-        }
-            ?>
-        <div tabindex = "<?=$_SESSION['tabindex']++?>" class="Box2 <?=$opacity?>"onclick="<?=$onclick?>">
-            <div class="text">
-                <?=$sn?>
-            </div>
-        </div>
-            <?php
+    if(!($id==0|$id==3)){
+        $body_width*=0.54;
+    }else{
+        $body_width*=1;
     }
+        $_SESSION['tabindex'] = 0;
+        function makebox2($sn,$fn,$opacity){
+            if($opacity=="opacity75"){
+                $onclick="alert('연구중입니다!');";
+            }else if($opacity=="opacity100"){
+                $onclick="location.href='$fn';";
+            }else{
+                $onclick="";
+            }
+                ?>
+            <div id="box<?=$_SESSION['tabindex']?>" tabindex = "<?=$_SESSION['tabindex']++?>" class="Box2 <?=$opacity?>"onclick="<?=$onclick?>">
+                <div class="text">
+                    <?=$sn?>
+                </div>
+            </div>
+                <?php
+        }
     ?>
-    <style>
-        .Box2{
-            background:white;
-            width:<?=$body_width/5*0.98?>;
-            height:<?=$body_width/5*0.98?>;
-            margin:<?=$body_width/5*0.01?>;
-            display:flex;
-            align-items:center;
-            float:left;
-        }
-        /* .air.top{
-    background:red;
-    <?php $air_height=18?>
-    <?php $air_height=49.99?>
-            height:<?=$air_height?>%;
-    position:absolute;
-    top:0;
-    margin:0;
-        } */
-    /* .air.bottom{
-    background:blue;
-            height:<?=$air_height?>%;
-    position:absolute;
-    z-index:-1;
-    bottom:0;
-    } */
-        .boxes{
-            /* background:green; */
-            width:<?=$body_width?>;
-            height:<?=$body_width*3/5?>;
-            top:<?=-$body_width*3/5/2?>;
-            position:absolute;
-            padding-top:28.5%;
-            /* opacity:95%; */
-        }
-        .box2:hover{
-            opacity:100%;
-        }
-        .text{
-            width:100%;
-            font-size:30;
-            text-align:center;
-        }
-        .opacity50{
-            opacity:30%;
-        }
-        .opacity75{
-            cursor:hand;
-            opacity:50%;
-        }
-        .opacity100{
-            cursor:hand;
-            opacity:70%;
-        }
-        .destroy2{
-            background:red;
-            opacity:30%;
-            cursor:hand;
-        }
-        .destroy2:hover{
-            opacity:90%;
-        }
-    </style>
+<style>
+    body{
+        <?php $body_color="black";?>
+        background:<?=$body_color?>;
+        width:0;
+    }
+    .Box2{
+        background:white;
+        width:<?=$body_width/5*0.98?>;
+        height:<?=$body_width/5*0.98?>;
+        margin:<?=$body_width/5*0.01?>;
+        /* margin:<?=$body_width/5*0.1?>; */
+        display:flex;
+        align-items:center;
+        float:left;
+    }
+    .boxes{
+        /* background:green; */
+            <?php
+            $body_width*=1.2;
+            ?>
+        left:<?=-$body_width/2?>;;
+        padding-left:50%;
+        width:<?=$body_width?>;
+        position:absolute;
+        padding-top:28.5%;
+        padding-top:0%;
+    }
+    .box2:hover{
+        opacity:100%;
+    }
+    .text{
+        width:100%;
+        font-size:30;
+        text-align:center;
+        color:<?=$body_color?>;
+    }
+    .opacity50{
+        opacity:30%;
+    }
+    .opacity75{
+        cursor:hand;
+        opacity:50%;
+    }
+    .opacity100{
+        cursor:hand;
+        opacity:70%;
+    }
+    .destroy2{
+        background:red;
+        opacity:30%;
+        cursor:hand;
+    }
+    .destroy2:hover{
+        opacity:90%;
+    }
+</style>
+<body onkeydown="keydown();">
     <div class="boxes">
         <?php
         for($i=0;$i<count($showing_name);$i++){
@@ -332,10 +299,8 @@ if(!($id==0|$id==3)){
                 $opacity="opacity100";
             } 
                 ?>
-        <?=makebox2("$showing_name[$i]","$folder_name[$i]",$opacity)?>
+            <?=makebox2("$showing_name[$i]","$folder_name[$i]",$opacity)?>
                 <?php
-            }?>
-            <?php
         }
         ?>
         <div class="box2 destroy2"onclick="destroy.click();">
