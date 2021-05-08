@@ -67,3 +67,16 @@ nav ul>li>a:hover{
   text-align:center;
   width:100%;
 }
+
+.signup-form-form{
+  font-size:20px;
+  width:240px;
+  margin:0 auto;
+  text-align:center;
+}
+.signup-form-form button{height:30px;width:80px;}
+.signup-form-form input{
+  width:240px;
+  height:30px;
+  margin-bottom:5px;
+}
